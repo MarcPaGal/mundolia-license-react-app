@@ -57,7 +57,7 @@ function ActivityDialog(props) {
 	const activity = useSelector(({ ActivitiesApp }) => ActivitiesApp.activities.activity);
 
 	const { form, handleChange, setForm } = useForm(defaultFormState);
-	const [selectedFile, setSelectedFile] = useState(null);
+	const [selectedFiles, setSelectedFiles] = useState([]);
 	const [fileType, setFileType] = useState('file');
 	///Getting date time
 	var today = new Date();
@@ -143,13 +143,14 @@ function ActivityDialog(props) {
 		event.preventDefault();
 
 		if (activityDialog.type === 'new') {
-			dispatch(submitCreateActivity(form, selectedFile, fileType));
-			setSelectedFile(null)
+			console.log("selectedFiles::",selectedFiles);
+			// dispatch(submitCreateActivity(form, selectedFiles, fileType));
+			setSelectedFiles(null)
 		}
 		else
 			if (activityDialog.type === 'edit') {
-				dispatch(submitUpdateActivity(form, formOrigin, selectedFile, fileType));
-				setSelectedFile(null)
+				dispatch(submitUpdateActivity(form, formOrigin, selectedFiles, fileType));
+				setSelectedFiles(null)
 			}
 	}
 
@@ -401,10 +402,15 @@ function ActivityDialog(props) {
 									type="file"
 									name="file"
 									id="file"
-									onChange={(e) => setSelectedFile(e.target.files[0])}
+									onChange={(e) => {setSelectedFiles([...selectedFiles,e.target.files[0]])}}
 									// onChange={handleChange}
 									variant="outlined"
-								/>
+									/>
+								{selectedFiles.map((row) => (
+									<Typography color="inherit" className="pt-8">
+										{row.name}
+									</Typography>
+								))}
 							</>
 							:
 							null
