@@ -46,6 +46,10 @@ function EventsCalendarEventDialog(props) {
     const event = useSelector(({ EventsCalendarApp }) => EventsCalendarApp.event.event);
     const subjects = useSelector(({ EventsCalendarApp }) => EventsCalendarApp.calendar.subjects.data.calendars);
     const { form, handleChange, setForm } = useForm(defaultFormState);
+    var startDate = null ;
+    const [selectedStartDate, setSelectedStartDate] = useState(null);
+    const [selectedEndDate, setSelectedEndDate] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(new Date());
 
     var today = new Date();
 	const date = today.getFullYear() + '-' + ('0'+( today.getMonth() + 1)).slice(-2) + '-' + ('0'+( today.getDate())).slice(-2)
@@ -87,6 +91,15 @@ function EventsCalendarEventDialog(props) {
     }, [eventDialog.props.open, initDialog]);
 
     useEffect(() => {
+
+        startDate = new Date(selectedDate);
+        setSelectedStartDate(startDate);
+        setSelectedEndDate(startDate);
+        console.log('Efecto' + selectedStartDate);
+
+    }, [selectedDate]);
+
+    useEffect(() => {
         if (event.error) {
             disableButton();
             setValues({ ...values, loading: false });
@@ -122,23 +135,23 @@ function EventsCalendarEventDialog(props) {
         setForm(values);
     }
 
-    const [selectedDate, setSelectedDate] = useState(new Date());
+
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
     };
 
-    const [selectedStartDate, setSelectedStartDate] = useState(new Date());
 
-    const startDate = new Date(selectedStartDate);
-
+    console.log(selectedStartDate)
     const handleStartChange = (date) => {
+        console.log(date)
         setSelectedStartDate(date);
     };
 
-    const [selectedEndDate, setSelectedEndDate] = useState(new Date(startDate.setMinutes(startDate.getMinutes() + 30)));
 
+    console.log(selectedEndDate)
     const handleEndChange = (date) => {
+        console.log(date)
         setSelectedEndDate(date);
     };
 
@@ -306,12 +319,14 @@ function EventsCalendarEventDialog(props) {
                                                     margin="normal"
                                                     id="start"
                                                     label="Hora de inicio"
-                                                    value={selectedStartDate}
-                                                    onChange={handleStartChange}
+                                                    initialFocusedDate={selectedDate}
+                                                    value={selectedDate}
+                                                    onChange={handleDateChange}
                                                 />
                                                 <KeyboardTimePicker
                                                     margin="normal"
                                                     id="end"
+                                                    initialFocusedDate={selectedDate}
                                                     label="Hora de cierre"
                                                     value={selectedEndDate}
                                                     onChange={handleEndChange}
