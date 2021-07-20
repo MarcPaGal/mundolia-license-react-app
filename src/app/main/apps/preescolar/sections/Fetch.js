@@ -14,8 +14,8 @@ export function getEvents(callback, apiKey, idCalendar, color) {
                         var rule = RRule.fromString(helperResponse.items[x].recurrence.toString());
                         var datesEvent = rule.all().toString().split(',');
                         for (var i = 0; i < datesEvent.length; i++) {
-                            var timeStringStart = moment(helperResponse.items[x].start.dateTime.toString()).format('hh:mm:ss a');
-                            var timeStringEnd = moment(helperResponse.items[x].end.dateTime.toString()).format('hh:mm:ss a');
+                            var timeStringStart = moment(helperResponse.items[x].start.dateTime.toString()).format('hh:mm a');
+                            var timeStringEnd = moment(helperResponse.items[x].end.dateTime.toString()).format('hh:mm a');
                             var dateString = moment(datesEvent[i].toString()).format('YYYY-MM-DD');
                             var initDate = dateString + ' ' + timeStringStart;
                             var endDate = dateString + ' ' + timeStringEnd;
