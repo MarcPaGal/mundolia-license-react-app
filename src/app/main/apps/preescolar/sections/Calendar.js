@@ -277,8 +277,9 @@ function CalendarActivities(props) {
                                             primary={data.custom_name}
                                             style={{
                                                 backgroundColor: data.custom_color,
-                                                padding: 10,
-                                                borderRadius:10
+                                                padding: 5,
+                                                marginLeft: 10,
+                                                borderRadius:30
                                             }}
                                             onClick={() => handleSubmit(data.calendar_id, data.custom_color)}
                                         />

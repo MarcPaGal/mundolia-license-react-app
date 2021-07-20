@@ -18,13 +18,17 @@
 
 @font-face {
   font-family: 'poppins';
-url('fonts/meteocons.ttf?kx31oc') format('truetype'),
+  url('fonts/Poppins-Medium.ttf') format('truetype'),
   font-weight: normal;
   font-style: normal;
 }
 
 .grobold {
   font-family: 'grobold' !important;
+}
+
+.poppins {
+  font-family: 'poppins' !important;
 }
 
 .meteocons {
