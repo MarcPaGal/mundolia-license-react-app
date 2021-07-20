@@ -67,8 +67,6 @@ const CustomEvent = ({ event }) => {
     );
 }
 
-
-
 const useStyles = makeStyles(theme => ({
     root: {
         '& .rbc-toolbar': {
@@ -103,7 +101,17 @@ const useStyles = makeStyles(theme => ({
     },
     paper: {
         padding: theme.spacing(3),
-        backgroundColor: "rgb(255, 255, 255, 0.7)",
+        backgroundColor: "rgb(255, 255, 255, 0.1)",
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+        height: 480,
+        position: 'relative',
+        overflow: 'auto',
+        maxHeight: 480,
+    },
+    paperNav: {
+        padding: theme.spacing(3),
+        backgroundColor: 'transparent',
         textAlign: 'center',
         color: theme.palette.text.secondary,
         height: 480,
@@ -226,6 +234,11 @@ function CalendarActivities(props) {
         const handleClick = () => {
             setOpen(!open)
         }
+        var reformattedArray = subject.map(function(obj){
+            var color = {};
+            color[obj.club_name] = obj.base_color;
+            return color;
+        });
 
         function handleSubmit( calendarId, color) {
             setEventData([]);
@@ -237,8 +250,13 @@ function CalendarActivities(props) {
                 <ListItem button key={club}  onClick={handleClick}>
                     <ListItemText
                         primary={club}
+                        style={{
+                            backgroundColor:reformattedArray[0][club],
+                            padding: 5,
+                            borderRadius: 30
+                        }}
                     />
-                    {open ? <ExpandLess /> : <ExpandMore />}
+                    {open }
                 </ListItem>
                 <Collapse
                     in={open}
@@ -398,7 +416,7 @@ function CalendarActivities(props) {
                         </Grid>
 
                         <Grid item xs={12} sm={2}>
-                            <Paper className={classes.paper}>
+                            <Paper elevation={0} className={classes.paperNav}>
                                 {/*<div className="flex w-full flex-col text-center">
                                     <Button
                                         variant="contained"
