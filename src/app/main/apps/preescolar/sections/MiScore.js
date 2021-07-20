@@ -204,7 +204,11 @@ const useStyles = makeStyles(theme => ({
 		'& > img': {
 			borderRadius: '50%'
 		}
-	}
+	},
+	customBadge: {
+		backgroundColor: "#8a02b0",
+		color: "white"
+	  }
 
 }));
 
@@ -275,7 +279,7 @@ function MiScore(props) {
 							</Link>
 							<div className="flex  flex-wrap p-12 relative overflow-hidden flex-row w-full pb-60">
 								<div className="w-1/3 flex-col items-center justify-center flex" >
-									<Badge badgeContent={pendientes ? pendientes.length : '0'} color="secondary" showZero>
+									<Badge badgeContent={pendientes ? pendientes.length : '0'} classes={{ badge: classes.customBadge }} showZero>
 										<Icon className={clsx(classes.yellowIcons)} >error_outline</Icon>
 									</Badge>
 									<Typography className={clsx(classes.Text)}>
@@ -284,7 +288,7 @@ function MiScore(props) {
 								</div>
 
 								<div className="w-1/3 flex-col items-center justify-center flex" >
-									<Badge badgeContent={entregadas ? entregadas.length : '0'} color="secondary" showZero>
+									<Badge badgeContent={entregadas ? entregadas.length : '0'} classes={{ badge: classes.customBadge }} showZero>
 										<Icon className={clsx(classes.yellowIcons)} >check</Icon>
 									</Badge>
 									<Typography className={clsx(classes.Text)}>
@@ -293,7 +297,7 @@ function MiScore(props) {
 								</div>
 
 								<div className="w-1/3 flex-col items-center justify-center flex" >
-									<Badge badgeContent={panelInfo ? panelInfo.score.length : '0'} color="secondary" showZero>
+									<Badge badgeContent={panelInfo ? panelInfo.score.length : '0'} classes={{ badge: classes.customBadge }} showZero>
 										<Icon className={clsx(classes.yellowIcons)} >star</Icon>
 									</Badge>
 									<Typography className={clsx(classes.Text)}>
@@ -502,7 +506,7 @@ function MiScore(props) {
 										<img className={clsx(classes.channelIcon)} src="assets/images/preescolar/logos/score_lia-u.png" />
 									</div>
 									<div className="w-3/4 flex-col items-start justify-center flex p-2" >
-										<Link to="/logina" onClick={ev => dispatch(setRedirect("onlinelia"))}>
+										<Link to="/logina" >
 											<Typography className={clsx(classes.TextChannel)}>
 												LIA U
 											</Typography>
@@ -515,7 +519,7 @@ function MiScore(props) {
 										<img className={clsx(classes.channelIcon)} src="assets/images/preescolar/logos/score_misgrupos.png"/>
 									</div>
 									<div className="w-3/4 flex-col items-start justify-center flex p-2" >
-										<Link to="/logina" onClick={ev => dispatch(setRedirect("onlinelia"))}>
+										<Link to="/loginp" onClick={ev => dispatch(setRedirect("misgrupos"))}>
 											<Typography className={clsx(classes.TextChannel)}>
 												Mis Grupos
 											</Typography>
