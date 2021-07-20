@@ -95,7 +95,6 @@ function EventsCalendarEventDialog(props) {
         startDate = new Date(selectedDate);
         setSelectedStartDate(startDate);
         setSelectedEndDate(startDate);
-        console.log('Efecto' + selectedStartDate);
 
     }, [selectedDate]);
 
@@ -141,17 +140,11 @@ function EventsCalendarEventDialog(props) {
         setSelectedDate(date);
     };
 
-
-    console.log(selectedStartDate)
     const handleStartChange = (date) => {
-        console.log(date)
         setSelectedStartDate(date);
     };
 
-
-    console.log(selectedEndDate)
     const handleEndChange = (date) => {
-        console.log(date)
         setSelectedEndDate(date);
     };
 
@@ -170,8 +163,6 @@ function EventsCalendarEventDialog(props) {
       });
 
       const handleChangeDays = (event) => {
-          console.log(event.target.name);
-          console.log(event.target.checked);
         setDays({ ...days, [event.target.name]: event.target.checked });
       };
 
@@ -319,14 +310,12 @@ function EventsCalendarEventDialog(props) {
                                                     margin="normal"
                                                     id="start"
                                                     label="Hora de inicio"
-                                                    initialFocusedDate={selectedDate}
                                                     value={selectedDate}
                                                     onChange={handleDateChange}
                                                 />
                                                 <KeyboardTimePicker
                                                     margin="normal"
                                                     id="end"
-                                                    initialFocusedDate={selectedDate}
                                                     label="Hora de cierre"
                                                     value={selectedEndDate}
                                                     onChange={handleEndChange}

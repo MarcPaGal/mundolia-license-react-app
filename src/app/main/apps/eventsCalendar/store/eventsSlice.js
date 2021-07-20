@@ -22,7 +22,6 @@ export const submitEvent = ( data, date, start, end, week, days ) => async dispa
 
 const eventAdapter = createEntityAdapter({});
 
-
 const eventSlice = createSlice({
 	name: 'calendarApp/event',
 	initialState: eventAdapter.getInitialState({
