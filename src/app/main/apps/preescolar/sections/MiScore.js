@@ -563,7 +563,7 @@ function MiScore(props) {
 							// opacity: 0.5
 						}}>
 						<List className={classes.scroll } >
-							<Link to="/apps/aula">
+							<Link to="/apps/sections/calendario">
 								<img className={clsx(classes.img)} src="assets/images/preescolar/artes.png" />
 								<Typography className={clsx(classes.TextTitle)}>
 									Mis Clases

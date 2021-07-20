@@ -46,6 +46,10 @@ function EventsCalendarEventDialog(props) {
     const event = useSelector(({ EventsCalendarApp }) => EventsCalendarApp.event.event);
     const subjects = useSelector(({ EventsCalendarApp }) => EventsCalendarApp.calendar.subjects.data.calendars);
     const { form, handleChange, setForm } = useForm(defaultFormState);
+    var startDate = null ;
+    const [selectedStartDate, setSelectedStartDate] = useState(null);
+    const [selectedEndDate, setSelectedEndDate] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(new Date());
 
     var today = new Date();
 	const date = today.getFullYear() + '-' + ('0'+( today.getMonth() + 1)).slice(-2) + '-' + ('0'+( today.getDate())).slice(-2)
@@ -87,6 +91,14 @@ function EventsCalendarEventDialog(props) {
     }, [eventDialog.props.open, initDialog]);
 
     useEffect(() => {
+
+        startDate = new Date(selectedDate);
+        setSelectedStartDate(startDate);
+        setSelectedEndDate(startDate);
+
+    }, [selectedDate]);
+
+    useEffect(() => {
         if (event.error) {
             disableButton();
             setValues({ ...values, loading: false });
@@ -122,21 +134,15 @@ function EventsCalendarEventDialog(props) {
         setForm(values);
     }
 
-    const [selectedDate, setSelectedDate] = useState(new Date());
+
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
     };
 
-    const [selectedStartDate, setSelectedStartDate] = useState(new Date());
-
-    const startDate = new Date(selectedStartDate);
-
     const handleStartChange = (date) => {
         setSelectedStartDate(date);
     };
-
-    const [selectedEndDate, setSelectedEndDate] = useState(new Date(startDate.setMinutes(startDate.getMinutes() + 30)));
 
     const handleEndChange = (date) => {
         setSelectedEndDate(date);
@@ -157,8 +163,6 @@ function EventsCalendarEventDialog(props) {
       });
 
       const handleChangeDays = (event) => {
-          console.log(event.target.name);
-          console.log(event.target.checked);
         setDays({ ...days, [event.target.name]: event.target.checked });
       };
 
@@ -306,8 +310,8 @@ function EventsCalendarEventDialog(props) {
                                                     margin="normal"
                                                     id="start"
                                                     label="Hora de inicio"
-                                                    value={selectedStartDate}
-                                                    onChange={handleStartChange}
+                                                    value={selectedDate}
+                                                    onChange={handleDateChange}
                                                 />
                                                 <KeyboardTimePicker
                                                     margin="normal"

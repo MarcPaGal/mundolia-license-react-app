@@ -3,11 +3,7 @@ import axios from 'axios';
 import jwtService from "../../../../services/jwtService";
 
 export const submitEvent = ( data, date, start, end, week, days ) => async dispatch => {
-	
-    const today = new Date();
-	const date = today.getFullYear() + '-' + ('0'+( today.getMonth() + 1)).slice(-2) + '-' + ('0'+( today.getDate())).slice(-2) + ' ' + today.getHours() + ':' + ('0'+( today.getMinutes() + 1)).slice(-2);
-    console.log([data, date, start, end, week, days]);
-     return jwtService
+    return jwtService
 	.addEvent({
             subject_id: data.id,
             description: data.description,
@@ -25,7 +21,6 @@ export const submitEvent = ( data, date, start, end, week, days ) => async dispa
 };
 
 const eventAdapter = createEntityAdapter({});
-
 
 const eventSlice = createSlice({
 	name: 'calendarApp/event',

@@ -11,7 +11,8 @@ export function getEvents(callback, apiKey, idCalendar, color) {
             if(helperResponse.items.length > 0) {
                 for (var x = 0; x < helperResponse.items.length; x++) {
                     if(helperResponse.items[x].hasOwnProperty('recurrence') == true) {
-                        var rule = RRule.fromString(helperResponse.items[x].recurrence.toString());
+                        var helperDate =  moment(helperResponse.items[x].start.dateTime.toString()).format('YYYYMMDD[T]HHmmss');
+                        var rule = RRule.fromString(helperResponse.items[x].recurrence.toString() + ';DTSTART=' + helperDate);
                         var datesEvent = rule.all().toString().split(',');
                         for (var i = 0; i < datesEvent.length; i++) {
                             var timeStringStart = moment(helperResponse.items[x].start.dateTime.toString()).format('hh:mm:ss a');

@@ -49,7 +49,7 @@ const HtmlTooltip = withStyles((theme) => ({
 
 const CustomEvent = ({ event }) => {
     moment.locale('es-MX');
-    var dateString = String(moment(event.start.toString()).format('dddd, Do MMMM h:mm:ss ') + '-' + moment(event.end.toString()).format('hh:mm:ss a')).charAt(0).toUpperCase() + String(moment(event.start.toString()).format('dddd, Do MMMM h:mm:ss ') + '-' + moment(event.end.toString()).format('hh:mm:ss a')).slice(1);
+    var dateString = String(moment(event.start.toString()).format('dddd, Do MMMM hh:mm ') + '-' + moment(event.end.toString()).format('hh:mm a')).charAt(0).toUpperCase() + String(moment(event.start.toString()).format('dddd, Do MMMM h:mm ') + '-' + moment(event.end.toString()).format('hh:mm a')).slice(1);
     return (
         <>
             <HtmlTooltip interactive
