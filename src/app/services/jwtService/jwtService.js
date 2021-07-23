@@ -244,14 +244,17 @@ class JwtService extends FuseUtils.EventEmitter {
 	addActivity = data => {
 		return new Promise((resolve, reject) => {
 			var formData = new FormData();
-			formData.append('name',data.name,);
+			formData.append('name',data.name);
 			formData.append('groupId',data.groupId);
 			formData.append('finishDate',data.finishDate);
 			formData.append('theme',data.theme);
 			formData.append('instructions',data.instructions);
 			formData.append('is_active',data.is_active);
 			formData.append('urlPath', data.urlPath);
-			formData.append('file', data.file);
+			Array.isArray(data.files) &&
+				data.files.forEach(file => {
+					formData.append('files[]', file);
+				})
 			formData.append('subject_id', data.subject_id);
 
 			axios.post(process.env.REACT_APP_API+'/actividades', formData,
@@ -261,7 +264,6 @@ class JwtService extends FuseUtils.EventEmitter {
 					'Content-Type': 'multipart/form-data',
 				}},
 			).then(response => {
-				console.log(response);
 				
 				if (response.status == 200) {
 					resolve(response.data);
@@ -285,7 +287,10 @@ class JwtService extends FuseUtils.EventEmitter {
 			formData.append('is_active',data.is_active);
 			formData.append('filePath', data.filePath);
 			formData.append('urlPath', data.urlPath);
-			formData.append('file', data.file);
+			Array.isArray(data.files) &&
+				data.files.forEach(file => {
+					formData.append('files[]', file);
+				})
 			formData.append('subject_id', data.subject_id);
 
 			axios.post(process.env.REACT_APP_API+'/actividades/' + data.activityId + '?_method=PUT', formData,

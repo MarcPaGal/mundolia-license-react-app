@@ -100,7 +100,7 @@ const useStyles = makeStyles(theme => ({
         zIndex: 99
     },
     paper: {
-        padding: theme.spacing(3),
+        padding: theme.spacing(1),
         backgroundColor: "rgb(255, 255, 255, 0.1)",
         textAlign: 'center',
         color: theme.palette.text.secondary,
@@ -110,7 +110,7 @@ const useStyles = makeStyles(theme => ({
         maxHeight: 480,
     },
     paperNav: {
-        padding: theme.spacing(3),
+        padding: theme.spacing(1),
         backgroundColor: 'transparent',
         textAlign: 'center',
         color: theme.palette.text.secondary,
@@ -124,13 +124,15 @@ const useStyles = makeStyles(theme => ({
         fontSize: "32px",
         color: 'white',
         textShadow: '2px 2px 2px black',
+        textTransform:"capitalize"
     },
     Text: {
-        fontSize: "18px",
+        fontSize: "16px",
         color: 'white',
         textShadow: '2px 2px 2px black',
         text: "center",
         alignSelf: "center",
+        textTransform: "capitalize"
     },
     TextInfo: {
         fontSize: "16px",
@@ -170,8 +172,8 @@ const useStyles = makeStyles(theme => ({
         maxWidth: "20%",
     },
     imgButton: {
-        maxHeight: "40%",
-        maxWidth: "40%",
+        maxHeight: "80%",
+        maxWidth: "80%",
     },
     container: {
         marginTop: "-40px",
@@ -253,7 +255,8 @@ function CalendarActivities(props) {
                         style={{
                             backgroundColor:reformattedArray[0][club],
                             padding: 5,
-                            borderRadius: 30
+                            borderRadius: 30,
+                            textAlign:"center"
                         }}
                     />
                     {open }
@@ -279,7 +282,8 @@ function CalendarActivities(props) {
                                                 backgroundColor: data.custom_color,
                                                 padding: 5,
                                                 marginLeft: 10,
-                                                borderRadius:30
+                                                borderRadius:30,
+                                                textAlign:"center"
                                             }}
                                             onClick={() => handleSubmit(data.calendar_id, data.custom_color)}
                                         />
@@ -352,7 +356,7 @@ function CalendarActivities(props) {
                         >
                             <img className={clsx(classes.img)} src={ escuelabaja ? "assets/images/preescolar/artes-1.png" : "assets/images/preescolar/islaClases-1.png"}/>
                             <Typography className={clsx(classes.TextTitle)}>
-                                {escuelabaja ? 'Mis Tareas' : 'Mis Clases'}
+                                {escuelabaja ? 'Mis Clases' : 'Mis Clases'}
                             </Typography>
                         </Button>
                     </div>

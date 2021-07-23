@@ -46,8 +46,6 @@ function EventsCalendarTokenDialog(props) {
 		return dispatch(closeTokenDialog());
 	}
 
-    console.log(token);
-
     return (
         <div>
             <Dialog

@@ -53,7 +53,7 @@ export const submitCreateActivity = ( activityData, file, fileType ) => async di
 			instructions: activityData.instructions,
 			is_active: activityData.is_active ? 1 : 0,
 			urlPath: fileType == 'url' ? activityData.url_path : '',
-			file: fileType == 'file' ? file : null,
+			files: fileType == 'file' ? file : null,
 			subject_id: activityData.subject_id
 		})
 		.then(activity => {
@@ -78,7 +78,7 @@ export const submitUpdateActivity = ( activityData, activityDataOrigin, file, fi
 			is_active: activityData.is_active ? 1 : 0,
 			filePath: fileType == 'file' ? activityDataOrigin.file_path ? activityDataOrigin.file_path : '' : '',
 			urlPath: fileType == 'url' ? activityData.url_path : '',
-			file: fileType == 'file' ? file : null,
+			files: fileType == 'file' ? file : null,
 			subject_id: activityDataOrigin.subject_id
 		})
 		.then(activity => {
@@ -110,6 +110,21 @@ export const removeActivity = createAsyncThunk(
 		}
 	}
 );
+
+export const removeFile = (name, file) => async dispatch => {
+	try {
+		await axios.delete(process.env.REACT_APP_API+'/remove-file/'+name+'/'+file).then(response => {
+			const data = response.data;
+			dispatch(showMessage({message: response.data.message, variant: 'success'}));
+			dispatch(getActivities());
+			return data;
+		}).catch(error => {
+			dispatch(showMessage({message: error.response.data.message, variant: 'error'}));
+		});
+	}catch (e){
+		console.log(e);
+	}
+};
 
 export const downloadActivity = ( filename ) => async dispatch => {
 	
