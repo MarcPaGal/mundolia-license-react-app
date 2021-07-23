@@ -63,7 +63,7 @@ function PreescolarLayout(props) {
 	const escuelabaja = role== 'alumno' && grade <= 3 ? true : false ; 
 	// const url =  `url("assets/sounds/Mi Mundo Lia.m4a")`;
     const audioMimundoLia = new Audio("assets/sounds/Mi Mundo Lia.mp3");
-	const audioMiScore = new Audio("assets/sounds/Mi Score.mp3");
+	const audioDashboard = new Audio("assets/sounds/Dashboard.mp3");
 	const audioMisClases= new Audio("assets/sounds/Mis Clases.mp3");
 	const audioMisTareas = new Audio("assets/sounds/Mis Tareas.mp3");
 	const audioMisActividades = new Audio("assets/sounds/Mis Actividades.mp3");
@@ -87,8 +87,8 @@ function PreescolarLayout(props) {
 	function playMundolia() {
 		audioMimundoLia.play();
 	}
-	function playMiScore() {
-		audioMiScore.play();
+	function playDashboard() {
+		audioDashboard.play();
 	}
 	function playMisClases() {
 		audioMisClases.play();
@@ -126,7 +126,7 @@ function PreescolarLayout(props) {
 	return (
         <div className="flex flex-1" 
 		style={{
-		backgroundImage: `url("assets/images/preescolar/pantalla12.png")`,
+		backgroundImage: `url(${ escuelabaja ? "assets/images/preescolar/pantalla12.png" : "assets/images/preescolar/BackgroundPreescolar.png" })`,
 			backgroundPosition: 'center',
 			backgroundSize: 'cover',
 			backgroundRepeat: 'no-repeat'
@@ -153,7 +153,7 @@ function PreescolarLayout(props) {
 						type="button"
 						// onMouseEnter={ playMisTareas }
 					>
-						<img src={ escuelabaja ? "assets/images/preescolar/explorer.png" : "assets/images/preescolar/explorer1.png"} />
+						<img src={ escuelabaja ? "assets/images/preescolar/explorer.png" : "assets/images/preescolar/islaTareas.png"} />
 					</Button>
 					<Button
 						disableRipple
@@ -199,7 +199,7 @@ function PreescolarLayout(props) {
 						component={Link}
 						type="button"
 					>
-						<img className="logo-icon" src="assets/images/preescolar/comunicacion.png" alt="logo" />
+						<img src={ escuelabaja ? "assets/images/preescolar/comunicacion.png" : "assets/images/preescolar/islaMundoLIA.png" } alt="logo" />
 					</Button>
 					<Button
 						disableRipple
@@ -247,7 +247,7 @@ function PreescolarLayout(props) {
 						type="button"
 						to={`/apps/sections/calendario`}
 					>
-						<img src={ escuelabaja ? "assets/images/preescolar/artes.png" : "assets/images/preescolar/artes1.png" } alt="logo" />
+						<img src={ escuelabaja ? "assets/images/preescolar/artes.png" : "assets/images/preescolar/islaClases.png" } alt="logo" />
 					</Button>
 					<Button
 						disableRipple
@@ -303,7 +303,7 @@ function PreescolarLayout(props) {
 						to={`/apps/sections/miscore`}
 						component={Link}
 						type="button"
-						onMouseEnter={ !escuelabaja && !isMobile ? playMiScore : null }
+						onMouseEnter={ !escuelabaja && !isMobile ? playDashboard : null }
 					> 						
 
 						<Typography className={clsx(classes.dashboardText)}>
@@ -316,7 +316,7 @@ function PreescolarLayout(props) {
 							style={{
 								backgroundColor: 'transparent',
 							}}
-							onClick={playMiScore}
+							onClick={playDashboard}
 						>
 							<Icon className={clsx(classes.listenIcon)}>volume_up</Icon>
 						</Button>

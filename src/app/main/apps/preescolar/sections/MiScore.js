@@ -271,7 +271,7 @@ function MiScore(props) {
 						}}>
 						<List className={classes.scroll} >
 							<Link to="/apps/sections/mistareas">
-								<img className={clsx(classes.img)} src="assets/images/preescolar/explorer.png" />
+								<img className={clsx(classes.img)} src={ escuelabaja ? "assets/images/preescolar/explorer.png" : "assets/images/preescolar/islaTareas.png"} />
 
 								<Typography className={clsx(classes.TextTitle)}>
 									{escuelabaja ? 'Mis Tareas' : 'Mis Actividades'}
@@ -430,7 +430,7 @@ function MiScore(props) {
 						}}>
 						<List className={classes.scroll} >
 							<Link to="/loginp">
-								<img className={clsx(classes.img)} src="assets/images/preescolar/comunicacion.png" />
+								<img className={clsx(classes.img)} src={ escuelabaja ? "assets/images/preescolar/comunicacion.png" : "assets/images/preescolar/islaMundoLIA.png"}  />
 
 								<Typography className={clsx(classes.TextTitle)}>
 									Mi Mundo Lia
@@ -564,7 +564,7 @@ function MiScore(props) {
 						}}>
 						<List className={classes.scroll } >
 							<Link to="/apps/sections/calendario">
-								<img className={clsx(classes.img)} src="assets/images/preescolar/artes.png" />
+								<img className={clsx(classes.img)} src={ escuelabaja ? "assets/images/preescolar/artes.png" : "assets/images/preescolar/islaClases.png"} />
 								<Typography className={clsx(classes.TextTitle)}>
 									Mis Clases
 								</Typography>

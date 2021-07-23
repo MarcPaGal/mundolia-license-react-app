@@ -205,7 +205,7 @@ function MisTareas(props) {
 		<div
 			className="flex-1"
 			style={{
-				backgroundImage: `url("assets/images/preescolar/pantalla12.png")`,
+				backgroundImage: `url(${ escuelabaja ? "assets/images/preescolar/pantalla12.png" : "assets/images/preescolar/BackgroundPreescolar.png" })`,
 				backgroundPosition: 'center',
 				backgroundSize: 'cover',
 				backgroundRepeat: 'no-repeat'
@@ -230,7 +230,7 @@ function MisTareas(props) {
 							component={Link}
 							type="button"
 						>
-							<img className={clsx(classes.img)} src="assets/images/preescolar/explorer.png" />
+							<img className={clsx(classes.img)} src={ escuelabaja ? "assets/images/preescolar/explorer.png" : "assets/images/preescolar/islaTareas.png"} />
 							<Typography className={clsx(classes.TextTitle)}>
 								{escuelabaja ? 'Mis Tareas' : 'Mis Actividades'}
 							</Typography>
