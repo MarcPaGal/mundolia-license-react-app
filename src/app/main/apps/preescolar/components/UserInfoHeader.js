@@ -47,6 +47,7 @@ const useStyles = makeStyles(theme => ({
 	containersInfo: {
 		borderRadius: 5,
 		// width: '50px'
+		backgroundColor: "#000000"
 	},
 	avatarContainer: {
 		// objectPosition: 'right',
@@ -112,32 +113,38 @@ export default function UserInfoHeader() {
                         ? user.data.photoURL
                         : " assets/images/preescolar/infoestudiante.png"} >
                 </Avatar>
-                <div className={clsx(classes.containersInfo), "w-1/2 flex-col"}>
+                <div id="container" className={clsx(classes.containersInfo), "w-1/2 flex-col"}>
                     {/* <div> */}
-					<div className="flex items-center justify-center">
+					<div className="flex items-center justify-start">
 						<p style={{
 							paddingTop: 3, paddingBottom: 3, paddingLeft: 5, paddingRight: 5, backgroundColor: '#FCDB00', color: '#FFFFFF', borderRadius: 12, fontWeight: "bold",
-							textAlign: "center", minWidth: 30
+							textAlign: "center", minWidth: 200
 						}}>
 							<Typography className={clsx(classes.TextInfo)}>
 								{info.data.displayName}
 							</Typography>
 						</p>
 					</div>
-					<div className="flex items-center justify-center">
+					<div className="flex items-center justify-start">
 						<p style={{
 							paddingTop: 3, paddingBottom: 3, paddingLeft: 5, paddingRight: 5, backgroundColor: '#FCDB00', color: '#FFFFFF', borderRadius: 12, fontWeight: "bold",
-							textAlign: "center", minWidth: 30
+							textAlign: "center", minWidth: 200
 						}}>
 							<Typography className={clsx(classes.TextInfo)}>
-								{info.data.grade}
+								{ info.data.grade == '1' ? 'Primer Grado' : null }
+								{ info.data.grade == '2' ? 'Segundo Grado' : null }
+								{ info.data.grade == '3' ? 'Tercer Grado' : null }
+								{ info.data.grade == '4' ? 'Cuarto Grado' : null }
+								{ info.data.grade == '5' ? 'Quinto Grado' : null }
+								{ info.data.grade == '6' ? 'Sexto Grado' : null }
+
 							</Typography>
 						</p>
 					</div>
-					<div className="flex items-center justify-center">
+					<div className="flex items-center justify-start">
 						<p style={{
 							paddingTop: 3, paddingBottom: 3, paddingLeft: 5, paddingRight: 5, backgroundColor: '#FCDB00', color: '#FFFFFF', borderRadius: 12, fontWeight: "bold",
-							textAlign: "center",
+							textAlign: "center", minWidth: 200
 						}}>
 							<Typography className={clsx(classes.TextInfo)}>
 								{info.data.school_name}
