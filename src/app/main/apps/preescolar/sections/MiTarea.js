@@ -734,39 +734,37 @@ function MiTarea(props) {
 												backgroundSize: 'cover',
 												backgroundRepeat: 'no-repeat',
 												borderRadius:8,
-												width:"100%"
+												width:"100%",
+												justifyContent:"center"
 
 											}}>
 											{/* ----------------------------Info inside card-------------------------- */}
-											<div
-												className={clsx(classes.imgIconsFooter,"flex pt-20 pb-20")}>
-												<Button  
-													onClick={ev => {
-                                                        ev.stopPropagation();
-                                                        homework.activityFile !== null && dispatch(downloadFile(homework.activityFile));}}>
-													<img src="assets/images/logos/firebase.svg" />
-												</Button>
-											</div>
-											<div
-												className={clsx(classes.imgIconsFooter,"flex pt-20 pb-20")}>
-												<img src="assets/images/logos/fuse.svg" />
-											</div>
-											<div
-												className={clsx(classes.imgIconsFooter,"flex pt-20 pb-20")}>
-												<img src="assets/images/logos/google-drive.svg" />
-											</div>
-											<div
-												className={clsx(classes.imgIconsFooter,"flex pt-20 pb-20")}>
-												<img src="assets/images/logos/google-slides.svg" />
-											</div>
-											<div
-												className={clsx(classes.imgIconsFooter,"flex pt-20 pb-20")}>
-												<img src="assets/images/logos/google-forms.svg" />
-											</div>
-											<div
-												className={clsx(classes.imgIconsFooter,"flex pt-20 pb-20")}>
-												<img src="assets/images/logos/google-meet.svg" />
-											</div>
+											{homework.activityFile && Array.isArray(homework.activityFile) && 
+												homework.activityFile.map((uFile) => (
+													<div className={clsx(classes.imgIconsFooter,"flex pt-20 pb-20 justify-center")}>
+														<Button className="flex w-full"
+															onClick={ev => {
+																ev.stopPropagation();
+																console.log("ufile::",uFile,uFile.split('.')[uFile.split('.').length-1]);
+																dispatch(downloadFile(uFile.replace('public','')));}}>
+															<img src={"assets/images/logos/" + 
+																((uFile.split('.')[uFile.split('.').length-1] == "jpg" || uFile.split('.')[uFile.split('.').length-1] == "png" || uFile.split('.')[uFile.split('.').length-1] == "svg" || uFile.split('.')[uFile.split('.').length-1] == "ico" ) ? 
+																	"image.png" :
+																((uFile.split('.')[uFile.split('.').length-1] == "mp4" || uFile.split('.')[uFile.split('.').length-1] == "gif" || uFile.split('.')[uFile.split('.').length-1] == "mpg" || uFile.split('.')[uFile.split('.').length-1] == "3gp" || uFile.split('.')[uFile.split('.').length-1] == "avi" || uFile.split('.')[uFile.split('.').length-1] == "wmv" ) ? 
+																	"video.png" :
+																(uFile.split('.')[uFile.split('.').length-1] == "docx" ?
+																	"word.svg" :
+																(uFile.split('.')[uFile.split('.').length-1] == "xlsx" ?
+																	"excel.svg" :
+																(uFile.split('.')[uFile.split('.').length-1] == "pptx" ?
+																	"powerpoint.svg" :
+																(uFile.split('.')[uFile.split('.').length-1] == "pdf" ?
+																	"pdf.png" :
+																	"fuse.svg"))))))} />
+														</Button>
+													</div>
+												))
+											}
 										</div>
 									</Grid>
 								</Grid>
