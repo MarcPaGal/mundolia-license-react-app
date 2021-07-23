@@ -330,7 +330,7 @@ function CalendarActivities(props) {
         <div
             className="flex-1"
             style={{
-                backgroundImage: `url("assets/images/preescolar/pantalla12.png")`,
+                backgroundImage: `url(${ escuelabaja ? "assets/images/preescolar/pantalla12.png" : "assets/images/preescolar/BackgroundPreescolar.png" })`,
                 backgroundPosition: 'center',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat'
@@ -354,7 +354,7 @@ function CalendarActivities(props) {
                             component={Link}
                             type="button"
                         >
-                            <img className={clsx(classes.img)} src={ escuelabaja ? "assets/images/preescolar/artes-1.png" : "assets/images/preescolar/artes1.png"}/>
+                            <img className={clsx(classes.img)} src={ escuelabaja ? "assets/images/preescolar/artes-1.png" : "assets/images/preescolar/islaClases-1.png"}/>
                             <Typography className={clsx(classes.TextTitle)}>
                                 {escuelabaja ? 'Mis Clases' : 'Mis Clases'}
                             </Typography>
@@ -452,7 +452,7 @@ function CalendarActivities(props) {
                                         component={Link}
                                         type="button"
                                     >
-                                        <img className={clsx(classes.imgButton)} src="assets/images/preescolar/comunicacionButton.png" alt="logo" />
+                                        <img className={clsx(classes.imgButton)} src={ escuelabaja ? "assets/images/preescolar/comunicacionButton.png" : "assets/images/preescolar/islaMundoLIAButton.png"} alt="logo" />
                                     </Button>
                                     <Button
                                         style={{
@@ -477,7 +477,7 @@ function CalendarActivities(props) {
                                         component={Link}
                                         type="button"
                                     >
-                                        <img className={clsx(classes.imgButton)} src={ escuelabaja ? "assets/images/preescolar/explorer.png" : "assets/images/preescolar/explorer1.png"} />
+                                        <img className={clsx(classes.imgButton)} src={ escuelabaja ? "assets/images/preescolar/explorer.png" : "assets/images/preescolar/islaTareas.png"} />
                                     </Button>
                                     <Button
                                         style={{

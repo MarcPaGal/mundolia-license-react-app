@@ -227,7 +227,7 @@ function MiTarea(props) {
 		<div
 			className="flex-1"
 			style={{
-				backgroundImage: `url("assets/images/preescolar/pantalla12.png")`,
+				backgroundImage: `url(${ escuelabaja ? "assets/images/preescolar/pantalla12.png" : "assets/images/preescolar/BackgroundPreescolar.png" })`,
 				backgroundPosition: 'center',
 				backgroundSize: 'cover',
 				backgroundRepeat: 'no-repeat'
@@ -251,7 +251,7 @@ function MiTarea(props) {
 							component={Link}
 							type="button"
 						>
-							<img className={clsx(classes.img)} src="assets/images/preescolar/explorer.png" />
+							<img className={clsx(classes.img)} src={ escuelabaja ? "assets/images/preescolar/explorer.png" : "assets/images/preescolar/islaTareas.png"} />
 							<Typography className={clsx(classes.TextTitle)}>	
 								{escuelabaja ? 'Mis Tareas' : 'Mis Actividades'}
 							</Typography>
@@ -287,7 +287,7 @@ function MiTarea(props) {
 										<Button
 											to={`/loginp`} component={Link} type="button">
 											<div  className="flex flex-col">
-												<img className={clsx(classes.imgIcons,"flex w-full")} src="assets/images/preescolar/comunicacion-1.png" />
+												<img className={clsx(classes.imgIcons,"flex w-full")} src={ escuelabaja ? "assets/images/preescolar/comunicacion-1.png" : "assets/images/preescolar/islaMundoLIA-1.png"} />
 												<Typography className={clsx(classes.TextIcons)}>
 													Mi Mundo Lia
 												</Typography>
@@ -298,7 +298,7 @@ function MiTarea(props) {
 										<Button
 											to={`/apps/aula`} component={Link} type="button">
 											<div  className="flex flex-col">
-												<img className={clsx(classes.imgIcons,"flex w-full")} src="assets/images/preescolar/artes-1.png" />
+												<img className={clsx(classes.imgIcons,"flex w-full")} src={ escuelabaja ? "assets/images/preescolar/artes-1.png" : "assets/images/preescolar/islaClases-1.png"} />
 												<Typography className={clsx(classes.TextIcons)}>
 													Mis Clases
 												</Typography>
