@@ -15,8 +15,6 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import { submitCreateSubject } from './store/subjectSlice';
 import { showMessage } from "../../../store/fuse/messageSlice";
-
-
 import {
     closeNewSubjectDialog,
     closeEditSubjectDialog,

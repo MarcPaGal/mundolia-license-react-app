@@ -217,7 +217,7 @@ function PreescolarLayout(props) {
 						onMouseEnter={ !escuelabaja && !isMobile ? playMundolia : null }
 					>
 						<Typography className={clsx(classes.Text)}>
-						Mi mundo Lia
+						Mi Mundo Lia
 						</Typography>
 					</Button>
 					{ isMobile && !escuelabaja ?

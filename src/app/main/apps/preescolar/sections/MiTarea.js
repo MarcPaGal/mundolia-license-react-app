@@ -35,6 +35,7 @@ const useStyles = makeStyles(theme => ({
 		fontSize: "32px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
+		textTransform:"capitalize"
 	},
 	Text: {
 		fontSize: "22px",
@@ -49,7 +50,8 @@ const useStyles = makeStyles(theme => ({
 		textShadow: '2px 2px 2px black',
 		text: "center",
 		alignSelf: "center",
-		textAlign:"center"
+		textAlign:"center",
+		textTransform:"capitalize"
 	},
 	TextInfo: {
 		fontSize: "16px",

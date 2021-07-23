@@ -14,6 +14,9 @@ import reducer from './store';
 import { openNewGroupDialog, getGroups } from './store/groupSlice';
 import { getTeacherInfo } from './store/teacherSlice';
 import GroupsList from './GroupsList';
+import {getToken} from "../eventsCalendar/store/tokenSlice";
+import EventsCalendarTokenDialog from "../eventsCalendar/EventsCalendarTokenDialog";
+
 
 const useStyles = makeStyles({
 	addButton: {
@@ -38,9 +41,9 @@ function GroupsApp(props) {
 	const routeParams = useParams();
 
 	useDeepCompareEffect(() => {
+		dispatch(getToken());
 		dispatch(getGroups(routeParams));
 		dispatch(getTeacherInfo());
-	
 	}, [dispatch, routeParams]);
 
 	return (
@@ -72,6 +75,7 @@ function GroupsApp(props) {
 				</Fab>
 			</FuseAnimate>
 			<GroupDialog/>
+			<EventsCalendarTokenDialog/>
 
 		</>
 	);
