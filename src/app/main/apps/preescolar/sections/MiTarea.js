@@ -296,7 +296,7 @@ function MiTarea(props) {
 									</Grid>
 									<Grid item xs={3} className="flex flex-col items-center justify-center max-w-400">
 										<Button
-											to={`/apps/aula`} component={Link} type="button">
+											to={`/apps/sections/calendario`} component={Link} type="button">
 											<div  className="flex flex-col">
 												<img className={clsx(classes.imgIcons,"flex w-full")} src={ escuelabaja ? "assets/images/preescolar/artes-1.png" : "assets/images/preescolar/islaClases-1.png"} />
 												<Typography className={clsx(classes.TextIcons)}>
