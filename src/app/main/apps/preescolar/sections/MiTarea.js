@@ -35,6 +35,7 @@ const useStyles = makeStyles(theme => ({
 		fontSize: "32px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
+		textTransform:"capitalize"
 	},
 	Text: {
 		fontSize: "22px",
@@ -49,7 +50,8 @@ const useStyles = makeStyles(theme => ({
 		textShadow: '2px 2px 2px black',
 		text: "center",
 		alignSelf: "center",
-		textAlign:"center"
+		textAlign:"center",
+		textTransform:"capitalize"
 	},
 	TextInfo: {
 		fontSize: "16px",
@@ -147,7 +149,6 @@ const useStyles = makeStyles(theme => ({
 		alignContent: "flex-end",
 		textAlign: "right",
 		alignSelf: 'flex-end',
-		alignContent: 'flex-end',
 		flexContainer: 'justify-end',
 		paddingLeft: '70px',
 		paddingRight: '70px',
@@ -160,7 +161,6 @@ const useStyles = makeStyles(theme => ({
 		flexContainer: 'justify-end',
 		justifyContent: "flex-end",
 		alignItems: "flex-end",
-		alignContent: "flex-end",
 		textAlign: "right",
 		alignSelf: 'flex-end',
 		alignContent: 'flex-end',
@@ -227,7 +227,7 @@ function MiTarea(props) {
 		<div
 			className="flex-1"
 			style={{
-				backgroundImage: `url("assets/images/preescolar/pantalla12.png")`,
+				backgroundImage: `url(${ escuelabaja ? "assets/images/preescolar/pantalla12.png" : "assets/images/preescolar/BackgroundPreescolar.png" })`,
 				backgroundPosition: 'center',
 				backgroundSize: 'cover',
 				backgroundRepeat: 'no-repeat'
@@ -251,7 +251,7 @@ function MiTarea(props) {
 							component={Link}
 							type="button"
 						>
-							<img className={clsx(classes.img)} src="assets/images/preescolar/explorer.png" />
+							<img className={clsx(classes.img)} src={ escuelabaja ? "assets/images/preescolar/explorer.png" : "assets/images/preescolar/islaTareas.png"} />
 							<Typography className={clsx(classes.TextTitle)}>	
 								{escuelabaja ? 'Mis Tareas' : 'Mis Actividades'}
 							</Typography>
@@ -287,7 +287,7 @@ function MiTarea(props) {
 										<Button
 											to={`/loginp`} component={Link} type="button">
 											<div  className="flex flex-col">
-												<img className={clsx(classes.imgIcons,"flex w-full")} src="assets/images/preescolar/comunicacion-1.png" />
+												<img className={clsx(classes.imgIcons,"flex w-full")} src={ escuelabaja ? "assets/images/preescolar/comunicacion-1.png" : "assets/images/preescolar/islaMundoLIA-1.png"} />
 												<Typography className={clsx(classes.TextIcons)}>
 													Mi Mundo Lia
 												</Typography>
@@ -296,9 +296,9 @@ function MiTarea(props) {
 									</Grid>
 									<Grid item xs={3} className="flex flex-col items-center justify-center max-w-400">
 										<Button
-											to={`/apps/aula`} component={Link} type="button">
+											to={`/apps/sections/calendario`} component={Link} type="button">
 											<div  className="flex flex-col">
-												<img className={clsx(classes.imgIcons,"flex w-full")} src="assets/images/preescolar/artes-1.png" />
+												<img className={clsx(classes.imgIcons,"flex w-full")} src={ escuelabaja ? "assets/images/preescolar/artes-1.png" : "assets/images/preescolar/islaClases-1.png"} />
 												<Typography className={clsx(classes.TextIcons)}>
 													Mis Clases
 												</Typography>
@@ -734,39 +734,37 @@ function MiTarea(props) {
 												backgroundSize: 'cover',
 												backgroundRepeat: 'no-repeat',
 												borderRadius:8,
-												width:"100%"
+												width:"100%",
+												justifyContent:"center"
 
 											}}>
 											{/* ----------------------------Info inside card-------------------------- */}
-											<div
-												className={clsx(classes.imgIconsFooter,"flex pt-20 pb-20")}>
-												<Button  
-													onClick={ev => {
-                                                        ev.stopPropagation();
-                                                        homework.activityFile !== null && dispatch(downloadFile(homework.activityFile));}}>
-													<img src="assets/images/logos/firebase.svg" />
-												</Button>
-											</div>
-											<div
-												className={clsx(classes.imgIconsFooter,"flex pt-20 pb-20")}>
-												<img src="assets/images/logos/fuse.svg" />
-											</div>
-											<div
-												className={clsx(classes.imgIconsFooter,"flex pt-20 pb-20")}>
-												<img src="assets/images/logos/google-drive.svg" />
-											</div>
-											<div
-												className={clsx(classes.imgIconsFooter,"flex pt-20 pb-20")}>
-												<img src="assets/images/logos/google-slides.svg" />
-											</div>
-											<div
-												className={clsx(classes.imgIconsFooter,"flex pt-20 pb-20")}>
-												<img src="assets/images/logos/google-forms.svg" />
-											</div>
-											<div
-												className={clsx(classes.imgIconsFooter,"flex pt-20 pb-20")}>
-												<img src="assets/images/logos/google-meet.svg" />
-											</div>
+											{homework.activityFile && Array.isArray(homework.activityFile) && 
+												homework.activityFile.map((uFile) => (
+													<div className={clsx(classes.imgIconsFooter,"flex pt-20 pb-20 justify-center")}>
+														<Button className="flex w-full"
+															onClick={ev => {
+																ev.stopPropagation();
+																console.log("ufile::",uFile,uFile.split('.')[uFile.split('.').length-1]);
+																dispatch(downloadFile(uFile.replace('public','')));}}>
+															<img src={"assets/images/logos/" + 
+																((uFile.split('.')[uFile.split('.').length-1] == "jpg" || uFile.split('.')[uFile.split('.').length-1] == "png" || uFile.split('.')[uFile.split('.').length-1] == "svg" || uFile.split('.')[uFile.split('.').length-1] == "ico" ) ? 
+																	"image.png" :
+																((uFile.split('.')[uFile.split('.').length-1] == "mp4" || uFile.split('.')[uFile.split('.').length-1] == "gif" || uFile.split('.')[uFile.split('.').length-1] == "mpg" || uFile.split('.')[uFile.split('.').length-1] == "3gp" || uFile.split('.')[uFile.split('.').length-1] == "avi" || uFile.split('.')[uFile.split('.').length-1] == "wmv" ) ? 
+																	"video.png" :
+																(uFile.split('.')[uFile.split('.').length-1] == "docx" ?
+																	"word.svg" :
+																(uFile.split('.')[uFile.split('.').length-1] == "xlsx" ?
+																	"excel.svg" :
+																(uFile.split('.')[uFile.split('.').length-1] == "pptx" ?
+																	"powerpoint.svg" :
+																(uFile.split('.')[uFile.split('.').length-1] == "pdf" ?
+																	"pdf.png" :
+																	"fuse.svg"))))))} />
+														</Button>
+													</div>
+												))
+											}
 										</div>
 									</Grid>
 								</Grid>

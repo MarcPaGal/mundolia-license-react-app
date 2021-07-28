@@ -6,7 +6,7 @@ import { showMessage } from "../../../../store/fuse/messageSlice";
 export const getMiTarea = createAsyncThunk('miTareaApp/miTarea/getMiTareasData', async (params) => {
 	const response = await axios.get(process.env.REACT_APP_API+'/tarea/'+params.id);
     const data = await response.data;
-    
+				
 	return data;
 });
 

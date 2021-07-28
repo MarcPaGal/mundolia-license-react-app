@@ -20,6 +20,7 @@ import {
 	closeEditActivityDialog,
 	submitUpdateActivity,
 	removeActivity,
+	removeFile,
 	getSubjects
 } from './store/activitiesSlice.js';
 import MenuItem from "@material-ui/core/MenuItem";
@@ -57,7 +58,8 @@ function ActivityDialog(props) {
 	const activity = useSelector(({ ActivitiesApp }) => ActivitiesApp.activities.activity);
 
 	const { form, handleChange, setForm } = useForm(defaultFormState);
-	const [selectedFile, setSelectedFile] = useState(null);
+	const [selectedFiles, setSelectedFiles] = useState([]);
+	// const [urlArr, setUrlArr] = useState([]);
 	const [fileType, setFileType] = useState('file');
 	///Getting date time
 	var today = new Date();
@@ -135,6 +137,7 @@ function ActivityDialog(props) {
 	}, [activity.error, activity.success]);
 
 	function closeComposeDialog() {
+		setSelectedFiles([])
 		return (activityDialog.type === 'edit') ? dispatch(closeEditActivityDialog()) : dispatch(closeNewActivityDialog());
 	}
 
@@ -143,19 +146,23 @@ function ActivityDialog(props) {
 		event.preventDefault();
 
 		if (activityDialog.type === 'new') {
-			dispatch(submitCreateActivity(form, selectedFile, fileType));
-			setSelectedFile(null)
+			dispatch(submitCreateActivity(form, selectedFiles, fileType));
+			setSelectedFiles([])
+			
 		}
 		else
 			if (activityDialog.type === 'edit') {
-				dispatch(submitUpdateActivity(form, formOrigin, selectedFile, fileType));
-				setSelectedFile(null)
+				dispatch(submitUpdateActivity(form, formOrigin, selectedFiles, fileType));
+				setSelectedFiles([])
 			}
 	}
 
 	function handleRemove() {
 		dispatch(removeActivity(formOrigin.id));
 		closeComposeDialog();
+	}
+	function handleRemoveFile(name,file) {
+		dispatch(removeFile(name,file));
 	}
 	function enableButton() {
 		setIsFormValid(true);
@@ -382,7 +389,10 @@ function ActivityDialog(props) {
 									name="file_path"
 									label="Archivo"
 									id="file_path"
-									value={formOrigin ? formOrigin.file_path ? formOrigin.file_path.slice(formOrigin.file_path.indexOf('_') + 1) : '' : ''}
+									value={formOrigin && formOrigin.file_path && Array.isArray(formOrigin.file_path) && 
+											formOrigin.file_path.map((row) => (
+												" "+row.split('/')[row.split('/').length-1]
+									))}
 									InputProps={{
 										endAdornment: (
 											<InputAdornment position="end">
@@ -395,48 +405,92 @@ function ActivityDialog(props) {
 									}}
 									variant="outlined"
 								/>
-								<input
-									fullWidth
-									className="mb-16"
-									type="file"
-									name="file"
-									id="file"
-									onChange={(e) => setSelectedFile(e.target.files[0])}
-									// onChange={handleChange}
-									variant="outlined"
-								/>
+								
+								{formOrigin && formOrigin.file_path && Array.isArray(formOrigin.file_path) && 
+										formOrigin.file_path.map((row) => (
+											<div className="flex flex-row">
+												<Typography color="inherit" className="pt-8">
+													{row.split('/')[row.split('/').length-1]}
+												</Typography>
+												<IconButton
+													onClick={()=>handleRemoveFile(formOrigin.name,row.split('/')[row.split('/').length-1])}
+													disabled={(values.loading)}>
+													<Icon>delete</Icon>
+												</IconButton>
+											</div>
+								))}
+
+								{selectedFiles.map((row) => (
+									<Typography color="inherit" className="pt-8">
+										{row && row.name && row.name}
+									</Typography>
+								))}
+								<label style={{color:'red'}}>
+									{(formOrigin && formOrigin.file_path && Array.isArray(formOrigin.file_path)) ? 
+										( (formOrigin.file_path.length + selectedFiles.length > 6) ? 
+											'El máximo de archivos son 7' 
+											: 
+											'' )
+										: 
+										(selectedFiles.length > 6) && "El máximo de archivos son 7"}
+								</label>
+									<input
+										fullWidth
+										className="mb-16"
+										type="file"
+										name="file"
+										id="file"
+										onChange={(e) => {setSelectedFiles([...selectedFiles,e.target.files[0]])}}
+										// onChange={handleChange}
+										variant="outlined"
+										disabled={(formOrigin && formOrigin.file_path && Array.isArray(formOrigin.file_path)) ? (formOrigin.file_path.length + selectedFiles.length > 6) : (selectedFiles.length > 6)}
+										/>
 							</>
 							:
 							null
 					}
 					{
 						fileType == 'url' ?
-							<TextFieldFormsy
-								fullWidth
-								className="mb-16"
-								type="text"
-								name="url_path"
-								label="URL"
-								id="url_path"
-								value={formOrigin ? formOrigin.url_path : form.url_path}
-								onChange={handleChange}
-								InputProps={{
-									endAdornment: (
-										<InputAdornment position="end">
-											<Icon className="text-20" color="action">
-												link
-											</Icon>
-										</InputAdornment>
-									)
-								}}
-								variant="outlined"
-								validations={{
-									maxLength: 255
-								}}
-								validationErrors={{
-									maxLength: 'El máximo de carácteres permitidos es 255'
-								}}
-							/>
+							<>
+							{/* {urlArr.map((row) => (
+								<> */}
+									<TextFieldFormsy
+										fullWidth
+										className="mb-16"
+										type="text"
+										name="url_path"
+										label="URL"
+										id="url_path"
+										value={formOrigin ? formOrigin.url_path : form.url_path}
+										onChange={handleChange}
+										InputProps={{
+											endAdornment: (
+												<InputAdornment position="end">
+													<Icon className="text-20" color="action">
+														link
+													</Icon>
+												</InputAdornment>
+											)
+										}}
+										variant="outlined"
+										validations={{
+											maxLength: 255
+										}}
+										validationErrors={{
+											maxLength: 'El máximo de carácteres permitidos es 255'
+										}}
+									/>
+									{/* <Button onClick={()=>}>
+										<Icon className="text-20" color="action">
+											add
+										</Icon>
+										<Typography color="inherit" className="pt-8">
+											Añade otra url
+										</Typography>
+									</Button>
+								</> */}
+							{/* ))} */}
+							</>
 							:
 							null
 					}

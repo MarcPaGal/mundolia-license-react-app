@@ -24,13 +24,13 @@ const PreescolarConfig = {
 			component: React.lazy(() => import('./sections/MiTarea'))
 		},
 		{
-			path: '/apps/sections/miscore',
-			component: React.lazy(() => import('./sections/MiScore'))
+			path: '/apps/sections/calendario/',
+			component: React.lazy(() => import('./sections/Calendar'))
 		},
 		{
-			path: '/apps/sections/mitarea/:id',
-			component: React.lazy(() => import('./sections/MiTarea'))
-		},
+			path: '/apps/sections/miscore',
+			component: React.lazy(() => import('./sections/MiScore'))
+		}
 	]
 };
 

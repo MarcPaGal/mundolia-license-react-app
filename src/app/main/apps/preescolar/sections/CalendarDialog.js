@@ -296,7 +296,7 @@ function CalendarDialog(props) {
 			>
 				
 					<Typography className={clsx(classes.Text)}>
-						{ escuelabaja ? 'Calendario Semanal Tareas' : 'Calendario Semanal Actividades' }
+						{ escuelabaja ? 'Calendario Semanal de Tareas' : 'Calendario Semanal de Actividades' }
 						{/* Calendario Semanal Nuevas Tareas */}
 					</Typography>
 			</div>

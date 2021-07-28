@@ -24,15 +24,15 @@ function RedirectPage() {
 	const url = 'http://plus.clublia.com/SSO?data='+encodedData;
 	const role = useSelector(({ auth }) => auth.user.role);
 	const grade = useSelector(({ auth }) => auth.user.grade);
-	const escuelabaja = role== 'alumno' && grade <= 3 ? true : false ; 
+	// const escuelabaja = role== 'alumno' && grade <= 3 ? true : false ; 
 
 	// if(user.data.role == 'alumno' || user.data.role == 'alumno_secundaria' || user.data.role == 'alumnoe0' || user.data.role == 'preescolar' || user.data.role == 'padre' ){
 	// 	return (<Redirect to="/loginp" />)
 	// }else {
-	if ( (user.data.role == 'alumno' && escuelabaja == false ) || user.data.role == 'alumno_secundaria' || user.data.role == 'alumnoe0' || user.data.role == 'alumnoe1' || user.data.role == 'alumnoe2' || user.data.role == 'alumnoe3' || user.data.role == 'Alumno-I' || user.data.role == 'Alumno-M' || user.data.role == 'Alumno-A') {
+	if (  user.data.role == 'alumno_secundaria' || user.data.role == 'alumnoe0' || user.data.role == 'alumnoe1' || user.data.role == 'alumnoe2' || user.data.role == 'alumnoe3' || user.data.role == 'Alumno-I' || user.data.role == 'Alumno-M' || user.data.role == 'Alumno-A') {
 		return (<Redirect to="/apps/dashboard/" />)
 	} 
-	if (user.data.role == 'preescolar' || escuelabaja ) {
+	if (user.data.role == 'preescolar' || user.data.role == 'alumno' ) {
 		return (<Redirect to="/apps/landing" />)
 	}
 	else {
