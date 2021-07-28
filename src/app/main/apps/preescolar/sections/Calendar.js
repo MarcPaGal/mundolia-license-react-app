@@ -104,27 +104,27 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: "rgb(255, 255, 255, 0.1)",
         textAlign: 'center',
         color: theme.palette.text.secondary,
-        height: 480,
+        height: 460,
         position: 'relative',
         overflow: 'auto',
-        maxHeight: 480,
+        maxHeight: 460,
     },
     paperNav: {
         padding: theme.spacing(1),
         backgroundColor: 'transparent',
         textAlign: 'center',
         color: theme.palette.text.secondary,
-        height: 480,
+        height: 460,
         position: 'relative',
-        overflow: 'auto',
-        maxHeight: 480,
+        maxHeight: 460,
     },
     TextTitle: {
         fontWeight: "bold",
         fontSize: "32px",
         color: 'white',
         textShadow: '2px 2px 2px black',
-        textTransform:"capitalize"
+        textTransform:"capitalize",
+        marginLeft: 25
     },
     Text: {
         fontSize: "16px",

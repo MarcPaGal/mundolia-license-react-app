@@ -35,9 +35,12 @@ function EventsCalendarTokenDialog(props) {
     const tokenDialog = useSelector(({ EventsCalendarApp }) => EventsCalendarApp.token.tokenDialog);
 
     useEffect(() => {
-		if(token == 'Not logged'){
+		if(token == 'notLogged'){
+		    console.log('entra')
             dispatch(openTokenDialog());
         } else {
+		    console.log(token)
+		    console.log('no entra')
             dispatch(closeTokenDialog());
         }
 	},[dispatch, token]);
