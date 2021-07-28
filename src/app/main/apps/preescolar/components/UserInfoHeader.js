@@ -118,7 +118,7 @@ export default function UserInfoHeader() {
 					<div className="flex items-center justify-start">
 						<p style={{
 							paddingTop: 3, paddingBottom: 3, paddingLeft: 5, paddingRight: 5, backgroundColor: '#FCDB00', color: '#FFFFFF', borderRadius: 12, fontWeight: "bold",
-							textAlign: "center", minWidth: 200
+							textAlign: "center", minWidth: 200, marginBottom: 5
 						}}>
 							<Typography className={clsx(classes.TextInfo)}>
 								{info.data.displayName}
@@ -128,7 +128,7 @@ export default function UserInfoHeader() {
 					<div className="flex items-center justify-start">
 						<p style={{
 							paddingTop: 3, paddingBottom: 3, paddingLeft: 5, paddingRight: 5, backgroundColor: '#FCDB00', color: '#FFFFFF', borderRadius: 12, fontWeight: "bold",
-							textAlign: "center", minWidth: 200
+							textAlign: "center", minWidth: 200, marginBottom: 5
 						}}>
 							<Typography className={clsx(classes.TextInfo)}>
 								{ info.data.grade == '1' ? 'Primer Grado' : null }
