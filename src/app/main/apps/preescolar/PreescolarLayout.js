@@ -52,8 +52,6 @@ const useStyles = makeStyles(theme => ({
 		textShadow: '2px 2px 2px black',
 		padding: 15,
 	},
-	
-	
 }));
 
 
@@ -76,7 +74,6 @@ function PreescolarLayout(props) {
 	const [width, setWidth] = useState(window.innerWidth);
 	const [device, setDevice] = useState(false);
 
-	
 	function handleSubmit(event) {
 		const token = localStorage.getItem('jwt_access_token');
 		if(token){
@@ -116,7 +113,6 @@ function PreescolarLayout(props) {
 			}
 			
 			console.log("updating Width");
-			console.log(width);
 
 		  };
 	  
@@ -144,11 +140,6 @@ function PreescolarLayout(props) {
             >
 
 				<LogoutButton/>
-				{/* <div className={clsx(classes.logoutButton)} >
-					<div className="float">
-						<LogoutButton/>
-					</div>
-				</div> */}
 
 				{/* -----------------------Mis Tareas/Mis Actividades------------------- */}
 				<div className="float flex w-full sm:w-1/2 md:w-1/3 p-12 flex-col text-center">
@@ -291,14 +282,6 @@ function PreescolarLayout(props) {
 						null
 					}
 				</div>
-
-				{/* {!device && !isMobile ?
-					<div className="float flex" >
-						<LogoutButton/>
-					</div>
-					:
-					null
-				} */}
 				
 
 				<div className="float flex w-full sm:w-1/2 md:w-1/3 p-12 flex-col items-center justify-center flex-1" >
@@ -345,16 +328,6 @@ function PreescolarLayout(props) {
 					}
 					
 				</div>
-
-				{/* { device || isMobile ? 
-					<>
-						<div className="float flex w-full sm:w-1/2 md:w-1/3 p-12 flex-col items-center justify-center" >
-							<LogoutButton/>
-						</div>
-					</>
-					:
-					<div style={{ width: 125 }} ></div>
-				} */}
 
             </FuseAnimateGroup>
 
