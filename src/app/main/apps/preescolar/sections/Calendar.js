@@ -28,6 +28,7 @@ import Collapse from "@material-ui/core/Collapse";
 import Tooltip from '@material-ui/core/Tooltip';
 import parse from 'html-react-parser';
 import UserInfoHeader from "../components/UserInfoHeader";
+import LogoutButton from '../components/LogoutButton';
 
 const formats = {
     eventTimeRangeFormat: () => {
@@ -342,6 +343,7 @@ function CalendarActivities(props) {
                     animation: 'transition.slideUpBigIn'
                 }}
             >
+                <LogoutButton/>
 
                 <div className="float flex w-full flex-wrap ">
                     <div className="flex w-full md:w-1/2">

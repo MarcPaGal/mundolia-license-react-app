@@ -28,6 +28,7 @@ import Icon from '@material-ui/core/Icon';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import UserInfoHeader from '../components/UserInfoHeader';
+import LogoutButton from '../components/LogoutButton';
 
 const useStyles = makeStyles(theme => ({
 	TextTitle: {
@@ -239,6 +240,7 @@ function MiTarea(props) {
 					animation: 'transition.slideUpBigIn'
 				}}
 			>
+				<LogoutButton/>
 
 				<div className="float flex w-full flex-wrap ">
 					<div className="flex w-full md:w-1/2">

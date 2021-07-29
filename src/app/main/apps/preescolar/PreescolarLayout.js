@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { useDeepCompareEffect } from '@fuse/hooks';
 import {isMobile} from 'react-device-detect';
 import {getStudentCalendars} from "./store/subjectCalendarSlice";
+import LogoutButton from './components/LogoutButton';
 
 const useStyles = makeStyles(theme => ({
 	Text: {
@@ -50,8 +51,9 @@ const useStyles = makeStyles(theme => ({
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 		padding: 15,
-	}
-
+	},
+	
+	
 }));
 
 
@@ -114,6 +116,8 @@ function PreescolarLayout(props) {
 			}
 			
 			console.log("updating Width");
+			console.log(width);
+
 		  };
 	  
 		  window.addEventListener("resize", updateWindowDimensions);
@@ -138,6 +142,13 @@ function PreescolarLayout(props) {
                     animation: 'transition.slideUpBigIn'
                 }}
             >
+
+				<LogoutButton/>
+				{/* <div className={clsx(classes.logoutButton)} >
+					<div className="float">
+						<LogoutButton/>
+					</div>
+				</div> */}
 
 				{/* -----------------------Mis Tareas/Mis Actividades------------------- */}
 				<div className="float flex w-full sm:w-1/2 md:w-1/3 p-12 flex-col text-center">
@@ -281,6 +292,15 @@ function PreescolarLayout(props) {
 					}
 				</div>
 
+				{/* {!device && !isMobile ?
+					<div className="float flex" >
+						<LogoutButton/>
+					</div>
+					:
+					null
+				} */}
+				
+
 				<div className="float flex w-full sm:w-1/2 md:w-1/3 p-12 flex-col items-center justify-center flex-1" >
 					<Button
 						disableRipple
@@ -325,6 +345,16 @@ function PreescolarLayout(props) {
 					}
 					
 				</div>
+
+				{/* { device || isMobile ? 
+					<>
+						<div className="float flex w-full sm:w-1/2 md:w-1/3 p-12 flex-col items-center justify-center" >
+							<LogoutButton/>
+						</div>
+					</>
+					:
+					<div style={{ width: 125 }} ></div>
+				} */}
 
             </FuseAnimateGroup>
 

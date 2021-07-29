@@ -26,6 +26,7 @@ import { getCalendar, openCalendarDialog } from '../store/calendarSlice';
 import CalendarDialog from './CalendarDialog';
 import Badge from '@material-ui/core/Badge';
 import UserInfoHeader from '../components/UserInfoHeader';
+import LogoutButton from '../components/LogoutButton';
 
 const useStyles = makeStyles(theme => ({
 	TextTitle: {
@@ -217,7 +218,7 @@ function MisTareas(props) {
 					animation: 'transition.slideUpBigIn'
 				}}
 			>
-
+				<LogoutButton/>
 				<div className="float flex w-full flex-wrap ">
 					<div className="flex w-full md:w-1/2">
 						<Button
@@ -239,7 +240,7 @@ function MisTareas(props) {
 
 
 					{/* ------------------------- Avatar and User Info --------------------- */}
-					<div className="flex w-full md:w-1/2 items-center justify-center flex-wrap flex-row">
+					<div className="flex w-full md:w-1/2 items-center justify-center flex-wrap flex-row" >
 						<UserInfoHeader/>
 					</div>
 				</div>
