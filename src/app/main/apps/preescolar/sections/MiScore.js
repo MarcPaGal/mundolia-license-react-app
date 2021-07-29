@@ -22,6 +22,7 @@ import { openAvatarLayout } from 'app/store/fuse/avatarSlice';
 import Avatar from '@material-ui/core/Avatar';
 import { setRedirect, getPHPFoxUrl } from '../../../../auth/store/redirectSlice'
 import UserInfoHeader from '../components/UserInfoHeader';
+import LogoutButton from '../components/LogoutButton';
 
 const useStyles = makeStyles(theme => ({
 	TextTitle: {
@@ -258,6 +259,7 @@ function MiScore(props) {
 					animation: 'transition.slideUpBigIn'
 				}}
 			>
+				<LogoutButton/>
 
 				< div className="w-full h-full pt-80 items-center justify-center flex-wrap flex-row flex flex-1 h-full">
 
