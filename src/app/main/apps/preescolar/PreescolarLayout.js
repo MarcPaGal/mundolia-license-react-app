@@ -52,8 +52,6 @@ const useStyles = makeStyles(theme => ({
 		textShadow: '2px 2px 2px black',
 		padding: 15,
 	},
-	
-	
 }));
 
 
@@ -76,7 +74,6 @@ function PreescolarLayout(props) {
 	const [width, setWidth] = useState(window.innerWidth);
 	const [device, setDevice] = useState(false);
 
-	
 	function handleSubmit(event) {
 		const token = localStorage.getItem('jwt_access_token');
 		if(token){
