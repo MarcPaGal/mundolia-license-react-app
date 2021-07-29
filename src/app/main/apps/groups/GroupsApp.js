@@ -4,8 +4,8 @@ import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
 import withReducer from 'app/store/withReducer';
-import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useDeepCompareEffect } from '@fuse/hooks';
 import GroupDialog from './GroupDialog';
@@ -14,6 +14,10 @@ import reducer from './store';
 import { openNewGroupDialog, getGroups } from './store/groupSlice';
 import { getTeacherInfo } from './store/teacherSlice';
 import GroupsList from './GroupsList';
+import {getToken} from "./store/tokenSlice";
+import TokenDialog from "./TokenDialog";
+import {CircularProgress} from "@material-ui/core";
+
 
 const useStyles = makeStyles({
 	addButton: {
@@ -32,20 +36,22 @@ const useStyles = makeStyles({
 
 function GroupsApp(props) {
 	const dispatch = useDispatch();
-
 	const classes = useStyles(props);
 	const pageLayout = useRef(null);
 	const routeParams = useParams();
+	const token = useSelector(({ GroupsApp }) => GroupsApp.token.token) ;
+
+	useEffect( () =>{
+		dispatch(getToken());
+	}, [])
 
 	useDeepCompareEffect(() => {
 		dispatch(getGroups(routeParams));
 		dispatch(getTeacherInfo());
-	
 	}, [dispatch, routeParams]);
 
 	return (
 		<>
-
 			<FusePageSimple
 				classes={{
 					contentWrapper: 'p-0 sm:p-24 pb-80 sm:pb-80 h-full',
@@ -72,6 +78,11 @@ function GroupsApp(props) {
 				</Fab>
 			</FuseAnimate>
 			<GroupDialog/>
+			{token ?
+				<TokenDialog/>
+			:
+				<CircularProgress variant="determinate" value={25} />
+			}
 
 		</>
 	);

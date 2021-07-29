@@ -4,14 +4,15 @@ import tareasEntregadas from './tareasEntregadasSlice';
 import panel from './panelSlice';
 import calendar from './calendarSlice';
 import miTarea from './miTarea';
-
+import subjectCalendarSlice from "./subjectCalendarSlice";
 
 const reducer = combineReducers({
 	tareasPendientes,
 	tareasEntregadas,
 	panel,
 	calendar,
-	miTarea
+	miTarea,
+	subjectCalendarSlice,
 });
 
 export default reducer;

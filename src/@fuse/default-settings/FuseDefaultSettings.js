@@ -56,7 +56,8 @@ export const mustHaveThemeOptions = {
 			fontFamily: 'grobold'
 		},
 		body2: {
-			fontSize: '1.6rem'
+			fontSize: '1.6rem',
+			fontFamily: 'poppins'
 		}
 	}
 };

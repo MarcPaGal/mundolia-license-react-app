@@ -13,6 +13,7 @@ import './Preescolar.css';
 import { Link } from 'react-router-dom';
 import { useDeepCompareEffect } from '@fuse/hooks';
 import {isMobile} from 'react-device-detect';
+import {getStudentCalendars} from "./store/subjectCalendarSlice";
 
 const useStyles = makeStyles(theme => ({
 	Text: {
@@ -42,22 +43,27 @@ const useStyles = makeStyles(theme => ({
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 		// paddingLeft: '6px'
-
+	},
+	dashboardText: {
+		fontWeight:"bold",
+		fontSize:"28px",
+		color: 'white',
+		textShadow: '2px 2px 2px black',
+		padding: 15,
 	}
 
 }));
 
 
 function PreescolarLayout(props) {
-	  
-
+	const dispatch = useDispatch();
 	const classes = useStyles();
 	const role = useSelector(({ auth }) => auth.user.role);
 	const grade = useSelector(({ auth }) => auth.user.grade);
 	const escuelabaja = role== 'alumno' && grade <= 3 ? true : false ; 
 	// const url =  `url("assets/sounds/Mi Mundo Lia.m4a")`;
     const audioMimundoLia = new Audio("assets/sounds/Mi Mundo Lia.mp3");
-	const audioMiScore = new Audio("assets/sounds/Mi Score.mp3");
+	const audioDashboard = new Audio("assets/sounds/Dashboard.mp3");
 	const audioMisClases= new Audio("assets/sounds/Mis Clases.mp3");
 	const audioMisTareas = new Audio("assets/sounds/Mis Tareas.mp3");
 	const audioMisActividades = new Audio("assets/sounds/Mis Actividades.mp3");
@@ -81,8 +87,8 @@ function PreescolarLayout(props) {
 	function playMundolia() {
 		audioMimundoLia.play();
 	}
-	function playMiScore() {
-		audioMiScore.play();
+	function playDashboard() {
+		audioDashboard.play();
 	}
 	function playMisClases() {
 		audioMisClases.play();
@@ -120,7 +126,7 @@ function PreescolarLayout(props) {
 	return (
         <div className="flex flex-1" 
 		style={{
-		backgroundImage: `url("assets/images/preescolar/pantalla12.png")`,
+		backgroundImage: `url(${ escuelabaja ? "assets/images/preescolar/pantalla12.png" : "assets/images/preescolar/BackgroundPreescolar.png" })`,
 			backgroundPosition: 'center',
 			backgroundSize: 'cover',
 			backgroundRepeat: 'no-repeat'
@@ -147,7 +153,7 @@ function PreescolarLayout(props) {
 						type="button"
 						// onMouseEnter={ playMisTareas }
 					>
-						<img src={ escuelabaja ? "assets/images/preescolar/explorer.png" : "assets/images/preescolar/explorer1.png"} />
+						<img src={ escuelabaja ? "assets/images/preescolar/explorer.png" : "assets/images/preescolar/islaTareas.png"} />
 					</Button>
 					<Button
 						disableRipple
@@ -193,7 +199,7 @@ function PreescolarLayout(props) {
 						component={Link}
 						type="button"
 					>
-						<img className="logo-icon" src="assets/images/preescolar/comunicacion.png" alt="logo" />
+						<img src={ escuelabaja ? "assets/images/preescolar/comunicacion.png" : "assets/images/preescolar/islaMundoLIA.png" } alt="logo" />
 					</Button>
 					<Button
 						disableRipple
@@ -211,7 +217,7 @@ function PreescolarLayout(props) {
 						onMouseEnter={ !escuelabaja && !isMobile ? playMundolia : null }
 					>
 						<Typography className={clsx(classes.Text)}>
-						Mi mundo Lia {device}
+						Mi Mundo Lia
 						</Typography>
 					</Button>
 					{ isMobile && !escuelabaja ?
@@ -239,9 +245,9 @@ function PreescolarLayout(props) {
 						}}
 						component={Link}
 						type="button"
-						to={`/apps/aula`}
+						to={`/apps/sections/calendario`}
 					>
-						<img src={ escuelabaja ? "assets/images/preescolar/artes.png" : "assets/images/preescolar/artes1.png" } alt="logo" />
+						<img src={ escuelabaja ? "assets/images/preescolar/artes.png" : "assets/images/preescolar/islaClases.png" } alt="logo" />
 					</Button>
 					<Button
 						disableRipple
@@ -251,7 +257,7 @@ function PreescolarLayout(props) {
 							textTransform: 'none',
 
 						}}
-						to={`/apps/aula`}
+						to={`/apps/sections/calendario`}
 						component={Link}
 						type="button"
 						onMouseEnter={ !escuelabaja && !isMobile ? playMisClases : null }
@@ -287,7 +293,7 @@ function PreescolarLayout(props) {
 							backgroundPosition: 'center',
 							backgroundSize: 'contain',
 							backgroundRepeat: 'no-repeat',
-							height: "100%",
+							// width: "100%",
 							textTransform: 'none',
 
 							// maxHeight: '100%',
@@ -297,11 +303,11 @@ function PreescolarLayout(props) {
 						to={`/apps/sections/miscore`}
 						component={Link}
 						type="button"
-						onMouseEnter={ !escuelabaja && !isMobile ? playMiScore : null }
+						onMouseEnter={ !escuelabaja && !isMobile ? playDashboard : null }
 					> 						
 
-						<Typography className={clsx(classes.Text)}>
-							Mi Score
+						<Typography className={clsx(classes.dashboardText)}>
+							Dashboard
 						</Typography>
 					</Button>
 					{ isMobile && !escuelabaja ?
@@ -310,7 +316,7 @@ function PreescolarLayout(props) {
 							style={{
 								backgroundColor: 'transparent',
 							}}
-							onClick={playMiScore}
+							onClick={playDashboard}
 						>
 							<Icon className={clsx(classes.listenIcon)}>volume_up</Icon>
 						</Button>

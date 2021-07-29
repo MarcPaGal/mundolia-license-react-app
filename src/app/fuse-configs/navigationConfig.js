@@ -62,6 +62,15 @@ const navigationConfig = [
 				url: '/apps/actividades/all'
 			},
 			{
+				id: 'calendario',
+				title: 'Calendario',
+				translate: 'Calendario',
+				type: 'item',
+				'auth' : authRoles.teacher,
+				icon: 'event',
+				url: '/apps/eventscalendar'
+			},
+			{
 				id: 'grupos',
 				title: 'Grupos',
 				translate: 'Grupos',

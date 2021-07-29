@@ -88,7 +88,7 @@ const themesConfig = {
 			},
 			background: {
 				paper: '#FFFFFF',
-				default: '#fae4e4'
+				default: '#D9D9FF'
 			},
 			error: red
 		},

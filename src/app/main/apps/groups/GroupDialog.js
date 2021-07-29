@@ -52,8 +52,6 @@ function GroupDialog(props) {
 	const teachers = useSelector(({ GroupsApp }) => GroupsApp.teachers.data);
 	const { form, handleChange, setForm} = useForm(defaultFormState);
 
-	console.log(teachers);
-
 	const [values, setValues] = React.useState({
 		// showPassword: false,
 		loading : false
