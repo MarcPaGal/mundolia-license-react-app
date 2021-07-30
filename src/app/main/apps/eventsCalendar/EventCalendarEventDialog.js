@@ -226,10 +226,10 @@ function EventsCalendarEventDialog(props) {
                                         onChange={handleChange}
                                         variant="outlined"
                                         validations={{
-                                            maxLength: 100
+                                            maxLength: 400
                                         }}
                                         validationErrors={{
-                                            maxLength: 'El máximo de carácteres permitidos es 100'
+                                            maxLength: 'El máximo de carácteres permitidos es 400'
                                         }}
                                     />
                                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
