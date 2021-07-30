@@ -61,12 +61,37 @@ function PreescolarLayout(props) {
 	const role = useSelector(({ auth }) => auth.user.role);
 	const grade = useSelector(({ auth }) => auth.user.grade);
 	const escuelabaja = role== 'alumno' && grade <= 3 ? true : false ; 
+	const nivel = role == 'alumno' ? grade > 3 ? 2 : 1 : 0 ; 
 	// const url =  `url("assets/sounds/Mi Mundo Lia.m4a")`;
     const audioMimundoLia = new Audio("assets/sounds/Mi Mundo Lia.mp3");
 	const audioDashboard = new Audio("assets/sounds/Dashboard.mp3");
 	const audioMisClases= new Audio("assets/sounds/Mis Clases.mp3");
 	const audioMisTareas = new Audio("assets/sounds/Mis Tareas.mp3");
 	const audioMisActividades = new Audio("assets/sounds/Mis Actividades.mp3");
+
+	const theme = {
+		background: [
+			'assets/images/preescolar/BackgroundPreescolar.png',
+			'assets/images/preescolar/pantalla12.png',
+			'assets/images/preescolar/BackgroundPrimariaAlta.png'
+		],
+		island1: [
+			'assets/images/preescolar/islaTareas.png',
+			'assets/images/preescolar/explorer.png',
+			'assets/images/preescolar/Mis-tareas-PLANETA.png'
+		],
+		island2: [
+			'assets/images/preescolar/islaMundoLIA.png',
+			'assets/images/preescolar/comunicacion.png',
+			'assets/images/preescolar/Mi-mundo-LIA.png'
+		],
+		island3: [
+			'assets/images/preescolar/islaClases.png',
+			'assets/images/preescolar/artes.png',
+			'assets/images/preescolar/Mis-clases.png'
+		],
+
+	}
 
 	// var windowW = window.innerWidth;
 	// var device = windowW < '1170' ? true : false ; 
@@ -84,6 +109,8 @@ function PreescolarLayout(props) {
 	}
 
 	function playMundolia() {
+		console.log(role);
+		console.log(grade);
 		audioMimundoLia.play();
 	}
 	function playDashboard() {
@@ -126,7 +153,7 @@ function PreescolarLayout(props) {
 	return (
         <div className="flex flex-1" 
 		style={{
-		backgroundImage: `url(${ escuelabaja ? "assets/images/preescolar/pantalla12.png" : "assets/images/preescolar/BackgroundPreescolar.png" })`,
+		backgroundImage: `url(${theme.background[nivel]})`,
 			backgroundPosition: 'center',
 			backgroundSize: 'cover',
 			backgroundRepeat: 'no-repeat'
@@ -155,7 +182,7 @@ function PreescolarLayout(props) {
 						type="button"
 						// onMouseEnter={ playMisTareas }
 					>
-						<img src={ escuelabaja ? "assets/images/preescolar/explorer.png" : "assets/images/preescolar/islaTareas.png"} />
+						<img src={ theme.island1[nivel] } />
 					</Button>
 					<Button
 						disableRipple
@@ -201,7 +228,7 @@ function PreescolarLayout(props) {
 						component={Link}
 						type="button"
 					>
-						<img src={ escuelabaja ? "assets/images/preescolar/comunicacion.png" : "assets/images/preescolar/islaMundoLIA.png" } alt="logo" />
+						<img src={ theme.island2[nivel] } alt="logo" />
 					</Button>
 					<Button
 						disableRipple
@@ -249,7 +276,7 @@ function PreescolarLayout(props) {
 						type="button"
 						to={`/apps/sections/calendario`}
 					>
-						<img src={ escuelabaja ? "assets/images/preescolar/artes.png" : "assets/images/preescolar/islaClases.png" } alt="logo" />
+						<img src={ theme.island3[nivel] } alt="logo" />
 					</Button>
 					<Button
 						disableRipple

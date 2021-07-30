@@ -225,6 +225,30 @@ function MiScore(props) {
 
 	const info = useSelector(({ auth }) => auth.user);
 	const escuelabaja = role== 'alumno' && info.grade <= 3 ? true : false ; 
+	const nivel = role == 'alumno' ? info.grade  > 3 ? 2 : 1 : 0 ; 
+
+	const theme = {
+		background: [
+			'assets/images/preescolar/BackgroundPreescolar.png',
+			'assets/images/preescolar/pantalla12.png',
+			'assets/images/preescolar/BackgroundPrimariaAlta.png'
+		],
+		island1: [
+			'assets/images/preescolar/islaTareas.png',
+			'assets/images/preescolar/explorer.png',
+			'assets/images/preescolar/Mis-tareas-PLANETA.png'
+		],
+		island2: [
+			'assets/images/preescolar/islaMundoLIA.png',
+			'assets/images/preescolar/comunicacion.png',
+			'assets/images/preescolar/Mi-mundo-LIA.png'
+		],
+		island3: [
+			'assets/images/preescolar/islaClases.png',
+			'assets/images/preescolar/artes.png',
+			'assets/images/preescolar/Mis-clases.png'
+		],
+	}
 
 	useDeepCompareEffect(() => {
 		dispatch(getPHPFoxUrl());	
@@ -273,7 +297,7 @@ function MiScore(props) {
 						}}>
 						<List className={classes.scroll} >
 							<Link to="/apps/sections/mistareas">
-								<img className={clsx(classes.img)} src={ escuelabaja ? "assets/images/preescolar/explorer.png" : "assets/images/preescolar/islaTareas.png"} />
+								<img className={clsx(classes.img)} src={ theme.island1[nivel] } />
 
 								<Typography className={clsx(classes.TextTitle)}>
 									{escuelabaja ? 'Mis Tareas' : 'Mis Actividades'}
@@ -432,7 +456,7 @@ function MiScore(props) {
 						}}>
 						<List className={classes.scroll} >
 							<Link to="/loginp">
-								<img className={clsx(classes.img)} src={ escuelabaja ? "assets/images/preescolar/comunicacion.png" : "assets/images/preescolar/islaMundoLIA.png"}  />
+								<img className={clsx(classes.img)} src={ theme.island2[nivel] }  />
 
 								<Typography className={clsx(classes.TextTitle)}>
 									Mi Mundo Lia
@@ -566,7 +590,7 @@ function MiScore(props) {
 						}}>
 						<List className={classes.scroll } >
 							<Link to="/apps/sections/calendario">
-								<img className={clsx(classes.img)} src={ escuelabaja ? "assets/images/preescolar/artes.png" : "assets/images/preescolar/islaClases.png"} />
+								<img className={clsx(classes.img)} src={ theme.island3[nivel] } />
 								<Typography className={clsx(classes.TextTitle)}>
 									Mis Clases
 								</Typography>

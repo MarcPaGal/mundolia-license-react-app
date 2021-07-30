@@ -175,6 +175,21 @@ function MisTareas(props) {
 	const info = useSelector(({ auth }) => auth.user);
 	const escuelabaja = role== 'alumno' && info.grade <= 3 ? true : false ; 
 
+	const nivel = role == 'alumno' ? info.grade  > 3 ? 2 : 1 : 0 ; 
+
+	const theme = {
+		background: [
+			'assets/images/preescolar/BackgroundPreescolar.png',
+			'assets/images/preescolar/pantalla12.png',
+			'assets/images/preescolar/BackgroundPrimariaAlta.png'
+		],
+		island1: [
+			'assets/images/preescolar/islaTareas.png',
+			'assets/images/preescolar/explorer.png',
+			'assets/images/preescolar/Mis-tareas-PLANETA.png'
+		],
+	}
+
 	const [userMenu, setUserMenu] = useState(null);
 
 	const userMenuClick = event => {
@@ -206,7 +221,7 @@ function MisTareas(props) {
 		<div
 			className="flex-1"
 			style={{
-				backgroundImage: `url(${ escuelabaja ? "assets/images/preescolar/pantalla12.png" : "assets/images/preescolar/BackgroundPreescolar.png" })`,
+				backgroundImage: `url(${ theme.background[nivel] })`,
 				backgroundPosition: 'center',
 				backgroundSize: 'cover',
 				backgroundRepeat: 'no-repeat'
@@ -231,7 +246,7 @@ function MisTareas(props) {
 							component={Link}
 							type="button"
 						>
-							<img className={clsx(classes.img)} src={ escuelabaja ? "assets/images/preescolar/explorer.png" : "assets/images/preescolar/islaTareas.png"} />
+							<img className={clsx(classes.img)} src={ theme.island1[nivel]} />
 							<Typography className={clsx(classes.TextTitle)}>
 								{escuelabaja ? 'Mis Tareas' : 'Mis Actividades'}
 							</Typography>

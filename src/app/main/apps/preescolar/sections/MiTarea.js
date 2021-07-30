@@ -191,6 +191,31 @@ function MiTarea(props) {
 	const homework = useSelector(({ MiTareaApp }) => MiTareaApp.miTarea.data);
 	const [userMenu, setUserMenu] = useState(null);
 
+	const nivel = role == 'alumno' ? info.grade > 3 ? 2 : 1 : 0 ; 
+	const theme = {
+		background: [
+			'assets/images/preescolar/BackgroundPreescolar.png',
+			'assets/images/preescolar/pantalla12.png',
+			'assets/images/preescolar/BackgroundPrimariaAlta.png'
+		],
+		island1: [
+			'assets/images/preescolar/islaTareas.png',
+			'assets/images/preescolar/explorer.png',
+			'assets/images/preescolar/Mis-tareas-PLANETA.png'
+		],
+		island2: [
+			'assets/images/preescolar/islaMundoLIA-1.png',
+			'assets/images/preescolar/comunicacion-1.png',
+			'assets/images/preescolar/Mi-mundo-LIA.png'
+		],
+		island3: [
+			'assets/images/preescolar/islaClases-1.png',
+			'assets/images/preescolar/artes-1.png',
+			'assets/images/preescolar/Mis-clases.png'
+		],
+
+	}
+
 	const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
 	"Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
 	];
@@ -228,7 +253,7 @@ function MiTarea(props) {
 		<div
 			className="flex-1"
 			style={{
-				backgroundImage: `url(${ escuelabaja ? "assets/images/preescolar/pantalla12.png" : "assets/images/preescolar/BackgroundPreescolar.png" })`,
+				backgroundImage: `url(${ theme.background[nivel] })`,
 				backgroundPosition: 'center',
 				backgroundSize: 'cover',
 				backgroundRepeat: 'no-repeat'
@@ -253,7 +278,7 @@ function MiTarea(props) {
 							component={Link}
 							type="button"
 						>
-							<img className={clsx(classes.img)} src={ escuelabaja ? "assets/images/preescolar/explorer.png" : "assets/images/preescolar/islaTareas.png"} />
+							<img className={clsx(classes.img)} src={ theme.island1[nivel] } />
 							<Typography className={clsx(classes.TextTitle)}>	
 								{escuelabaja ? 'Mis Tareas' : 'Mis Actividades'}
 							</Typography>
@@ -289,7 +314,7 @@ function MiTarea(props) {
 										<Button
 											to={`/loginp`} component={Link} type="button">
 											<div  className="flex flex-col">
-												<img className={clsx(classes.imgIcons,"flex w-full")} src={ escuelabaja ? "assets/images/preescolar/comunicacion-1.png" : "assets/images/preescolar/islaMundoLIA-1.png"} />
+												<img className={clsx(classes.imgIcons,"flex w-full")} src={ theme.island2[nivel] } />
 												<Typography className={clsx(classes.TextIcons)}>
 													Mi Mundo Lia
 												</Typography>
@@ -300,7 +325,7 @@ function MiTarea(props) {
 										<Button
 											to={`/apps/sections/calendario`} component={Link} type="button">
 											<div  className="flex flex-col">
-												<img className={clsx(classes.imgIcons,"flex w-full")} src={ escuelabaja ? "assets/images/preescolar/artes-1.png" : "assets/images/preescolar/islaClases-1.png"} />
+												<img className={clsx(classes.imgIcons,"flex w-full")} src={ theme.island3[nivel] } />
 												<Typography className={clsx(classes.TextIcons)}>
 													Mis Clases
 												</Typography>
@@ -726,7 +751,7 @@ function MiTarea(props) {
 										</Grid>
 									</Grid>
 
-									<Grid item xs={10} className="flex h-full w-full">
+									<Grid item xs={12} className="flex h-full w-full p-16">
 										<div
 											className= "flex"
 
