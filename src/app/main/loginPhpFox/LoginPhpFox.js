@@ -46,19 +46,14 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 function getUrl(redirect){
-
-	
 	axios
 	.post(process.env.REACT_APP_API+'/usuario_p/login')
 	.then(response => {
-
-
 		if (response.data) {
 			console.log(response.data);
 			window.location.href = response.data;
 
 
-			
 			//added to redirection of different phpfox routes
 			if (redirect.redirectValue.data == 'misgrupos') {
 				window.location.href = redirect.data + '/groups';
@@ -67,9 +62,6 @@ function getUrl(redirect){
 			if (redirect.redirectValue.data == 'onlinelia') {
 				window.location.href = redirect.data + '/video';
 			}
-			
-				
-
 		} else {
 			//dispatch(showMessage({ message: error.message }));
 		}
