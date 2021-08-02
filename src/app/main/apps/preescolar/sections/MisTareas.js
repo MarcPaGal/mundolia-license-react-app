@@ -204,7 +204,7 @@ function MisTareas(props) {
 	const panelInfo = useSelector(({ PreescolarApp }) => PreescolarApp.panel.data);
 	const calendarInfo = useSelector(({ PreescolarApp }) => PreescolarApp.calendar.data);
 	const info = useSelector(({ auth }) => auth.user);
-	const escuelabaja = role== 'alumno' && info.grade <= 3 ? true : false ; 
+	// const escuelabaja = role== 'alumno' && info.grade <= 3 ? true : false ; 
 
 	const nivel = role == 'alumno' ? info.grade  > 3 ? 2 : 1 : 0 ; 
 
@@ -279,7 +279,7 @@ function MisTareas(props) {
 						>
 							<img className={clsx(classes.img)} src={ theme.island1[nivel]} />
 							<Typography className={clsx(classes.TextTitle)}>
-								{escuelabaja ? 'Mis Tareas' : 'Mis Actividades'}
+								{!nivel == 0 ? 'Mis Tareas' : 'Mis Actividades'}
 							</Typography>
 						</Button>
 					</div>
@@ -316,7 +316,7 @@ function MisTareas(props) {
 							}}
 						>
 							<Typography className={clsx(classes.Text)}>
-								{ escuelabaja ? 'Tareas Pendientes' : 'Actividades Pendientes' }
+								{ !nivel == 0 ? 'Tareas Pendientes' : 'Actividades Pendientes' }
 							</Typography>
 						</div>
 						{/* ----------------------------Info inside card-------------------------- */}
@@ -326,7 +326,7 @@ function MisTareas(props) {
 									pendientes.map(row => (
 										<>
 
-											{ escuelabaja ?
+											{ !nivel == 0 ?
 												<>
 												<div className=" flex w-full p-4 text-center items-center justify-center" style={{display:'table-row'}}>
 													<p className={clsx(classes.linkCardsColumn)} style={{ display:'table-cell', width:'20%', verticalAlign:'middle', padding:15}}>
@@ -373,6 +373,7 @@ function MisTareas(props) {
 															{row.name}
 														</Typography>
 													</p>
+													
 												</div>
 											}
 
@@ -386,7 +387,7 @@ function MisTareas(props) {
 								:
 								<div className="flex flex-1 items-center justify-center h-full">
 									<Typography className={clsx(classes.TextInfo)}>
-										{ escuelabaja ? 'No hay tareas que mostrar!' : 'No hay actividades que mostrar!' }
+										{ !nivel == 0 ? 'No hay tareas que mostrar!' : 'No hay actividades que mostrar!' }
 									</Typography>
 								</div>								
 							}
@@ -416,7 +417,7 @@ function MisTareas(props) {
 							}}
 						>
 							<Typography className={clsx(classes.Text)}>
-								{ escuelabaja ? 'Tareas Entregadas' : 'Actividades Entregadas' }
+								{ !nivel == 0 ? 'Tareas Entregadas' : 'Actividades Entregadas' }
 							</Typography>
 						</div>
 						{/* ----------------------------Info inside card-------------------------- */}
@@ -428,7 +429,7 @@ function MisTareas(props) {
 											<div className="flex w-1/5 p-12 text-center items-center justify-center">
 											<Link to={'/apps/sections/mitarea/'+row.id} ><img src="assets/images/preescolar/entregado.png"/></Link>
 											</div>
-											{ escuelabaja ?
+											{ !nivel == 0 ?
 											<>
 												<div className=" flex w-2/5 p-12 text-center items-center justify-center"
 													style={{
@@ -474,7 +475,7 @@ function MisTareas(props) {
 								:
 								<div className="flex flex-1 items-center justify-center h-full">
 									<Typography className={clsx(classes.TextInfo)}>
-										{ escuelabaja ? 'No hay tareas que mostrar!' : 'No hay actividades que mostrar!' }
+										{ !nivel == 0 ? 'No hay tareas que mostrar!' : 'No hay actividades que mostrar!' }
 									</Typography>
 								</div>
 							}
@@ -503,7 +504,7 @@ function MisTareas(props) {
 							}}
 						>
 							<Typography className={clsx(classes.Text)}>
-								{ escuelabaja ? 'Tareas Calificadas' : 'Actividades Calificadas' }
+								{ !nivel == 0 ? 'Tareas Calificadas' : 'Actividades Calificadas' }
 							</Typography>
 						</div>
 						{/* ----------------------------Info inside card-------------------------- */}
@@ -550,7 +551,7 @@ function MisTareas(props) {
 								:
 								<div className="flex flex-1 items-center justify-center h-full">
 									<Typography className={clsx(classes.TextInfo)}>
-										{ escuelabaja ? 'No hay tareas que mostrar!' : 'No hay actividades que mostrar!' }
+										{ !nivel == 0 ? 'No hay tareas que mostrar!' : 'No hay actividades que mostrar!' }
 									</Typography>
 								</div>
 							}
@@ -579,7 +580,7 @@ function MisTareas(props) {
 							}}
 						>
 							<Typography className={clsx(classes.TextCalendar)}>
-								{ escuelabaja ? 'Calendario Semanal de tareas' : 'Calendario Semanal de Actividades' }
+								{ !nivel == 0 ? 'Calendario Semanal de tareas' : 'Calendario Semanal de Actividades' }
 								 {/* Nuevas Tareas */}
 							</Typography>
 						</div>

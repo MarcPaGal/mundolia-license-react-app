@@ -207,7 +207,7 @@ function MiTarea(props) {
 	const fileInput = useRef(null);
 	const role = useSelector(({ auth }) => auth.user.role);
 	const info = useSelector(({ auth }) => auth.user);
-	const escuelabaja = role == 'alumno' && info.grade <= 3 ? true : false;
+	// const escuelabaja = role == 'alumno' && info.grade <= 3 ? true : false;
 	const homework = useSelector(({ MiTareaApp }) => MiTareaApp.miTarea.data);
 	const [userMenu, setUserMenu] = useState(null);
 
@@ -300,7 +300,7 @@ function MiTarea(props) {
 						>
 							<img className={clsx(classes.img)} src={ theme.island1[nivel] } />
 							<Typography className={clsx(classes.TextTitle)}>	
-								{escuelabaja ? 'Mis Tareas' : 'Mis Actividades'}
+								{!nivel == 0 ? 'Mis Tareas' : 'Mis Actividades'}
 							</Typography>
 						</Button>
 					</div>
@@ -735,6 +735,7 @@ function MiTarea(props) {
 																			:
 																				<Icon className={clsx( (nivel == 2 ? classes.whiteIcon : classes.redIcon ) ,"text-center text-40 font-600 ml-4")}>send</Icon>
 																			}
+																			
 																		</Button>
 																	</DialogActions>
 																</Formsy>
@@ -839,7 +840,7 @@ function MiTarea(props) {
 														</Typography>
 														{
 															homework.status == 'Calificado' ?
-															    (escuelabaja ? 
+															    (!nivel == 0 ? 
 																	<div
 																		style={{
 																			marginTop: 40,
