@@ -224,7 +224,7 @@ function MiScore(props) {
 	const panelInfo = useSelector(({ PreescolarApp }) => PreescolarApp.panel.data);
 
 	const info = useSelector(({ auth }) => auth.user);
-	const escuelabaja = role== 'alumno' && info.grade <= 3 ? true : false ; 
+	// const escuelabaja = role== 'alumno' && info.grade <= 3 ? true : false ; 
 	const nivel = role == 'alumno' ? info.grade  > 3 ? 2 : 1 : 0 ; 
 
 	const theme = {
@@ -300,7 +300,7 @@ function MiScore(props) {
 								<img className={clsx(classes.img)} src={ theme.island1[nivel] } />
 
 								<Typography className={clsx(classes.TextTitle)}>
-									{escuelabaja ? 'Mis Tareas' : 'Mis Actividades'}
+									{!nivel == 0 ? 'Mis Tareas' : 'Mis Actividades'}
 								</Typography>
 							</Link>
 							<div className="flex  flex-wrap p-12 relative overflow-hidden flex-row w-full pb-60">

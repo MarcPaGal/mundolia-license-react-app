@@ -232,7 +232,7 @@ function CalendarActivities(props) {
     const subjectsCalendar = Object.entries(subjects).map(([key, value]) => ({key, value}));
 
     const info = useSelector(({ auth }) => auth.user);
-    const escuelabaja = role== 'alumno' && info.grade <= 3 ? true : false ;
+    // const escuelabaja = role== 'alumno' && info.grade <= 3 ? true : false ;
     const nivel = role == 'alumno' ? info.grade > 3 ? 2 : 1 : 0 ;
     
 	const theme = {
@@ -383,7 +383,7 @@ function CalendarActivities(props) {
                         >
                             <img className={clsx(classes.img)} src={ theme.island3[nivel] }/>                            
                             <Typography className={clsx(classes.TextTitle)}>
-                                {escuelabaja ? 'Mis Clases' : 'Mis Clases'}
+                                Mis Clases
                             </Typography>
                         </Button>
                     </div>
@@ -515,7 +515,7 @@ function CalendarActivities(props) {
                                         color="secondary"
                                     >
                                         <Typography className={clsx(classes.Text)}>
-                                            { escuelabaja ? 'Mis Tareas' : 'Mis Actividades' }
+                                            { !nivel == 0 ? 'Mis Tareas' : 'Mis Actividades' }
                                         </Typography>
                                     </Button>
                                 </div>

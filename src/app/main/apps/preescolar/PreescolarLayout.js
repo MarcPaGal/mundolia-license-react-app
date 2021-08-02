@@ -60,7 +60,7 @@ function PreescolarLayout(props) {
 	const classes = useStyles();
 	const role = useSelector(({ auth }) => auth.user.role);
 	const grade = useSelector(({ auth }) => auth.user.grade);
-	const escuelabaja = role== 'alumno' && grade <= 3 ? true : false ; 
+	// const escuelabaja = role== 'alumno' && grade <= 3 ? true : false ; 
 	const nivel = role == 'alumno' ? grade > 3 ? 2 : 1 : 0 ; 
 	// const url =  `url("assets/sounds/Mi Mundo Lia.m4a")`;
     const audioMimundoLia = new Audio("assets/sounds/Mi Mundo Lia.mp3");
@@ -195,13 +195,13 @@ function PreescolarLayout(props) {
 						component={Link}
 						// className="justify-start px-32"
 						color="secondary"
-						onMouseEnter={ !escuelabaja && !isMobile ? playMisActividades : null }
+						onMouseEnter={ nivel == 0 && !isMobile ? playMisActividades : null }
 					>
 						<Typography className={clsx(classes.Text)}>
-							{ escuelabaja ? 'Mis Tareas' : 'Mis Actividades' }
+							{ !nivel == 0 ? 'Mis Tareas' : 'Mis Actividades' }
 						</Typography>
 					</Button>
-					{ isMobile && !escuelabaja ?
+					{ isMobile && nivel == 0 ?
 						<Button
 							style={{
 								backgroundColor: 'transparent',
@@ -243,13 +243,13 @@ function PreescolarLayout(props) {
 						type="button"
 						// name={mundolia}
 						// id={'mundolia'}
-						onMouseEnter={ !escuelabaja && !isMobile ? playMundolia : null }
+						onMouseEnter={ nivel == 0 && !isMobile ? playMundolia : null }
 					>
 						<Typography className={clsx(classes.Text)}>
 						Mi Mundo Lia
 						</Typography>
 					</Button>
-					{ isMobile && !escuelabaja ?
+					{ isMobile && nivel == 0 ?
 						<Button
 							style={{
 								backgroundColor: 'transparent',
@@ -289,13 +289,13 @@ function PreescolarLayout(props) {
 						to={`/apps/sections/calendario`}
 						component={Link}
 						type="button"
-						onMouseEnter={ !escuelabaja && !isMobile ? playMisClases : null }
+						onMouseEnter={ nivel == 0 && !isMobile ? playMisClases : null }
 					>
 						<Typography className={clsx(classes.Text)}>
 							{ 'Mis Clases'}
 						</Typography>
 					</Button>
-					{ isMobile && !escuelabaja ?
+					{ isMobile && nivel == 0 ?
 						<Button
 						disableRipple
 							style={{
@@ -333,14 +333,14 @@ function PreescolarLayout(props) {
 						to={`/apps/sections/miscore`}
 						component={Link}
 						type="button"
-						onMouseEnter={ !escuelabaja && !isMobile ? playDashboard : null }
+						onMouseEnter={ nivel == 0 && !isMobile ? playDashboard : null }
 					> 						
 
 						<Typography className={clsx(classes.dashboardText)}>
 							Dashboard
 						</Typography>
 					</Button>
-					{ isMobile && !escuelabaja ?
+					{ isMobile && nivel == 0 ?
 						<Button
 						disableRipple
 							style={{
