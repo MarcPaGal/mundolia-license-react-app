@@ -193,25 +193,6 @@ const useStyles = makeStyles(theme => ({
 		borderColor: '#FFD90A', 
 		borderWidth: 6,
 	},
-	infoCardsColumnBlue: {
-		paddingTop: 12, 
-		paddingBottom: 12, 
-		paddingLeft: 5, 
-		paddingRight: 5, 
-		//backgroundColor: '#003A83', 
-		color: '#FFFFFF',												
-		borderRadius: 15, 
-		fontWeight: "bold", 
-		width: 'full', 
-		height: 'full', 
-		textAlign: "center", 
-		flex: 1, 
-		//borderColor: '#FFD90A', 
-		//borderWidth: 6,
-		background: 'rgb(0,150,203)',
-		background: 'radial-gradient(circle, rgba(0,150,203,1) 0%, rgba(0,58,131,1) 100%)'
-	},
-
 }));
 
 function MiTarea(props) {
@@ -624,7 +605,7 @@ function MiTarea(props) {
 																				style={{
 																					paddingLeft: 5, 
 																					paddingRight: 5,	
-																					paddingTop: 10, 
+																					paddingTop: 2, 
 																					paddingBottom: 2,								
 																					borderRadius: 30, 
 																					textAlign: "center", 
@@ -635,7 +616,13 @@ function MiTarea(props) {
 																				<Typography className={clsx(classes.LabelTextWhite)}>
 																					Realizar
 																				</Typography>
-																				<DescriptionIcon className={clsx( classes.whiteIcon ,"text-center text-40 font-600 ml-4")}></DescriptionIcon>
+																				<img 
+																					src="assets/images/primaria-alta/realizarIcon.png" 
+																					style={{
+																						paddingLeft: 5,
+																						height: '40px' 
+																					}}
+																				/>
 																			</Button>
 																		</DialogContent>
 																	:
@@ -647,7 +634,7 @@ function MiTarea(props) {
 																			style={ nivel == 2 ? {
 																					paddingLeft: 5, 
 																					paddingRight: 5,	
-																					paddingTop: 10, 
+																					paddingTop: 2, 
 																					paddingBottom: 2,								
 																					borderRadius: 30, 
 																					textAlign: "center", 
@@ -668,8 +655,18 @@ function MiTarea(props) {
 																			<Typography className={nivel == 2 ? clsx(classes.LabelTextWhite) : clsx(classes.LabelText)}>
 																				Adjuntar
 																			</Typography>
-																			<Icon className={clsx( (nivel == 2 ? classes.whiteIcon : classes.redIcon ) ,"text-center text-40 font-600 ml-4")}>description</Icon>
-																		</Button>
+																			{ nivel == 2 ?
+																				<img 
+																					src="assets/images/primaria-alta/adjuntarIcon.png" 
+																					style={{
+																						paddingLeft: 5,
+																						height: '40px' 
+																					}}
+																				/>
+																			:
+																				<Icon className={clsx( (nivel == 2 ? classes.whiteIcon : classes.redIcon ) ,"text-center text-40 font-600 ml-4")}>description</Icon>
+																			}
+																			</Button>
 																		<input
 																			type="file"
 																			name="file"
@@ -724,11 +721,21 @@ function MiTarea(props) {
 																			type="submit"
 																			disabled={!selectedFile}
 																		>
-
 																			<Typography className={nivel == 2 ? clsx(classes.LabelTextWhite) : clsx(classes.LabelText)}>
 																				Enviar
 																			</Typography>
-																			<Icon className={clsx( (nivel == 2 ? classes.whiteIcon : classes.redIcon ) ,"text-center text-40 font-600 ml-4")}>send</Icon>
+																			{ nivel == 2 ?
+																				<img 
+																					src="assets/images/primaria-alta/enviarIcon.png" 
+																					style={{
+																						paddingLeft: 5,
+																						height: '40px' 
+																					}}
+																				/>
+																			:
+																				<Icon className={clsx( (nivel == 2 ? classes.whiteIcon : classes.redIcon ) ,"text-center text-40 font-600 ml-4")}>send</Icon>
+																			}
+																			
 																		</Button>
 																	</DialogActions>
 																</Formsy>
