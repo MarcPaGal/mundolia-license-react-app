@@ -735,7 +735,6 @@ function MiTarea(props) {
 																			:
 																				<Icon className={clsx( (nivel == 2 ? classes.whiteIcon : classes.redIcon ) ,"text-center text-40 font-600 ml-4")}>send</Icon>
 																			}
-																			
 																		</Button>
 																	</DialogActions>
 																</Formsy>
