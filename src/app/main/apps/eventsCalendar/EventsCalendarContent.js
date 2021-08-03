@@ -143,7 +143,7 @@ function EventsCalendarContent(props) {
 					<Icon>event</Icon>
 				</Fab>
 			</FuseAnimate>
-			<EventsCalendarEventDialog/>
+			<EventsCalendarEventDialog />
 			<EventsCalendarDialog/>
 		</>
 	);
