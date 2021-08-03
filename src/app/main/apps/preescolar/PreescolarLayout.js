@@ -78,17 +78,17 @@ function PreescolarLayout(props) {
 		island1: [
 			'assets/images/preescolar/islaTareas.png',
 			'assets/images/preescolar/explorer.png',
-			'assets/images/preescolar/Mis-tareas-PLANETA.png'
+			'assets/images/preescolar/MistareasPLANETA.png'
 		],
 		island2: [
 			'assets/images/preescolar/islaMundoLIA.png',
 			'assets/images/preescolar/comunicacion.png',
-			'assets/images/preescolar/Mi-mundo-LIA.png'
+			'assets/images/preescolar/MimundoLIA.png'
 		],
 		island3: [
 			'assets/images/preescolar/islaClases.png',
 			'assets/images/preescolar/artes.png',
-			'assets/images/preescolar/Mis-clases.png'
+			'assets/images/preescolar/Misclases.png'
 		],
 
 	}
