@@ -717,7 +717,7 @@ function MiScore(props) {
 
 							{/* -------------------------- Mis Tareas Section ------------------------- */}
 
-							<div className="flex w-full md:w-1/4 sm:w-1/2 flex-col">
+							<div className="flex w-full md:w-1/4 sm:w-1/2 flex-col items-center justify-center">
 
 								<div className={classes.paperTitle}>
 
@@ -854,7 +854,7 @@ function MiScore(props) {
 							</div>
 
 							{/* -------------------------- Mi Mundo LIA ------------------------- */}
-							<div className="flex w-full md:w-1/4 sm:w-1/2 flex-col">
+							<div className="flex w-full md:w-1/4 sm:w-1/2 flex-col items-center justify-center">
 
 								<div className={classes.paperTitle}>
 
@@ -953,7 +953,7 @@ function MiScore(props) {
 												</Link>
 											</div>
 										</div>
-										<div className="flex flex-wrap  w-full border-t-1"
+										<div className="flex flex-wrap  w-full border-t-1 border-b-1"
 											style={{ borderTopColor: "white", borderBottomColor: "white" }}>
 											<div className="w-1/4 flex-col items-center justify-center flex" >
 												<img className={clsx(classes.channelIcon)} src="assets/images/preescolar/logos/score_lia-u.png" />
@@ -973,7 +973,7 @@ function MiScore(props) {
 
 							{/* -------------------------- Mis Clases ------------------------- */}
 
-							<div className="flex w-full md:w-1/4 sm:w-1/2 flex-col">
+							<div className="flex w-full md:w-1/4 sm:w-1/2 flex-col items-center justify-center">
 
 								<div className={classes.paperTitle}>
 
@@ -1012,13 +1012,13 @@ function MiScore(props) {
 
 									<div className={clsx(classes.card)}>
 
-										{/* <div className="flex flex-wrap p-12 relative overflow-hidden flex-col w-full">
+										<div className="flex flex-wrap p-12 relative overflow-hidden flex-col w-full mt-80">
 
 
 
-										</div> */}
+										</div>
 
-										<div className="flex flex-wrap  w-full border-t-1 border-b-1 mt-120"
+										<div className="flex flex-wrap  w-full border-t-1 border-b-1 mt-80"
 											style={{ borderTopColor: "white", borderBottomColor: "white" }}>
 											<div className="w-1/4 flex-col items-center justify-center flex" >
 												<img className={clsx(classes.channelIcon)} src="assets/images/preescolar/logos/score_clases-envivo.png" />
