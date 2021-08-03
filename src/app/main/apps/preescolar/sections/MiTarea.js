@@ -221,17 +221,17 @@ function MiTarea(props) {
 		island1: [
 			'assets/images/preescolar/islaTareas.png',
 			'assets/images/preescolar/explorer.png',
-			'assets/images/preescolar/Mis-tareas-PLANETA.png'
+			'assets/images/preescolar/MisTareasPLANETA.png'
 		],
 		island2: [
-			'assets/images/preescolar/islaMundoLIA-1.png',
-			'assets/images/preescolar/comunicacion-1.png',
-			'assets/images/preescolar/Mi-mundo-LIA.png'
+			'assets/images/preescolar/islaMundoLIA.png',
+			'assets/images/preescolar/comunicacion.png',
+			'assets/images/preescolar/MiMundoLIA.png'
 		],
 		island3: [
-			'assets/images/preescolar/islaClases-1.png',
-			'assets/images/preescolar/artes-1.png',
-			'assets/images/preescolar/Mis-clases.png'
+			'assets/images/preescolar/islaClases.png',
+			'assets/images/preescolar/artes.png',
+			'assets/images/preescolar/MisClases.png'
 		],
 
 	}

@@ -294,17 +294,17 @@ function MiScore(props) {
 		island1: [
 			'assets/images/preescolar/islaTareas.png',
 			'assets/images/preescolar/explorer.png',
-			'assets/images/preescolar/Mis-tareas-PLANETA.png'
+			'assets/images/preescolar/MisTareasPLANETA.png'
 		],
 		island2: [
 			'assets/images/preescolar/islaMundoLIA.png',
 			'assets/images/preescolar/comunicacion.png',
-			'assets/images/preescolar/Mi-mundo-LIA.png'
+			'assets/images/preescolar/MiMundoLIA.png'
 		],
 		island3: [
 			'assets/images/preescolar/islaClases.png',
 			'assets/images/preescolar/artes.png',
-			'assets/images/preescolar/Mis-clases.png'
+			'assets/images/preescolar/MisClases.png'
 		],
 	}
 
@@ -751,7 +751,7 @@ function MiScore(props) {
 								<div className={classes.paperTitle}>
 
 									<Link to="/apps/sections/mistareas" className="items-center justify-center" >
-										<img className={clsx(classes.img)} src={escuelabaja ? "assets/images/primariaalta/explorer.png" : "assets/images/preescolar/islaTareas.png"} />
+										<img className={clsx(classes.img)} src={ theme.island1[nivel] } />
 
 										<div className="mb-16"
 											style={{
@@ -888,7 +888,7 @@ function MiScore(props) {
 								<div className={classes.paperTitle}>
 
 									<Link to="/loginp" className="items-center justify-center" >
-										<img className={clsx(classes.img)} src={escuelabaja ? "assets/images/preescolar/comunicacion.png" : "assets/images/preescolar/islaMundoLIA.png"} />
+										<img className={clsx(classes.img)} src={ theme.island2[nivel] }  />
 
 										<div className="mb-16"
 											style={{
@@ -1007,7 +1007,7 @@ function MiScore(props) {
 								<div className={classes.paperTitle}>
 
 									<Link to="/apps/sections/calendario" className="items-center justify-center" >
-										<img className={clsx(classes.img)} src={escuelabaja ? "assets/images/preescolar/artes.png" : "assets/images/preescolar/islaClases.png"} />
+										<img className={clsx(classes.img)} src={ theme.island3[nivel] } />
 
 										<div className="mb-16"
 											style={{
