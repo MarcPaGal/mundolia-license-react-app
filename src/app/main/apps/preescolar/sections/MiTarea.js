@@ -28,6 +28,8 @@ import Icon from '@material-ui/core/Icon';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import UserInfoHeader from '../components/UserInfoHeader';
+import LogoutButton from '../components/LogoutButton';
+import DescriptionIcon from '@material-ui/icons/Description';
 
 const useStyles = makeStyles(theme => ({
 	TextTitle: {
@@ -64,10 +66,15 @@ const useStyles = makeStyles(theme => ({
 		fontSize: "26px",
 		color: 'red',
 	},
+	LabelTextWhite: {
+		fontSize: "26px",
+		color: '#fff',
+	},
 	LabelDue: {
 		fontSize: "45px",
 		color: 'red',
 		textAlign: "center",
+		paddingTop: "25px",
 	},
 	LabelDesc: {
 		fontSize: "28px",
@@ -83,6 +90,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	redIcon: {
 		color: 'red',
+	},
+	whiteIcon: {
+		color: '#fff',
 	},
 	button: {
 		"&:hover": {
@@ -168,10 +178,21 @@ const useStyles = makeStyles(theme => ({
 
 	},
 	infoCardsColumn: {
-		paddingTop: 12, paddingBottom: 12, paddingLeft: 5, paddingRight: 5, backgroundColor: '#ECA800', color: '#FFFFFF',
-		borderRadius: 15, fontWeight: "bold", width: 'full', height: 'full', textAlign: "center", flex: 1, borderColor: '#FFD90A', borderWidth: 6,
+		paddingTop: 12, 
+		paddingBottom: 12, 
+		paddingLeft: 5, 
+		paddingRight: 5, 
+		backgroundColor: '#ECA800', 
+		color: '#FFFFFF',
+		borderRadius: 15, 
+		fontWeight: "bold", 
+		width: 'full', 
+		height: 'full', 
+		textAlign: "center", 
+		flex: 1, 
+		borderColor: '#FFD90A', 
+		borderWidth: 6,
 	},
-
 }));
 
 function MiTarea(props) {
@@ -186,9 +207,34 @@ function MiTarea(props) {
 	const fileInput = useRef(null);
 	const role = useSelector(({ auth }) => auth.user.role);
 	const info = useSelector(({ auth }) => auth.user);
-	const escuelabaja = role == 'alumno' && info.grade <= 3 ? true : false;
+	// const escuelabaja = role == 'alumno' && info.grade <= 3 ? true : false;
 	const homework = useSelector(({ MiTareaApp }) => MiTareaApp.miTarea.data);
 	const [userMenu, setUserMenu] = useState(null);
+
+	const nivel = role == 'alumno' ? info.grade > 3 ? 2 : 1 : 0 ; 
+	const theme = {
+		background: [
+			'assets/images/preescolar/BackgroundPreescolar.png',
+			'assets/images/preescolar/pantalla12.png',
+			'assets/images/preescolar/BackgroundPrimariaAlta.png'
+		],
+		island1: [
+			'assets/images/preescolar/islaTareas.png',
+			'assets/images/preescolar/explorer.png',
+			'assets/images/preescolar/Mis-tareas-PLANETA.png'
+		],
+		island2: [
+			'assets/images/preescolar/islaMundoLIA-1.png',
+			'assets/images/preescolar/comunicacion-1.png',
+			'assets/images/preescolar/Mi-mundo-LIA.png'
+		],
+		island3: [
+			'assets/images/preescolar/islaClases-1.png',
+			'assets/images/preescolar/artes-1.png',
+			'assets/images/preescolar/Mis-clases.png'
+		],
+
+	}
 
 	const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
 	"Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
@@ -227,7 +273,7 @@ function MiTarea(props) {
 		<div
 			className="flex-1"
 			style={{
-				backgroundImage: `url(${ escuelabaja ? "assets/images/preescolar/pantalla12.png" : "assets/images/preescolar/BackgroundPreescolar.png" })`,
+				backgroundImage: `url(${ theme.background[nivel] })`,
 				backgroundPosition: 'center',
 				backgroundSize: 'cover',
 				backgroundRepeat: 'no-repeat'
@@ -239,6 +285,7 @@ function MiTarea(props) {
 					animation: 'transition.slideUpBigIn'
 				}}
 			>
+				<LogoutButton/>
 
 				<div className="float flex w-full flex-wrap ">
 					<div className="flex w-full md:w-1/2">
@@ -251,9 +298,9 @@ function MiTarea(props) {
 							component={Link}
 							type="button"
 						>
-							<img className={clsx(classes.img)} src={ escuelabaja ? "assets/images/preescolar/explorer.png" : "assets/images/preescolar/islaTareas.png"} />
+							<img className={clsx(classes.img)} src={ theme.island1[nivel] } />
 							<Typography className={clsx(classes.TextTitle)}>	
-								{escuelabaja ? 'Mis Tareas' : 'Mis Actividades'}
+								{!nivel == 0 ? 'Mis Tareas' : 'Mis Actividades'}
 							</Typography>
 						</Button>
 					</div>
@@ -287,7 +334,7 @@ function MiTarea(props) {
 										<Button
 											to={`/loginp`} component={Link} type="button">
 											<div  className="flex flex-col">
-												<img className={clsx(classes.imgIcons,"flex w-full")} src={ escuelabaja ? "assets/images/preescolar/comunicacion-1.png" : "assets/images/preescolar/islaMundoLIA-1.png"} />
+												<img className={clsx(classes.imgIcons,"flex w-full")} src={ theme.island2[nivel] } />
 												<Typography className={clsx(classes.TextIcons)}>
 													Mi Mundo Lia
 												</Typography>
@@ -298,7 +345,7 @@ function MiTarea(props) {
 										<Button
 											to={`/apps/sections/calendario`} component={Link} type="button">
 											<div  className="flex flex-col">
-												<img className={clsx(classes.imgIcons,"flex w-full")} src={ escuelabaja ? "assets/images/preescolar/artes-1.png" : "assets/images/preescolar/islaClases-1.png"} />
+												<img className={clsx(classes.imgIcons,"flex w-full")} src={ theme.island3[nivel] } />
 												<Typography className={clsx(classes.TextIcons)}>
 													Mis Clases
 												</Typography>
@@ -320,16 +367,16 @@ function MiTarea(props) {
 													elevation={3}
 
 													style={{
-														backgroundImage: `url("assets/images/preescolar/Back-tareas.png")`,
+														backgroundImage: `url(${nivel == 2 ? 'assets/images/primaria-alta/Back-tareas.png' : 'assets/images/preescolar/Back-tareas.png'})`,
 														backgroundPosition: 'center',
 														backgroundSize: 'cover',
 														backgroundRepeat: 'no-repeat',
-
+														backgroundColor: 'transparent',
 													}}>
 
 													<div className={clsx(classes.paperTitle)}
 														style={{
-															backgroundImage: `url("assets/images/preescolar/tituloback.png")`,
+															backgroundImage: `url(${nivel == 2 ? 'assets/images/primaria-alta/tituloback.png' : 'assets/images/preescolar/tituloback.png'} )`,
 															backgroundPosition: 'center',
 															backgroundSize: 'contain',
 															backgroundRepeat: 'no-repeat',
@@ -350,17 +397,27 @@ function MiTarea(props) {
 													>
 														<div
 															className="w-full"
-															style={{
-																backgroundColor: '#FFFFFF',
-																paddingLeft: 5,
-																paddingRight: 5,
-																paddingTop: 2,
-																paddingBottom: 2,
-																borderRadius: 30,
-																textAlign: "center",
-															}}
+															style={ nivel == 2 ? {
+																	paddingLeft: 5, 
+																	paddingRight: 5,	
+																	paddingTop: 2, 
+																	paddingBottom: 2,								
+																	borderRadius: 30, 
+																	textAlign: "center", 
+																	background: 'rgb(0,58,131,203)',
+																	background: 'linear-gradient(0deg, rgba(0,58,131,1) 50%, rgba(0,150,203,1) 100%)'
+																} : {
+																	backgroundColor: '#FFFFFF',
+																	paddingLeft: 5,
+																	paddingRight: 5,
+																	paddingTop: 2,
+																	paddingBottom: 2,
+																	borderRadius: 30,
+																	textAlign: "center",
+																}
+															}
 														>
-															<Typography className={clsx(classes.LabelText)}>
+															<Typography className={nivel == 2 ? clsx(classes.LabelTextWhite) : clsx(classes.LabelText)}>
 																{homework.custom_name}
 															</Typography>
 														</div>
@@ -371,11 +428,11 @@ function MiTarea(props) {
 													elevation={3}
 
 													style={{
-														backgroundImage: `url("assets/images/preescolar/Back-tareas.png")`,
+														backgroundImage: `url(${nivel == 2 ? 'assets/images/primaria-alta/Back-tareas.png' : 'assets/images/preescolar/Back-tareas.png'})`,
 														backgroundPosition: 'center',
 														backgroundSize: 'cover',
 														backgroundRepeat: 'no-repeat',
-
+														backgroundColor: 'transparent'
 													}}>
 													{/* ----------------------------Info inside card-------------------------- */}
 													<div
@@ -390,6 +447,7 @@ function MiTarea(props) {
 														<Typography className={clsx(classes.LabelDesc)}>
 															Descripción
 														</Typography>
+														
 
 														{
 															homework.instructions ?
@@ -423,16 +481,16 @@ function MiTarea(props) {
 													elevation={3}
 
 													style={{
-														backgroundImage: `url("assets/images/preescolar/Back-tareas.png")`,
+														backgroundImage: `url(${nivel == 2 ? 'assets/images/primaria-alta/Back-tareas.png' : 'assets/images/preescolar/Back-tareas.png'})`,
 														backgroundPosition: 'center',
 														backgroundSize: 'cover',
 														backgroundRepeat: 'no-repeat',
-
+														backgroundColor: 'transparent',
 													}}>
 
 													<div className={clsx(classes.paperTitle)}
 														style={{
-															backgroundImage: `url("assets/images/preescolar/tituloback.png")`,
+															backgroundImage: `url(${nivel == 2 ? 'assets/images/primaria-alta/tituloback.png' : 'assets/images/preescolar/tituloback.png'})`,
 															backgroundPosition: 'center',
 															backgroundSize: 'contain',
 															backgroundRepeat: 'no-repeat',
@@ -446,6 +504,7 @@ function MiTarea(props) {
 													<div
 														className="flex items-center justify-center w-full"
 														style={{
+															
 															height: 85,
 															paddingLeft: 45,
 															paddingRight: 45,
@@ -455,15 +514,19 @@ function MiTarea(props) {
 														<div
 															className="flex items-center flex-col"
 															style={{
-																backgroundColor: '#FFFFFF',
+																backgroundImage: 'url(assets/images/primaria-alta/calendario.png)',
+																backgroundPosition: 'center',
+																backgroundSize: 'contain',
+																backgroundRepeat: 'no-repeat',
+																//backgroundColor: '#FFFFFF',
+																backgroundColor: 'transparent',
 																height: 90,
 																width: 95,
 																borderRadius: 5,
 																position: 'relative',
 															}}
 														>
-
-															<div
+															{/* <div
 																className="w-full"
 																style={{
 																	backgroundColor: 'red',
@@ -483,8 +546,7 @@ function MiTarea(props) {
 																	background: 'transparent',
 																	top: '-6px',
 																}}>
-
-															</div>
+															</div> */}
 															<Typography className={clsx(classes.LabelDue)}>
 																{new Date(homework.finish_date).getDate()}
 															</Typography>
@@ -499,11 +561,11 @@ function MiTarea(props) {
 													elevation={3}
 
 													style={{
-														backgroundImage: `url("assets/images/preescolar/Back-tareas.png")`,
+														backgroundImage: `url(${nivel == 2 ? 'assets/images/primaria-alta/Back-tareas.png' : 'assets/images/preescolar/Back-tareas.png'})`,
 														backgroundPosition: 'center',
 														backgroundSize: 'cover',
 														backgroundRepeat: 'no-repeat',
-
+														backgroundColor: 'transparent',
 													}}>
 													{/* ----------------------------Info inside card-------------------------- */}
 													{
@@ -536,25 +598,75 @@ function MiTarea(props) {
 																	// ref={formRef}
 																	className="flex flex-col w-full items-center mt-20"
 																>
+																	{ nivel == 2 ?
+																		<DialogContent className="w-full items-center">
+																			<Button
+																				className="w-full"
+																				style={{
+																					paddingLeft: 5, 
+																					paddingRight: 5,	
+																					paddingTop: 2, 
+																					paddingBottom: 2,								
+																					borderRadius: 30, 
+																					textAlign: "center", 
+																					background: 'rgb(0,58,131,203)',
+																					background: 'linear-gradient(0deg, rgba(0,58,131,1) 50%, rgba(0,150,203,1) 100%)'
+																				}}
+																			>
+																				<Typography className={clsx(classes.LabelTextWhite)}>
+																					Realizar
+																				</Typography>
+																				<img 
+																					src="assets/images/primaria-alta/realizarIcon.png" 
+																					style={{
+																						paddingLeft: 5,
+																						height: '40px' 
+																					}}
+																				/>
+																			</Button>
+																		</DialogContent>
+																	:
+																		null
+																	}
 																	<DialogContent className="w-full items-center">
 																		<Button
 																			className="w-full"
-																			style={{
-																				backgroundColor: '#FFFFFF',
-																				paddingLeft: 5,
-																				paddingRight: 5,
-																				paddingTop: 10,
-																				paddingBottom: 2,
-																				borderRadius: 30,
-																				textAlign: "center",
-																			}}
+																			style={ nivel == 2 ? {
+																					paddingLeft: 5, 
+																					paddingRight: 5,	
+																					paddingTop: 2, 
+																					paddingBottom: 2,								
+																					borderRadius: 30, 
+																					textAlign: "center", 
+																					background: 'rgb(0,58,131,203)',
+																					background: 'linear-gradient(0deg, rgba(0,58,131,1) 50%, rgba(0,150,203,1) 100%)'
+																				} : {
+																					backgroundColor: '#FFFFFF',
+																					paddingLeft: 5,
+																					paddingRight: 5,
+																					paddingTop: 10,
+																					paddingBottom: 2,
+																					borderRadius: 30,
+																					textAlign: "center",
+																				}
+																			}
 																			onClick={e => fileInput.current && fileInput.current.click()}
 																		>
-																			<Typography className={clsx(classes.LabelText)}>
+																			<Typography className={nivel == 2 ? clsx(classes.LabelTextWhite) : clsx(classes.LabelText)}>
 																				Adjuntar
 																			</Typography>
-																			<Icon className={clsx(classes.redIcon,"text-center text-40 font-600 ml-4")}>description</Icon>
-																		</Button>
+																			{ nivel == 2 ?
+																				<img 
+																					src="assets/images/primaria-alta/adjuntarIcon.png" 
+																					style={{
+																						paddingLeft: 5,
+																						height: '40px' 
+																					}}
+																				/>
+																			:
+																				<Icon className={clsx( (nivel == 2 ? classes.whiteIcon : classes.redIcon ) ,"text-center text-40 font-600 ml-4")}>description</Icon>
+																			}
+																			</Button>
 																		<input
 																			type="file"
 																			name="file"
@@ -585,24 +697,45 @@ function MiTarea(props) {
 																	<DialogActions className="w-full mt-20">
 																		<Button
 																			className="w-full"
-																			style={{
-																				backgroundColor: '#FFFFFF',
-																				paddingLeft: 5,
-																				paddingRight: 5,
-																				paddingTop: 2,
-																				paddingBottom: 2,
-																				borderRadius: 30,
-																				textAlign: "center",
-																			}}
+																			style={ nivel == 2 ? {
+																					paddingLeft: 5, 
+																					paddingRight: 5,	
+																					paddingTop: 2, 
+																					paddingBottom: 2,								
+																					borderRadius: 30, 
+																					textAlign: "center", 
+																					background: 'rgb(0,58,131,203)',
+																					background: 'linear-gradient(0deg, rgba(0,58,131,1) 50%, rgba(0,150,203,1) 100%)'
+																				} : {
+																					backgroundColor: '#FFFFFF',
+																					paddingLeft: 5,
+																					paddingRight: 5,
+																					paddingTop: 2,
+																					paddingBottom: 2,
+																					borderRadius: 30,
+																					textAlign: "center",
+																				}
+																			}
 																			uppercase='false'
 																			// onClick={handleSubmit}
 																			type="submit"
 																			disabled={!selectedFile}
 																		>
-																			<Typography className={clsx(classes.LabelText)}>
+																			<Typography className={nivel == 2 ? clsx(classes.LabelTextWhite) : clsx(classes.LabelText)}>
 																				Enviar
 																			</Typography>
-																			<Icon className={clsx(classes.redIcon,"text-center text-40 font-600 ml-4")}>send</Icon>
+																			{ nivel == 2 ?
+																				<img 
+																					src="assets/images/primaria-alta/enviarIcon.png" 
+																					style={{
+																						paddingLeft: 5,
+																						height: '40px' 
+																					}}
+																				/>
+																			:
+																				<Icon className={clsx( (nivel == 2 ? classes.whiteIcon : classes.redIcon ) ,"text-center text-40 font-600 ml-4")}>send</Icon>
+																			}
+																			
 																		</Button>
 																	</DialogActions>
 																</Formsy>
@@ -618,16 +751,16 @@ function MiTarea(props) {
 													elevation={3}
 
 													style={{
-														backgroundImage: `url("assets/images/preescolar/Back-tareas.png")`,
+														backgroundImage: `url(${nivel == 2 ? 'assets/images/primaria-alta/Back-tareas.png' : 'assets/images/preescolar/Back-tareas.png'})`,
 														backgroundPosition: 'center',
 														backgroundSize: 'cover',
 														backgroundRepeat: 'no-repeat',
-
+														backgroundColor: 'transparent',
 													}}>
 
 													<div className={clsx(classes.paperTitle)}
 														style={{
-															backgroundImage: `url("assets/images/preescolar/tituloback.png")`,
+															backgroundImage: `url(${nivel == 2 ? 'assets/images/primaria-alta/tituloback.png' : 'assets/images/preescolar/tituloback.png'})`,
 															backgroundPosition: 'center',
 															backgroundSize: 'contain',
 															backgroundRepeat: 'no-repeat',
@@ -647,17 +780,33 @@ function MiTarea(props) {
 													>
 														<div
 															className="w-full"
-															style={{
-																backgroundColor: '#FFFFFF',
-																paddingLeft: 5,
-																paddingRight: 5,
-																paddingTop: 2,
-																paddingBottom: 2,
-																borderRadius: 30,
-																textAlign: "center",
-															}}
+															style={ nivel == 2 ? {
+																	paddingLeft: 5, 
+																	paddingRight: 5,	
+																	paddingTop: 2, 
+																	paddingBottom: 2,								
+																	borderRadius: 30, 
+																	textAlign: "center", 
+																	background: 'rgb(0,58,131,203)',
+																	background: 'linear-gradient(0deg, rgba(0,58,131,1) 50%, rgba(0,150,203,1) 100%)'
+																	/* backgroundImage: `url(assets/images/primaria-alta/Materias-DESPLIEGUE.png)`,
+																	backgroundPosition: 'center',
+																	backgroundSize: '250px 50px',
+																	backgroundRepeat: 'no-repeat',
+																	backgroundColor: 'transparent',
+																	textAlign: "center", */
+																} : {
+																	backgroundColor: '#FFFFFF',
+																	paddingLeft: 5,
+																	paddingRight: 5,
+																	paddingTop: 10,
+																	paddingBottom: 2,
+																	borderRadius: 30,
+																	textAlign: "center",
+																}
+															}
 														>
-															<Typography className={clsx(classes.LabelText)}>
+															<Typography className={nivel == 2 ? clsx(classes.LabelTextWhite) : clsx(classes.LabelText)}>
 																{homework.status}
 															</Typography>
 														</div>
@@ -670,11 +819,11 @@ function MiTarea(props) {
 													elevation={3}
 
 													style={{
-														backgroundImage: `url("assets/images/preescolar/Back-tareas.png")`,
+														backgroundImage: `url(${nivel == 2 ? 'assets/images/primaria-alta/Back-tareas.png' : 'assets/images/preescolar/Back-tareas.png'})`,
 														backgroundPosition: 'center',
 														backgroundSize: 'cover',
 														backgroundRepeat: 'no-repeat',
-
+														backgroundColor: 'transparent',
 													}}>
 													{/* ----------------------------Info inside card-------------------------- */}
 													<div
@@ -691,7 +840,7 @@ function MiTarea(props) {
 														</Typography>
 														{
 															homework.status == 'Calificado' ?
-															    (escuelabaja ? 
+															    (!nivel == 0 ? 
 																	<div
 																		style={{
 																			marginTop: 40,
@@ -724,12 +873,12 @@ function MiTarea(props) {
 										</Grid>
 									</Grid>
 
-									<Grid item xs={10} className="flex h-full w-full">
+									<Grid item xs xl={10} className="flex h-full w-full p-16">
 										<div
 											className= "flex"
 
 											style={{
-												backgroundImage: `url("assets/images/preescolar/Back-iconos.png")`,
+												backgroundImage: `url(${nivel == 2 ? 'assets/images/primaria-alta/Back-iconos.png' : 'assets/images/preescolar/Back-iconos.png'})`,
 												backgroundPosition: 'center',
 												backgroundSize: 'cover',
 												backgroundRepeat: 'no-repeat',
@@ -767,6 +916,7 @@ function MiTarea(props) {
 											}
 										</div>
 									</Grid>
+
 								</Grid>
 							</Grid>
 							{/* --------------- logout --------------- */}

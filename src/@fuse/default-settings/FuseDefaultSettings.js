@@ -53,7 +53,7 @@ export const mustHaveThemeOptions = {
 		htmlFontSize: 10,
 		body1: {
 			fontSize: '1.4rem',
-			fontFamily: 'grobold'
+			fontFamily: 'grobold',
 		},
 		body2: {
 			fontSize: '1.6rem',

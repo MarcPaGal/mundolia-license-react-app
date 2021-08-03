@@ -22,6 +22,7 @@ import { openAvatarLayout } from 'app/store/fuse/avatarSlice';
 import Avatar from '@material-ui/core/Avatar';
 import { setRedirect, getPHPFoxUrl } from '../../../../auth/store/redirectSlice'
 import UserInfoHeader from '../components/UserInfoHeader';
+import LogoutButton from '../components/LogoutButton';
 
 const useStyles = makeStyles(theme => ({
 	TextTitle: {
