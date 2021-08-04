@@ -14,6 +14,7 @@ export const submitEvent = ( data, date, start, end, week, days ) => async dispa
 	 	.then(event => {
 	 		dispatch(registerSuccess());
 	 		dispatch(registerReset());
+            // return event;
 	 	})
 	 	.catch(error => {
 	 		return dispatch(registerError(error));

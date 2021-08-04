@@ -18,8 +18,10 @@ import LogoutButton from './components/LogoutButton';
 
 const useStyles = makeStyles(theme => ({
 	Text: {
-		fontWeight:"bold",
-		fontSize:"32px",
+		// fontWeight:"bold",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[1] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "42px" : "32px",
+		fontWeight: '500',
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 	},
@@ -46,8 +48,9 @@ const useStyles = makeStyles(theme => ({
 		// paddingLeft: '6px'
 	},
 	dashboardText: {
-		fontWeight:"bold",
-		fontSize:"28px",
+		// fontWeight:"bold",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[1] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "38px" : "28px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 		padding: 15,
@@ -57,17 +60,17 @@ const useStyles = makeStyles(theme => ({
 
 function PreescolarLayout(props) {
 	const dispatch = useDispatch();
-	const classes = useStyles();
+	
 	const role = useSelector(({ auth }) => auth.user.role);
 	const grade = useSelector(({ auth }) => auth.user.grade);
 	// const escuelabaja = role== 'alumno' && grade <= 3 ? true : false ; 
-	const nivel = role == 'alumno' ? grade > 3 ? 2 : 1 : 0 ; 
+	const nivel = role == 'alumno' ? grade > 3 ? 2 : 1 : 0 ;
 	// const url =  `url("assets/sounds/Mi Mundo Lia.m4a")`;
     const audioMimundoLia = new Audio("assets/sounds/Mi Mundo Lia.mp3");
 	const audioDashboard = new Audio("assets/sounds/Dashboard.mp3");
 	const audioMisClases= new Audio("assets/sounds/Mis Clases.mp3");
 	const audioMisTareas = new Audio("assets/sounds/Mis Tareas.mp3");
-	const audioMisActividades = new Audio("assets/sounds/Mis Actividades.mp3");
+	const audioMisActividades = new Audio("assets/sounds/Mis Actividades.mp3");	
 
 	const theme = {
 		background: [
@@ -90,8 +93,13 @@ function PreescolarLayout(props) {
 			'assets/images/preescolar/artes.png',
 			'assets/images/preescolar/MisClases.png'
 		],
-
+		fonts: [
+			'grobold',
+			'haettenschweilerRegular',
+		],
 	}
+
+	const classes = useStyles({nivel, theme}); 
 
 	// var windowW = window.innerWidth;
 	// var device = windowW < '1170' ? true : false ; 
@@ -156,7 +164,8 @@ function PreescolarLayout(props) {
 		backgroundImage: `url(${theme.background[nivel]})`,
 			backgroundPosition: 'center',
 			backgroundSize: 'cover',
-			backgroundRepeat: 'no-repeat'
+			backgroundRepeat: 'no-repeat',
+			font: 'haettenschweilerRegular'
 		}}>
 
             <FuseAnimateGroup

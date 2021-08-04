@@ -19,14 +19,16 @@ const useStyles = makeStyles(theme => ({
 		textShadow: '2px 2px 2px black',
 	},
 	Text: {
-		fontSize: "18px",
+		fontFamily:  ({ nivel, fonts }) => nivel == 2 ? fonts[2] : fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "24px" : "18px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 		text: "center",
 		alignSelf: "center",
 	},
 	TextInfo: {
-		fontSize: "16px",
+		fontFamily:  ({ nivel, fonts }) => nivel == 2 ? fonts[2] : fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "22px" : "16px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 		text: "center",
@@ -87,10 +89,19 @@ const useStyles = makeStyles(theme => ({
 
 export default function UserInfoHeader() {
     const dispatch = useDispatch();
-	const classes = useStyles();
+	
     const user = useSelector(({ auth }) => auth.user);
 	const role = useSelector(({ auth }) => auth.user.role);
     const info = useSelector(({ auth }) => auth.user);
+	const nivel = role == 'alumno' ? info.grade > 3 ? 2 : 1 : 0 ;
+
+	const fonts = [
+		'grobold',
+		'rager',
+		'haettenschweilerRegular',
+	];
+
+	const classes = useStyles({nivel, fonts});
 
     const [userMenu, setUserMenu] = useState(null);
 
@@ -117,18 +128,36 @@ export default function UserInfoHeader() {
                     {/* <div> */}
 					<div className="flex items-center justify-start">
 						<p style={{
-							paddingTop: 3, paddingBottom: 3, paddingLeft: 5, paddingRight: 5, backgroundColor: '#FCDB00', color: '#FFFFFF', borderRadius: 12, fontWeight: "bold",
-							textAlign: "center", minWidth: 200, marginBottom: 5
+							paddingTop: nivel == 2 ? 0 : 3, 
+							paddingBottom: nivel == 2 ? 0 : 3, 
+							paddingLeft: 5, 
+							paddingRight: 5, 
+							backgroundColor: '#FCDB00', 
+							color: '#FFFFFF', 
+							borderRadius: 12, 
+							fontWeight: "bold",
+							textAlign: "center", 
+							minWidth: 200, 
+							marginBottom: 5
 						}}>
-							<Typography className={clsx(classes.TextInfo)}>
+							<Typography className={clsx(classes.TextInfo, nivel != 2 ? fonts[1] : '')}>
 								{info.data.displayName}
 							</Typography>
 						</p>
 					</div>
 					<div className="flex items-center justify-start">
 						<p style={{
-							paddingTop: 3, paddingBottom: 3, paddingLeft: 5, paddingRight: 5, backgroundColor: '#FCDB00', color: '#FFFFFF', borderRadius: 12, fontWeight: "bold",
-							textAlign: "center", minWidth: 200, marginBottom: 5
+							paddingTop: nivel == 2 ? 0 : 3, 
+							paddingBottom: nivel == 2 ? 0 : 3, 
+							paddingLeft: 5, 
+							paddingRight: 5, 
+							backgroundColor: '#FCDB00', 
+							color: '#FFFFFF', 
+							borderRadius: 12, 
+							fontWeight: "bold",
+							textAlign: "center", 
+							minWidth: 200, 
+							marginBottom: 5
 						}}>
 							<Typography className={clsx(classes.TextInfo)}>
 								{ info.data.grade == '1' ? 'Primer Grado' : null }
@@ -143,8 +172,16 @@ export default function UserInfoHeader() {
 					</div>
 					<div className="flex items-center justify-start">
 						<p style={{
-							paddingTop: 3, paddingBottom: 3, paddingLeft: 5, paddingRight: 5, backgroundColor: '#FCDB00', color: '#FFFFFF', borderRadius: 12, fontWeight: "bold",
-							textAlign: "center", minWidth: 200
+							paddingTop: nivel == 2 ? 0 : 3, 
+							paddingBottom: nivel == 2 ? 0 : 3, 
+							paddingLeft: 5, 
+							paddingRight: 5, 
+							backgroundColor: '#FCDB00', 
+							color: '#FFFFFF', 
+							borderRadius: 12, 
+							fontWeight: "bold",
+							textAlign: "center", 
+							minWidth: 200
 						}}>
 							<Typography className={clsx(classes.TextInfo)}>
 								{info.data.school_name}

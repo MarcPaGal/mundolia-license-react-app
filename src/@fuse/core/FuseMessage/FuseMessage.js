@@ -56,7 +56,7 @@ function FuseMessage(props) {
 				variant: 'body2',
 				headlineMapping: {
 					body1: 'div',
-					body2: 'div'
+					body2: 'div',
 				}
 			}}
 		>

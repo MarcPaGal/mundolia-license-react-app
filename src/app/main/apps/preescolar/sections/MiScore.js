@@ -26,13 +26,16 @@ import LogoutButton from '../components/LogoutButton';
 
 const useStyles = makeStyles(theme => ({
 	TextTitle: {
-		fontWeight: "bold",
-		fontSize: "32px",
+		// fontWeight: "bold",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "42px" : "32px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 	},
 	Text: {
-		fontSize: "18px",
+		// fontSize: "18px",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "24px" : "18px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 		text: "center",
@@ -54,7 +57,8 @@ const useStyles = makeStyles(theme => ({
 		paddingLeft: 5
 	},
 	TextSubtitle:{
-		fontSize: "26px",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "32px" : "26px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 		text: "center",
@@ -62,7 +66,8 @@ const useStyles = makeStyles(theme => ({
 	},
 	yellowIcons: {
 		// fontWeight: "bold",
-		fontSize: "28px",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "38px" : "28px",
 		color: 'yellow',
 		// textShadow: '2px 2px 2px black',
 	},
@@ -203,7 +208,8 @@ const useStyles = makeStyles(theme => ({
 		maxWidth: 60,
 	}, 
 	TextChannel: {
-		fontSize: "18px",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[1],
+		fontSize: ({ nivel }) => nivel == 2 ? "24px" : "18px",
 		color: 'white',
 		// textShadow: '2px 2px 2px black',
 		// text: "left",
@@ -235,8 +241,9 @@ const useStyles = makeStyles(theme => ({
 		// marginLeft: 12
 	  },
 	TextTitleAlta: {
-		fontWeight: "bold",
-		fontSize: "28px",
+		// fontWeight: "bold",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "38px" : "28px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 		padding: 8,
@@ -270,7 +277,6 @@ const useStyles = makeStyles(theme => ({
 
 function MiScore(props) {
 	const dispatch = useDispatch();
-	const classes = useStyles();
 	const routeParams = useParams();
 	const user = useSelector(({ auth }) => auth.user);
 	const role = useSelector(({ auth }) => auth.user.role);
@@ -306,7 +312,14 @@ function MiScore(props) {
 			'assets/images/preescolar/artes.png',
 			'assets/images/preescolar/MisClases.png'
 		],
+		fonts: [
+            'grobold',
+            'rager',
+            'haettenschweilerRegular',
+        ],
 	}
+
+    const classes = useStyles({nivel, theme});
 
 	useDeepCompareEffect(() => {
 		dispatch(getPHPFoxUrl());	

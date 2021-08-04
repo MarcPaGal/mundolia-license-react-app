@@ -30,27 +30,31 @@ import LogoutButton from '../components/LogoutButton';
 
 const useStyles = makeStyles(theme => ({
 	TextTitle: {
-		fontWeight: "bold",
-		fontSize: "32px",
+		// fontWeight: "bold",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "42px" : "32px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 	},
 	Text: {
-		fontSize: "18px",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "24px" : "18px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 		text: "center",
 		alignSelf: "center",
 	},
 	TextCalendar: {
-		fontSize: "13px",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "18px" : "13px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 		text: "center",
 		alignSelf: "center",
 	},
 	TextInfo: {
-		fontSize: "14px",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[1],
+		fontSize: ({ nivel }) => nivel == 2 ? "19px" : "14px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 		text: "center",
@@ -185,7 +189,8 @@ const useStyles = makeStyles(theme => ({
 
 	},
 	TextDaysCalendar: {
-		fontSize: "8px",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[1],
+		fontSize: ({ nivel }) => nivel == 2 ? "12px" : "8px",
 		color: 'white',
 		textShadow: '1px 1px 1px black',
 		text: "center",
@@ -196,7 +201,7 @@ const useStyles = makeStyles(theme => ({
 
 function MisTareas(props) {
 	const dispatch = useDispatch();
-	const classes = useStyles();
+	
 	const routeParams = useParams();
 	const role = useSelector(({ auth }) => auth.user.role);
 	const pendientes = useSelector(({ PreescolarApp }) => PreescolarApp.tareasPendientes.data);
@@ -229,8 +234,14 @@ function MisTareas(props) {
 			'assets/images/preescolar/artes.png',
 			'assets/images/preescolar/MisClases.png'
 		],
-
+		fonts: [
+            'grobold',
+            'rager',
+            'haettenschweilerRegular',
+        ],
 	}
+
+    const classes = useStyles({nivel, theme});
 
 	const [userMenu, setUserMenu] = useState(null);
 

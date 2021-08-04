@@ -33,21 +33,24 @@ import DescriptionIcon from '@material-ui/icons/Description';
 
 const useStyles = makeStyles(theme => ({
 	TextTitle: {
-		fontWeight: "bold",
-		fontSize: "32px",
+		// fontWeight: "bold",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "42px" : "32px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 		textTransform:"capitalize"
 	},
 	Text: {
-		fontSize: "22px",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "30px" : "22px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 		text: "center",
 		alignSelf: "center",
 	},
 	TextIcons: {
-		fontSize: "18px",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "24px" : "18px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 		text: "center",
@@ -56,7 +59,8 @@ const useStyles = makeStyles(theme => ({
 		textTransform:"capitalize"
 	},
 	TextInfo: {
-		fontSize: "16px",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[1],
+		fontSize: ({ nivel }) => nivel == 2 ? "22px" : "16px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 		text: "center",
@@ -67,22 +71,26 @@ const useStyles = makeStyles(theme => ({
 		color: 'red',
 	},
 	LabelTextWhite: {
-		fontSize: "26px",
+		fontFamily:  ({ theme }) => theme.fonts[2],
+		fontSize: "34px",
 		color: '#fff',
 	},
 	LabelDue: {
-		fontSize: "45px",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "55px" : "45px",
 		color: 'red',
 		textAlign: "center",
 		paddingTop: "25px",
 	},
 	LabelDesc: {
-		fontSize: "28px",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[1],
+		fontSize: ({ nivel }) => nivel == 2 ? "38px" : "28px",
 		color: 'white',
 		textShadow: '4px 4px 4px #595959',
 	},
 	LabelScore: {
-		fontSize: "80px",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "95px" : "80px",
 		color: 'red',
 	},
 	starIcon: {
@@ -198,7 +206,7 @@ const useStyles = makeStyles(theme => ({
 function MiTarea(props) {
 
 	const dispatch = useDispatch();
-	const classes = useStyles();
+	
 	const routeParams = useParams();
 
 	const [fileName, setFileName] = useState('');
@@ -233,8 +241,14 @@ function MiTarea(props) {
 			'assets/images/preescolar/artes.png',
 			'assets/images/preescolar/MisClases.png'
 		],
-
+		fonts: [
+            'grobold',
+            'rager',
+            'haettenschweilerRegular',
+        ],
 	}
+
+    const classes = useStyles({nivel, theme});
 
 	const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
 	"Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
@@ -459,7 +473,8 @@ function MiTarea(props) {
 																		overflowY: 'scroll',
 																		color: 'white',
 																		padding: 10,
-																		fontSize: 20,
+																		fontFamily: nivel == 2 ? theme.fonts[2] : theme.fonts[1],
+																		fontSize: nivel == 2 ? "28px" : "20px",
 																	}}
 																>
 																	{homework.instructions}
