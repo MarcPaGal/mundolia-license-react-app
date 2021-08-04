@@ -28,6 +28,7 @@ import Collapse from "@material-ui/core/Collapse";
 import Tooltip from '@material-ui/core/Tooltip';
 import parse from 'html-react-parser';
 import UserInfoHeader from "../components/UserInfoHeader";
+import LogoutButton from '../components/LogoutButton';
 
 const formats = {
     eventTimeRangeFormat: () => {
@@ -224,12 +225,39 @@ function CalendarActivities(props) {
     const dispatch = useDispatch();
     const classes = useStyles();
     const role = useSelector(({ auth }) => auth.user.role);
-    const info = useSelector(({ auth }) => auth.user);
     const calendars = useSelector(({ MisTareasApp }) => MisTareasApp.subjectCalendarSlice.data);
     const subjects = useSelector(({ MisTareasApp }) => MisTareasApp.subjectCalendarSlice.subjects.data);
     const [open, setOpen] = React.useState(true);
     const [eventData, setEventData] = React.useState([]);
-    const subjectsCalendar = Object.entries(subjects).map(([key, value]) => ({key, value}))
+    const subjectsCalendar = Object.entries(subjects).map(([key, value]) => ({key, value}));
+
+    const info = useSelector(({ auth }) => auth.user);
+    // const escuelabaja = role== 'alumno' && info.grade <= 3 ? true : false ;
+    const nivel = role == 'alumno' ? info.grade > 3 ? 2 : 1 : 0 ;
+    
+	const theme = {
+		background: [
+			'assets/images/preescolar/BackgroundPreescolar.png',
+			'assets/images/preescolar/pantalla12.png',
+			'assets/images/preescolar/BackgroundPrimariaAlta.png'
+		],
+		island1: [
+			'assets/images/preescolar/islaTareas.png',
+			'assets/images/preescolar/explorer.png',
+			'assets/images/preescolar/Mis-tareas-PLANETA.png'
+		],
+		island2: [
+			'assets/images/preescolar/islaMundoLIAButton.png',
+			'assets/images/preescolar/comunicacionButton.png',
+			'assets/images/preescolar/Mi-mundo-LIA.png'
+		],
+		island3: [
+			'assets/images/preescolar/islaClases-1.png',
+			'assets/images/preescolar/artes-1.png',
+			'assets/images/preescolar/Mis-clases.png'
+		],
+
+	}
 
     const SubjectListItem = ({ club, subject }) => {
         const [ open, setOpen ] = useState(false)
@@ -299,8 +327,6 @@ function CalendarActivities(props) {
         )
     }
 
-    const escuelabaja = role== 'alumno' && info.grade <= 3 ? true : false ;
-
     useEffect(() => {
         setEventData([]);
         for (let i in calendars) {
@@ -330,7 +356,7 @@ function CalendarActivities(props) {
         <div
             className="flex-1"
             style={{
-                backgroundImage: `url(${ escuelabaja ? "assets/images/preescolar/pantalla12.png" : "assets/images/preescolar/BackgroundPreescolar.png" })`,
+                backgroundImage: `url(${ theme.background[nivel] })`,
                 backgroundPosition: 'center',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat'
@@ -342,6 +368,7 @@ function CalendarActivities(props) {
                     animation: 'transition.slideUpBigIn'
                 }}
             >
+                <LogoutButton/>
 
                 <div className="float flex w-full flex-wrap ">
                     <div className="flex w-full md:w-1/2">
@@ -354,9 +381,9 @@ function CalendarActivities(props) {
                             component={Link}
                             type="button"
                         >
-                            <img className={clsx(classes.img)} src={ escuelabaja ? "assets/images/preescolar/artes-1.png" : "assets/images/preescolar/islaClases-1.png"}/>
+                            <img className={clsx(classes.img)} src={ theme.island3[nivel] }/>                            
                             <Typography className={clsx(classes.TextTitle)}>
-                                {escuelabaja ? 'Mis Clases' : 'Mis Clases'}
+                                Mis Clases
                             </Typography>
                         </Button>
                     </div>
@@ -452,7 +479,7 @@ function CalendarActivities(props) {
                                         component={Link}
                                         type="button"
                                     >
-                                        <img className={clsx(classes.imgButton)} src={ escuelabaja ? "assets/images/preescolar/comunicacionButton.png" : "assets/images/preescolar/islaMundoLIAButton.png"} alt="logo" />
+                                        <img className={clsx(classes.imgButton)} src={ theme.island2[nivel] } alt="logo" />
                                     </Button>
                                     <Button
                                         style={{
@@ -477,7 +504,7 @@ function CalendarActivities(props) {
                                         component={Link}
                                         type="button"
                                     >
-                                        <img className={clsx(classes.imgButton)} src={ escuelabaja ? "assets/images/preescolar/explorer.png" : "assets/images/preescolar/islaTareas.png"} />
+                                        <img className={clsx(classes.imgButton)} src={ theme.island1[nivel]} />
                                     </Button>
                                     <Button
                                         style={{
@@ -488,7 +515,7 @@ function CalendarActivities(props) {
                                         color="secondary"
                                     >
                                         <Typography className={clsx(classes.Text)}>
-                                            { escuelabaja ? 'Mis Tareas' : 'Mis Actividades' }
+                                            { !nivel == 0 ? 'Mis Tareas' : 'Mis Actividades' }
                                         </Typography>
                                     </Button>
                                 </div>

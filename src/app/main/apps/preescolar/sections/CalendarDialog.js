@@ -211,7 +211,8 @@ function CalendarDialog(props) {
 	const role = useSelector(({ auth }) => auth.user.role);
 	const { form, handleChange, setForm} = useForm(defaultFormState);
 	const info = useSelector(({ auth }) => auth.user);
-	const escuelabaja = role== 'alumno' && info.grade <= 3 ? true : false ; 
+	// const escuelabaja = role== 'alumno' && info.grade <= 3 ? true : false ; 
+	const nivel = role == 'alumno' ? info.grade > 3 ? 2 : 1 : 0 ; 
 
 	const [values, setValues] = React.useState({
 		// showPassword: false,
@@ -296,7 +297,7 @@ function CalendarDialog(props) {
 			>
 				
 					<Typography className={clsx(classes.Text)}>
-						{ escuelabaja ? 'Calendario Semanal de Tareas' : 'Calendario Semanal de Actividades' }
+						{ !nivel == 0 ? 'Calendario Semanal de Tareas' : 'Calendario Semanal de Actividades' }
 						{/* Calendario Semanal Nuevas Tareas */}
 					</Typography>
 			</div>

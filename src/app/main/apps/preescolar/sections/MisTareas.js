@@ -26,6 +26,7 @@ import { getCalendar, openCalendarDialog } from '../store/calendarSlice';
 import CalendarDialog from './CalendarDialog';
 import Badge from '@material-ui/core/Badge';
 import UserInfoHeader from '../components/UserInfoHeader';
+import LogoutButton from '../components/LogoutButton';
 
 const useStyles = makeStyles(theme => ({
 	TextTitle: {
@@ -49,7 +50,7 @@ const useStyles = makeStyles(theme => ({
 		alignSelf: "center",
 	},
 	TextInfo: {
-		fontSize: "16px",
+		fontSize: "14px",
 		color: 'white',
 		textShadow: '2px 2px 2px black',
 		text: "center",
@@ -143,9 +144,40 @@ const useStyles = makeStyles(theme => ({
 
 	},
 	infoCardsColumn: {
-		paddingTop: 12, paddingBottom: 12, paddingLeft: 5, paddingRight: 5, backgroundColor: '#ECA800', color: '#FFFFFF',												
-		borderRadius: 15, fontWeight: "bold", width: 'full', height: 'full', textAlign: "center", flex: 1, borderColor: '#FFD90A', borderWidth: 6,
-		
+		paddingTop: 12, 
+		paddingBottom: 12, 
+		paddingLeft: 5, 
+		paddingRight: 5, 
+		//backgroundColor: '#ECA800', 
+		color: '#FFFFFF',												
+		borderRadius: 15, 
+		fontWeight: "bold", 
+		width: 'full', 
+		height: 'full', 
+		textAlign: "center", 
+		flex: 1, 
+		borderColor: '#FFD90A', 
+		borderWidth: 6,
+		background: 'rgb(255,231,5)',
+		background: 'radial-gradient(circle, rgba(255,231,5,1) 0%, rgba(234,160,0,1) 100%)'
+	},
+	linkCardsColumn: {
+		paddingTop: 12, 
+		paddingBottom: 12, 
+		paddingLeft: 5, 
+		paddingRight: 5, 
+		//backgroundColor: '#ECA800', 
+		//color: '#FFFFFF',												
+		//borderRadius: 15, 
+		//fontWeight: "bold", 
+		//width: 'full', 
+		//height: 'full', 
+		textAlign: "center", 
+		flex: 1, 
+		//borderColor: '#FFD90A', 
+		//borderWidth: 6,
+		//background: 'rgb(255,231,5)',
+		//background: 'radial-gradient(circle, rgba(255,231,5,1) 0%, rgba(234,160,0,1) 100%)'
 	},
 	calendarPoints: {
 		paddingLeft: 5, paddingRight: 5, color: '#FFFFFF',
@@ -172,7 +204,22 @@ function MisTareas(props) {
 	const panelInfo = useSelector(({ PreescolarApp }) => PreescolarApp.panel.data);
 	const calendarInfo = useSelector(({ PreescolarApp }) => PreescolarApp.calendar.data);
 	const info = useSelector(({ auth }) => auth.user);
-	const escuelabaja = role== 'alumno' && info.grade <= 3 ? true : false ; 
+	// const escuelabaja = role== 'alumno' && info.grade <= 3 ? true : false ; 
+
+	const nivel = role == 'alumno' ? info.grade  > 3 ? 2 : 1 : 0 ; 
+
+	const theme = {
+		background: [
+			'assets/images/preescolar/BackgroundPreescolar.png',
+			'assets/images/preescolar/pantalla12.png',
+			'assets/images/preescolar/BackgroundPrimariaAlta.png'
+		],
+		island1: [
+			'assets/images/preescolar/islaTareas.png',
+			'assets/images/preescolar/explorer.png',
+			'assets/images/preescolar/Mis-tareas-PLANETA.png'
+		],
+	}
 
 	const [userMenu, setUserMenu] = useState(null);
 
@@ -205,7 +252,7 @@ function MisTareas(props) {
 		<div
 			className="flex-1"
 			style={{
-				backgroundImage: `url(${ escuelabaja ? "assets/images/preescolar/pantalla12.png" : "assets/images/preescolar/BackgroundPreescolar.png" })`,
+				backgroundImage: `url(${ theme.background[nivel] })`,
 				backgroundPosition: 'center',
 				backgroundSize: 'cover',
 				backgroundRepeat: 'no-repeat'
@@ -217,7 +264,7 @@ function MisTareas(props) {
 					animation: 'transition.slideUpBigIn'
 				}}
 			>
-
+				<LogoutButton/>
 				<div className="float flex w-full flex-wrap ">
 					<div className="flex w-full md:w-1/2">
 						<Button
@@ -230,16 +277,16 @@ function MisTareas(props) {
 							component={Link}
 							type="button"
 						>
-							<img className={clsx(classes.img)} src={ escuelabaja ? "assets/images/preescolar/explorer.png" : "assets/images/preescolar/islaTareas.png"} />
+							<img className={clsx(classes.img)} src={ theme.island1[nivel]} />
 							<Typography className={clsx(classes.TextTitle)}>
-								{escuelabaja ? 'Mis Tareas' : 'Mis Actividades'}
+								{!nivel == 0 ? 'Mis Tareas' : 'Mis Actividades'}
 							</Typography>
 						</Button>
 					</div>
 
 
 					{/* ------------------------- Avatar and User Info --------------------- */}
-					<div className="flex w-full md:w-1/2 items-center justify-center flex-wrap flex-row">
+					<div className="flex w-full md:w-1/2 items-center justify-center flex-wrap flex-row" >
 						<UserInfoHeader/>
 					</div>
 				</div>
@@ -269,7 +316,7 @@ function MisTareas(props) {
 							}}
 						>
 							<Typography className={clsx(classes.Text)}>
-								{ escuelabaja ? 'Tareas Pendientes' : 'Actividades Pendientes' }
+								{ !nivel == 0 ? 'Tareas Pendientes' : 'Actividades Pendientes' }
 							</Typography>
 						</div>
 						{/* ----------------------------Info inside card-------------------------- */}
@@ -278,54 +325,55 @@ function MisTareas(props) {
 								{pendientes &&
 									pendientes.map(row => (
 										<>
-											<div className="flex w-1/5 p-12 text-center items-center justify-center">
-												<Link to={'/apps/sections/mitarea/' + row.id} >
-													{row.remaining_days > 5 ?
-														<img src={"assets/images/preescolar/tiempo-tareaspendientes.png"} />
-														// tiempo-tareaspendientes.png
-														: row.remaining_days >= 1 ?
-															<img src={"assets/images/preescolar/proxima-tareaspendientes.png"} />
-															:
-															<img src={"assets/images/preescolar/pendientes.png"} />
-													}
-												</Link>
-											</div>
 
-											{ escuelabaja ?
+											{ !nivel == 0 ?
 												<>
-													<div className=" flex w-2/5 p-12 text-center items-center justify-center"
-														style={{
-															backgroundImage: `url("assets/images/preescolar/fecha.png")`,
-															backgroundPosition: 'center',
-															backgroundSize: 'contain',
-															backgroundRepeat: 'no-repeat',
-														}}
-													>
+												<div className=" flex w-full p-4 text-center items-center justify-center" style={{display:'table-row'}}>
+													<p className={clsx(classes.linkCardsColumn)} style={{ display:'table-cell', width:'20%', verticalAlign:'middle', padding:15}}>
+														<Link to={'/apps/sections/mitarea/' + row.id} >
+															{row.remaining_days > 5 ?
+																<img src={"assets/images/preescolar/tiempo-tareaspendientes.png"}/>
+																// tiempo-tareaspendientes.png
+																: row.remaining_days >= 1 ?
+																	<img src={"assets/images/preescolar/proxima-tareaspendientes.png"} />
+																	:
+																	<img src={"assets/images/preescolar/pendientes.png"} />
+															}
+														</Link>
+													</p>
+													<p className={clsx(classes.infoCardsColumn)} style={{display:'table-cell', width:'40%', verticalAlign:'middle'}}>
 														<Typography className={clsx(classes.TextInfo)}>
 															{row.name}
 														</Typography>
-													</div>
-													<div className=" flex w-2/5 p-12 text-center items-center justify-center"
-														style={{
-															backgroundImage: `url("assets/images/preescolar/fecha.png")`,
-															backgroundPosition: 'center',
-															backgroundSize: 'contain',
-															backgroundRepeat: 'no-repeat',
-														}}
-													>
+													</p>
+													<p className={clsx(classes.infoCardsColumn)} style={{display:'table-cell', width:'40%', verticalAlign:'middle'}}>
 														<Typography className={clsx(classes.TextInfo)}>
 															{row.finish_date.slice(0, 10)}
 														</Typography>
-													</div>
+													</p>
+												</div>
 												</>
 													:
 
-												<div className=" flex w-4/5 p-4 text-center items-center justify-center">
-													<p className={clsx(classes.infoCardsColumn)} >
-														<Typography className={clsx(classes.TextInfo)}>
-														{row.name}
-													</Typography>
+													<div className=" flex w-full p-4 text-center items-center justify-center" style={{display:'table-row'}}>
+													<p className={clsx(classes.linkCardsColumn)} style={{ display:'table-cell', width:'20%', verticalAlign:'middle', padding:15}}>
+														<Link to={'/apps/sections/mitarea/' + row.id} >
+															{row.remaining_days > 5 ?
+																<img src={"assets/images/preescolar/tiempo-tareaspendientes.png"}/>
+																// tiempo-tareaspendientes.png
+																: row.remaining_days >= 1 ?
+																	<img src={"assets/images/preescolar/proxima-tareaspendientes.png"} />
+																	:
+																	<img src={"assets/images/preescolar/pendientes.png"} />
+															}
+														</Link>
 													</p>
+													<p className={clsx(classes.infoCardsColumn)} style={{display:'table-cell', width:'80%', verticalAlign:'middle'}}>
+														<Typography className={clsx(classes.TextInfo)}>
+															{row.name}
+														</Typography>
+													</p>
+													
 												</div>
 											}
 
@@ -339,7 +387,7 @@ function MisTareas(props) {
 								:
 								<div className="flex flex-1 items-center justify-center h-full">
 									<Typography className={clsx(classes.TextInfo)}>
-										{ escuelabaja ? 'No hay tareas que mostrar!' : 'No hay actividades que mostrar!' }
+										{ !nivel == 0 ? 'No hay tareas que mostrar!' : 'No hay actividades que mostrar!' }
 									</Typography>
 								</div>								
 							}
@@ -369,7 +417,7 @@ function MisTareas(props) {
 							}}
 						>
 							<Typography className={clsx(classes.Text)}>
-								{ escuelabaja ? 'Tareas Entregadas' : 'Actividades Entregadas' }
+								{ !nivel == 0 ? 'Tareas Entregadas' : 'Actividades Entregadas' }
 							</Typography>
 						</div>
 						{/* ----------------------------Info inside card-------------------------- */}
@@ -381,7 +429,7 @@ function MisTareas(props) {
 											<div className="flex w-1/5 p-12 text-center items-center justify-center">
 											<Link to={'/apps/sections/mitarea/'+row.id} ><img src="assets/images/preescolar/entregado.png"/></Link>
 											</div>
-											{ escuelabaja ?
+											{ !nivel == 0 ?
 											<>
 												<div className=" flex w-2/5 p-12 text-center items-center justify-center"
 													style={{
@@ -427,7 +475,7 @@ function MisTareas(props) {
 								:
 								<div className="flex flex-1 items-center justify-center h-full">
 									<Typography className={clsx(classes.TextInfo)}>
-										{ escuelabaja ? 'No hay tareas que mostrar!' : 'No hay actividades que mostrar!' }
+										{ !nivel == 0 ? 'No hay tareas que mostrar!' : 'No hay actividades que mostrar!' }
 									</Typography>
 								</div>
 							}
@@ -456,7 +504,7 @@ function MisTareas(props) {
 							}}
 						>
 							<Typography className={clsx(classes.Text)}>
-								{ escuelabaja ? 'Tareas Calificadas' : 'Actividades Calificadas' }
+								{ !nivel == 0 ? 'Tareas Calificadas' : 'Actividades Calificadas' }
 							</Typography>
 						</div>
 						{/* ----------------------------Info inside card-------------------------- */}
@@ -503,7 +551,7 @@ function MisTareas(props) {
 								:
 								<div className="flex flex-1 items-center justify-center h-full">
 									<Typography className={clsx(classes.TextInfo)}>
-										{ escuelabaja ? 'No hay tareas que mostrar!' : 'No hay actividades que mostrar!' }
+										{ !nivel == 0 ? 'No hay tareas que mostrar!' : 'No hay actividades que mostrar!' }
 									</Typography>
 								</div>
 							}
@@ -532,7 +580,7 @@ function MisTareas(props) {
 							}}
 						>
 							<Typography className={clsx(classes.TextCalendar)}>
-								{ escuelabaja ? 'Calendario Semanal de tareas' : 'Calendario Semanal de Actividades' }
+								{ !nivel == 0 ? 'Calendario Semanal de tareas' : 'Calendario Semanal de Actividades' }
 								 {/* Nuevas Tareas */}
 							</Typography>
 						</div>
