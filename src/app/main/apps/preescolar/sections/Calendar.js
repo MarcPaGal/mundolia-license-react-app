@@ -120,15 +120,17 @@ const useStyles = makeStyles(theme => ({
         maxHeight: 460,
     },
     TextTitle: {
-        fontWeight: "bold",
-        fontSize: "32px",
+        // fontWeight: "bold",
+        fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "42px" : "32px",
         color: 'white',
         textShadow: '2px 2px 2px black',
         textTransform:"capitalize",
         marginLeft: 25
     },
     Text: {
-        fontSize: "16px",
+        fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "26px" : "16px",
         color: 'white',
         textShadow: '2px 2px 2px black',
         text: "center",
@@ -223,7 +225,7 @@ const useStyles = makeStyles(theme => ({
 function CalendarActivities(props) {
 
     const dispatch = useDispatch();
-    const classes = useStyles();
+    
     const role = useSelector(({ auth }) => auth.user.role);
     const calendars = useSelector(({ MisTareasApp }) => MisTareasApp.subjectCalendarSlice.data);
     const subjects = useSelector(({ MisTareasApp }) => MisTareasApp.subjectCalendarSlice.subjects.data);
@@ -244,20 +246,26 @@ function CalendarActivities(props) {
 		island1: [
 			'assets/images/preescolar/islaTareas.png',
 			'assets/images/preescolar/explorer.png',
-			'assets/images/preescolar/Mis-tareas-PLANETA.png'
+			'assets/images/preescolar/MisTareasPLANETA.png'
 		],
 		island2: [
-			'assets/images/preescolar/islaMundoLIAButton.png',
-			'assets/images/preescolar/comunicacionButton.png',
-			'assets/images/preescolar/Mi-mundo-LIA.png'
+			'assets/images/preescolar/islaMundoLIA.png',
+			'assets/images/preescolar/comunicacion.png',
+			'assets/images/preescolar/MiMundoLIA.png'
 		],
 		island3: [
-			'assets/images/preescolar/islaClases-1.png',
-			'assets/images/preescolar/artes-1.png',
-			'assets/images/preescolar/Mis-clases.png'
+			'assets/images/preescolar/islaClases.png',
+			'assets/images/preescolar/artes.png',
+			'assets/images/preescolar/MisClases.png'
 		],
-
+        fonts: [
+            'grobold',
+            'rager',
+            'haettenschweilerRegular',
+        ],
 	}
+
+    const classes = useStyles({nivel, theme});
 
     const SubjectListItem = ({ club, subject }) => {
         const [ open, setOpen ] = useState(false)
@@ -427,8 +435,8 @@ function CalendarActivities(props) {
                                     showMultiDayTimes={true} startAccessor="start" endAccessor="end"
                                     eventPropGetter={event => ({
                                         style: {
-                                            backgroundColor: event.customColor,
                                             fontSize: "10px",
+                                            backgroundColor: event.customColor,
                                             textAlign: "center",
                                             alignContent: 'center',
                                             alignItems: 'center'

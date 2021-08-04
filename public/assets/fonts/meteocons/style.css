@@ -9,9 +9,25 @@
 }
 
 @font-face {
-  font-family: 'grobold';
+  font-family: 'rager';
   src:
     url('fonts/RAGER.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'grobold';
+  src:
+    url('fonts/GROBOLD.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'haettenschweilerRegular';
+  src:
+    url('fonts/HaettenschweilerRegular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -25,7 +41,15 @@
 }
 
 .grobold {
-  font-family: 'grobold' !important;
+  font-family: 'grobold', 'rager' !important;
+}
+
+.rager {
+  font-family: 'rager' !important;
+}
+
+.haettenschweilerRegular {
+  font-family: 'haettenschweilerRegular' !important;
 }
 
 .poppins {

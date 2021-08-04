@@ -53,12 +53,20 @@ export const mustHaveThemeOptions = {
 		htmlFontSize: 10,
 		body1: {
 			fontSize: '1.4rem',
-			fontFamily: 'grobold',
+			fontFamily: `'grobold', 'rager'`,
 		},
 		body2: {
 			fontSize: '1.6rem',
 			fontFamily: 'poppins'
-		}
+		},
+		body3: {
+			fontSize: '1.4rem',
+			fontFamily: 'rager',
+		},
+		body4: {
+			fontSize: '1.4rem',
+			fontFamily: 'HaettenschweilerRegular',
+		},
 	}
 };
 
