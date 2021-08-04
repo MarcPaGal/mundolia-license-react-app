@@ -53,7 +53,7 @@ const useStyles = makeStyles({
 		maxWidth: "20%",
 	},
     imgBackgroundStyle: {
-        backgroundImage: "url(assets/images/backgrounds/Background.png)",backgroundSize:"cover",position:"relative",height:"80%",backgroundSize:"cover",
+        backgroundImage: "url(assets/images/backgrounds/_0012_Vector-Smart-Object.png)",backgroundSize:"cover",position:"relative",height:"80%",backgroundSize:"cover",
         width: '100%',
         height: '100%',
     },
@@ -97,14 +97,27 @@ const useStyles = makeStyles({
     videoScreen: {
         marginTop: "40px",
         // margin-top: 40px,
-        height: "63vh"
+        //height: "63vh"
+        height: "55vh",
+        maxWidth: "40vw",
+    //max-width: "49vw";
+        marginLeft: "-27px",
+    //margin-left: -27px;
+        marginTop: "95px",
+    //margin-top: 95px;
+    //margin-left: -27px;
     },
     imgBackgroundStyle2: {
-        backgroundImage: "url(assets/images/backgrounds/RecursosClase.png)",backgroundSize:"cover",position:"relative",height:"80%",backgroundSize:"cover",
-        width: '80% !important',
-        height: '100%',
-        marginTop: '48px',
-        marginLeft: '10%'
+        backgroundImage: "url(assets/images/backgrounds/_0008_nave-frente.png)",backgroundSize:"cover",position:"relative",height:"80%",backgroundSize:"cover",
+        //width: '80% !important',
+        //height: '100%',
+        //marginTop: '48px',
+        // width: "57vw !important",
+        width: "42vw !important",
+        marginLeft: "-12px",
+        height: "40vh",
+        marginTop: "-42px"
+        //marginLeft: '10%'
     },
     elementDown: {
         marginLeft: '111px',
@@ -115,7 +128,20 @@ const useStyles = makeStyles({
     },
     anotherelementDown: {
         marginTop: '57px'
-    }
+    },
+    imgBackgroundStyle3: {
+        backgroundImage: "url(assets/images/backgrounds/_0007_Objeto-inteligente-vectorial.png)",backgroundSize:"cover",position:"relative",height:"80%",backgroundSize:"cover",
+        //width: '80% !important',
+        // width: '464% !important',
+        width: '396px !important',
+        height: '100%',
+        marginTop: '48px',
+        marginLeft: '86px'
+    },
+    resourcesRight: {
+        width: "10vw",
+    height: "100vh"
+    },
     
 });
 
@@ -130,9 +156,12 @@ const useStyles = makeStyles({
     }
     const { items } = this.state; */
 
+    var hideConsole = true;
+    var gamesShow = true;
+
 function AulaVirtualApp(props) {
 	const dispatch = useDispatch();
-
+    var hideBar = 0;
 	const classes = useStyles(props);
 	const pageLayout = useRef(null);
 	const routeParams = useParams();
@@ -216,7 +245,9 @@ function AulaVirtualApp(props) {
         dispatch(getMeetingId(id));
     }
 
-    
+    function loadGame (){
+        hideBar = 0;
+    }
 
     let state = {
         activeDrags: 0,
@@ -228,6 +259,12 @@ function AulaVirtualApp(props) {
         }
       };
 
+      function consol() { //hideBar = 1;
+        hideConsole = false;
+        gamesShow = true;
+        console.log("hide", gamesShow);
+          console.log('1234!'); }
+
     function onStart  ()  {
         this.setState({activeDrags: ++this.state.activeDrags});
       };
@@ -236,6 +273,13 @@ function AulaVirtualApp(props) {
         this.setState({activeDrags: --this.state.activeDrags});
       };
 
+
+      var state2 = {
+        items: [
+          
+        ]
+      }
+      const { items } = state2;
     //   const dragHandlers = {onStart: this.onStart, onStop: this.onStop};
 
 	return (
@@ -317,15 +361,40 @@ function AulaVirtualApp(props) {
                                             );
                                         })}
                                     </div>
+                                    
                                     </>
                                 :
-                                <Draggable>
-                                {/* <div > */}
+
+                                <>
                                     <div id="jitsi-container" className={classes.jitsiContainerOpen}>
                                                 <img className={clsx(classes.img)} src="assets/images/logos/clublia.png" />
                                                 </div>
-                                {/* </div> */}
-                                </Draggable>
+                                        <Carousel itemsToShow={1} className={classes.imgBackgroundStyle2}>
+                                        {/* <Item>1</Item>
+                                        <Item>2</Item>
+                                        <Item>3</Item>
+                                        <Item>4</Item>
+                                        <Item>5</Item>
+                                        <Item>6</Item> */}
+                                        {items.map(item => <div key={item.id}>{item.title}</div>)}
+                                        {/* <div className={classes.elementDown}>   
+                                        <button className={classes.anotherelementDown}>Legend 1</button>
+
+                                        </div>
+                                        <div className={classes.elementDown}>
+                                            <p className={classes.anotherelementDown}>Legend 2</p>
+                                        </div> */}
+                                        {/* <div>
+                                            <p className="legend">Legend 3</p>
+                                        </div> */}
+                                        </Carousel>                                    
+              
+                                </>
+                         
+                                    
+
+                  
+                                
                                 
                                 // <Droppable droppableId="vid">
                                 //     {(droppableProvided) => (
@@ -344,6 +413,12 @@ function AulaVirtualApp(props) {
                                 // </Droppable>
                                 }
                             </Grid>
+                            <Grid className={classes.resourcesRight}>
+                            {(gamesShow) && (
+                                <div className={classes.imgBackgroundStyle3}>
+                                <p className="legend"></p>
+                                </div>)}
+                            </Grid>
                                        </Grid> 
                                 
 
@@ -357,31 +432,11 @@ function AulaVirtualApp(props) {
                         {/* <div className="float flex w-full flex-wrap ">
 
                         </div> */}
-                        <Grid>
+
                         
 
-                        {/* <Carousel>
-                            {items.map(item => <div key={item.id}>{item.title}</div>)}
-                        </Carousel> */}
-                        <Carousel itemsToShow={1} className={classes.imgBackgroundStyle2}>
-                            {/* <Item>1</Item>
-                            <Item>2</Item>
-                            <Item>3</Item>
-                            <Item>4</Item>
-                            <Item>5</Item>
-                            <Item>6</Item> */}
-                            <div className={classes.elementDown}>   
-                                <p className={classes.anotherelementDown}>Legend 1</p>
-                            </div>
-                            <div className={classes.elementDown}>
-                                <p className={classes.anotherelementDown}>Legend 2</p>
-                            </div>
-                            <div>
-                                <p className="legend">Legend 3</p>
-                            </div>
-                            </Carousel>
-                        </Grid>
-
+                       
+                        
                         {/* <Grid container direction="row" className={classes.containerStyle}> */}
                             {/* <Grid item xs={9} className={classes.containerStyle}>
                                 {openGroups ? 
