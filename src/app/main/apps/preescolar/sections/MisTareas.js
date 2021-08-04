@@ -221,7 +221,8 @@ const useStyles = makeStyles(theme => ({
 		alignSelf: "center",
 	},
 	TextDaysCalendarAlta: {
-		fontSize: "11px",
+		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[0],
+		fontSize: ({ nivel }) => nivel == 2 ? "18px" : "11px",
 		color: 'white',
 		textShadow: '1px 1px 1px black',
 		text: "center",
