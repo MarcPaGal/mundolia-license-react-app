@@ -143,7 +143,7 @@ function EventsCalendarContent(props) {
 					<Icon>event</Icon>
 				</Fab>
 			</FuseAnimate>
-			<EventsCalendarEventDialog /* setCalendars={setCalendars} calendarsIds={calendarsIds} */ />
+			<EventsCalendarEventDialog/>
 			<EventsCalendarDialog/>
 		</>
 	);

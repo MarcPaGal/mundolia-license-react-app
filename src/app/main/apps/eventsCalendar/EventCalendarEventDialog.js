@@ -28,6 +28,7 @@ import { useForm } from '@fuse/hooks';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FuseUtils from '@fuse/utils/FuseUtils';
 import { submitEvent } from './store/eventsSlice';
+import { getCalendars, getSubjects, setGroup } from './store/calendarSlice';
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -50,6 +51,8 @@ function EventsCalendarEventDialog(props) {
     const [selectedStartDate, setSelectedStartDate] = useState(null);
     const [selectedEndDate, setSelectedEndDate] = useState(null);
     const [selectedDate, setSelectedDate] = useState(new Date());
+
+    const group_id = useSelector(({ EventsCalendarApp }) => EventsCalendarApp.calendar.group.group);
 
     var today = new Date();
 	const date = today.getFullYear() + '-' + ('0'+( today.getMonth() + 1)).slice(-2) + '-' + ('0'+( today.getDate())).slice(-2)
@@ -124,6 +127,8 @@ function EventsCalendarEventDialog(props) {
 
         if (eventDialog.type === 'new') {
             dispatch(submitEvent(form, selectedDate, selectedStartDate, selectedEndDate, week, days));
+            dispatch(getCalendars({group_id: 0}));
+            dispatch(getCalendars({group_id: group_id}));
         }
     }
 
