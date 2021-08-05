@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import withReducer from 'app/store/withReducer';
 import React, { useRef,useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useDeepCompareEffect } from '@fuse/hooks';
 import reducer from './store';
 import Grid from '@material-ui/core/Grid';
@@ -14,15 +14,23 @@ import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import {submitFileClassroom,getFileClassroom,getMeetingId,getGroupsStudent,getGroups,downloadFile} from './store/aulaSlice.js';
 import { Typography } from '@material-ui/core';
-import FuseLoading from '@fuse/core/FuseLoading';
-import {showMessage} from "../../../store/fuse/messageSlice";
 import clsx from 'clsx';
-import {TextFieldFormsy} from "../../../../@fuse/core/formsy";
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Formsy from "formsy-react";
+import UserInfoHeader from '../preescolar/components/UserInfoHeader';
+import { Component } from 'react';
+import Carousel from 'react-elastic-carousel';
+//import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import ReactDOM from 'react-dom';
+import Draggable, {DraggableCore} from 'react-draggable'; // Both at the same time
+
 
 
 const useStyles = makeStyles({
+	TextTitle: {
+		fontWeight: "bold",
+		fontSize: "32px",
+		color: 'white',
+		textShadow: '2px 2px 2px black',
+	},
 	addButton: {
 		position: 'absolute',
 		right: 12,
@@ -40,8 +48,12 @@ const useStyles = makeStyles({
         position:"absolute",
         margin:"1%",
 	},
+	imgHeader: {
+		maxHeight: "20%",
+		maxWidth: "20%",
+	},
     imgBackgroundStyle: {
-        backgroundImage: "url(assets/images/backgrounds/background-space.png)",backgroundSize:"cover",position:"relative",height:"80%",backgroundSize:"cover",
+        backgroundImage: "url(assets/images/backgrounds/_0012_Vector-Smart-Object.png)",backgroundSize:"cover",position:"relative",height:"80%",backgroundSize:"cover",
         width: '100%',
         height: '100%',
     },
@@ -63,6 +75,13 @@ const useStyles = makeStyles({
         color:"#FFF",
         textShadow:"-2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;"
     },
+	button: {
+		"&:hover": {
+			transform: "scale(1.2) translateX(50px)"
+			// width:"120%"
+		},
+		justifyContent:"left"
+	},
 	groupButton:{
         backgroundColor:"#4883C0",
         color:"white",
@@ -74,12 +93,75 @@ const useStyles = makeStyles({
     },
     groupDivButtons:{
         width:"100%"
-    }
+    },
+    videoScreen: {
+        marginTop: "40px",
+        // margin-top: 40px,
+        //height: "63vh"
+        height: "55vh",
+        maxWidth: "40vw",
+    //max-width: "49vw";
+        marginLeft: "-27px",
+    //margin-left: -27px;
+        marginTop: "95px",
+    //margin-top: 95px;
+    //margin-left: -27px;
+    },
+    imgBackgroundStyle2: {
+        backgroundImage: "url(assets/images/backgrounds/_0008_nave-frente.png)",backgroundSize:"cover",position:"relative",height:"80%",backgroundSize:"cover",
+        //width: '80% !important',
+        //height: '100%',
+        //marginTop: '48px',
+        // width: "57vw !important",
+        width: "42vw !important",
+        marginLeft: "-12px",
+        height: "40vh",
+        marginTop: "-42px"
+        //marginLeft: '10%'
+    },
+    elementDown: {
+        marginLeft: '111px',
+        marginTop: '26px',
+         height: '117px',
+         width: '17%'
+        // width: '80%'
+    },
+    anotherelementDown: {
+        marginTop: '57px'
+    },
+    imgBackgroundStyle3: {
+        backgroundImage: "url(assets/images/backgrounds/_0007_Objeto-inteligente-vectorial.png)",backgroundSize:"cover",position:"relative",height:"80%",backgroundSize:"cover",
+        //width: '80% !important',
+        // width: '464% !important',
+        width: '396px !important',
+        height: '100%',
+        marginTop: '48px',
+        marginLeft: '86px'
+    },
+    resourcesRight: {
+        width: "10vw",
+    height: "100vh"
+    },
+    
 });
+
+   /*  const state = {
+      items: [
+        {id: 1, title: 'item #1'},
+        {id: 2, title: 'item #2'},
+        {id: 3, title: 'item #3'},
+        {id: 4, title: 'item #4'},
+        {id: 5, title: 'item #5'}
+      ]
+    }
+    const { items } = this.state; */
+
+    var hideConsole = true;
+    var gamesShow = true;
 
 function AulaVirtualApp(props) {
 	const dispatch = useDispatch();
-
+    var hideBar = 0;
 	const classes = useStyles(props);
 	const pageLayout = useRef(null);
 	const routeParams = useParams();
@@ -158,13 +240,52 @@ function AulaVirtualApp(props) {
     }
 
     function onClickGroup(id){
+
         setOpenGroups(false);
         dispatch(getMeetingId(id));
     }
 
+    function loadGame (){
+        hideBar = 0;
+    }
+
+    let state = {
+        activeDrags: 0,
+        deltaPosition: {
+          x: 0, y: 0
+        },
+        controlledPosition: {
+          x: -400, y: 200
+        }
+      };
+
+      function consol() { //hideBar = 1;
+        hideConsole = false;
+        gamesShow = true;
+        console.log("hide", gamesShow);
+          console.log('1234!'); }
+
+    function onStart  ()  {
+        this.setState({activeDrags: ++this.state.activeDrags});
+      };
+
+    function  onStop ()  {
+        this.setState({activeDrags: --this.state.activeDrags});
+      };
+
+
+      var state2 = {
+        items: [
+          
+        ]
+      }
+      const { items } = state2;
+    //   const dragHandlers = {onStart: this.onStart, onStop: this.onStop};
+
 	return (
 		<>
-
+            {
+           /* <DragDropContext onDragEnd={(result)=>console.log(result)}></DragDropContext> */}
 			<FusePageSimple
 				classes={{
 					contentWrapper: 'p-0 h-full',
@@ -174,9 +295,150 @@ function AulaVirtualApp(props) {
 					wrapper: 'min-h-0'
 				}}
 				content={ 
-                    <div className={classes.imgBackgroundStyle}>
-                        <Grid container direction="row" className={classes.containerStyle}>
-                            <Grid item xs={9} className={classes.containerStyle}>
+                    <div className={classes.imgBackgroundStyle}>   
+                        {/* <div className="float flex w-full flex-wrap "> */}
+                            {/* <div className="flex w-full md:w-1/2">
+                                <Button
+                                    className={clsx(classes.button)}
+                                    style={{
+                                        backgroundColor: 'transparent',
+                                    }}
+                                    to={`/apps/landing`}
+                                    component={Link}
+                                    type="button"
+                                >
+                                    <img className={clsx(classes.imgHeader)} src="assets/images/preescolar/artes-1.png" />
+                                </Button>
+                                <div style={{display : 'block'}}>
+                                    <Typography className={clsx(classes.TextTitle)}>	
+                                        Mis Clases 
+                                    </Typography>
+                                    </div>
+                            </div> */}
+                                       <Grid container>
+                                           <Grid item xs={2}>
+                                           <div>
+                                                <Button
+                                                    className={clsx(classes.button)}
+                                                    style={{
+                                                        backgroundColor: 'transparent',
+                                                    }}
+                                                    to={`/apps/landing`}
+                                                    component={Link}
+                                                    type="button"
+                                                >
+                                                    <img className={clsx(classes.imgHeader)} src="assets/images/preescolar/artes-1.png" />
+                                                </Button>
+                                                
+                                                    </div>
+                                                    <div >
+                                                    <Typography className={clsx(classes.TextTitle)}>	
+                                                        Mis Clases 
+                                                    </Typography>
+                                                    </div>
+                                           </Grid>
+
+                                           <Grid item xs={9} className={classes.containerStyle, classes.videoScreen}>
+                                {openGroups ? 
+                                    <>
+                                    <Typography fontFamily variant="h3" color="inherit" className={clsx(classes.groupTitle)}>
+                                        {(role === 'maestro_preescolar' || role === 'maestro_secundaria' || role === 'profesor_summit_2021' || role === 'maestro' || role ==='maestroe1' || role === 'maestroe2' || role === 'maestroe3' || role === 'Maestro-I' || role === 'Maestro-M' || role === 'Maestro-A') ?
+                                            <div className={clsx(classes.fileNameStyle)}>
+                                                    ¿A qué grupo impartirás clase?
+                                            </div>
+                                        :
+                                            <div className={clsx(classes.fileNameStyle)}>
+                                                 Selecciona un grupo para entrar a la clase
+                                            </div>
+                                        }
+                                    </Typography>
+                                    <div className={clsx(classes.groupDivButtons)}>
+                                        {valueGroups.map(group => {
+                                            return(
+                                                    <Button onClick={()=>onClickGroup(group.id)} className={clsx(classes.groupButton,"normal-case")}>
+                                                        <Typography>{group.name}</Typography>
+                                                    </Button>
+                                            );
+                                        })}
+                                    </div>
+                                    
+                                    </>
+                                :
+
+                                <>
+                                    <div id="jitsi-container" className={classes.jitsiContainerOpen}>
+                                                <img className={clsx(classes.img)} src="assets/images/logos/clublia.png" />
+                                                </div>
+                                        <Carousel itemsToShow={1} className={classes.imgBackgroundStyle2}>
+                                        {/* <Item>1</Item>
+                                        <Item>2</Item>
+                                        <Item>3</Item>
+                                        <Item>4</Item>
+                                        <Item>5</Item>
+                                        <Item>6</Item> */}
+                                        {items.map(item => <div key={item.id}>{item.title}</div>)}
+                                        {/* <div className={classes.elementDown}>   
+                                        <button className={classes.anotherelementDown}>Legend 1</button>
+
+                                        </div>
+                                        <div className={classes.elementDown}>
+                                            <p className={classes.anotherelementDown}>Legend 2</p>
+                                        </div> */}
+                                        {/* <div>
+                                            <p className="legend">Legend 3</p>
+                                        </div> */}
+                                        </Carousel>                                    
+              
+                                </>
+                         
+                                    
+
+                  
+                                
+                                
+                                // <Droppable droppableId="vid">
+                                //     {(droppableProvided) => (
+                                //     <div className={classes.jitsiContainerOpen} {...droppableProvided.droppableProps} ref={droppableProvided.innerRef}>
+                                //         <Draggable key={0} draggableId={0} index={1}>
+                                //             {(draggableProvided) => (
+                                //                 <div id="jitsi-container" {...draggableProvided.draggableProps} ref={draggableProvided.innerRef} {...draggableProvided.dragHandleProps}>
+                                //                 <img className={clsx(classes.img)} src="assets/images/logos/clublia.png" />
+                                //                 </div>
+                                //             )}
+                                //         </Draggable>
+                                //         {droppableProvided.placeholder}
+                                //     </div>    
+                                //    )}
+                                    
+                                // </Droppable>
+                                }
+                            </Grid>
+                            <Grid className={classes.resourcesRight}>
+                            {(gamesShow) && (
+                                <div className={classes.imgBackgroundStyle3}>
+                                <p className="legend"></p>
+                                </div>)}
+                            </Grid>
+                                       </Grid> 
+                                
+
+                            {/* ------------------------- Avatar and User Info --------------------- */}
+                            {/* <div className="flex w-full md:w-1/2 items-center justify-center flex-wrap flex-row">
+                                <UserInfoHeader/>
+                            </div> */}
+                        {/* </div> */}
+
+
+                        {/* <div className="float flex w-full flex-wrap ">
+
+                        </div> */}
+
+                        
+
+                       
+                        
+                        {/* <Grid container direction="row" className={classes.containerStyle}> */}
+                            {/* <Grid item xs={9} className={classes.containerStyle}>
                                 {openGroups ? 
                                     <>
                                     <Typography fontFamily variant="h3" color="inherit" className={clsx(classes.groupTitle)}>
@@ -205,8 +467,8 @@ function AulaVirtualApp(props) {
                                     <img className={clsx(classes.img)} src="assets/images/logos/clublia.png" />
                                 </div>
                                 }
-                            </Grid>
-                            <Grid item xs={3} className={classes.rightContainerStyle}>
+                            </Grid> */}
+                            {/* <Grid item xs={3} className={classes.rightContainerStyle}>
                                 <div className={clsx('flex flex-col justify-center')}>    
                                 {openMeeting !== false && aula.response &&
                                 <>
@@ -252,8 +514,8 @@ function AulaVirtualApp(props) {
                                 </>
                                 } 
                                 </div>
-                            </Grid>
-                        </Grid>
+                            </Grid> */}
+                        {/* </Grid> */}
                          
                         
                     </div>
