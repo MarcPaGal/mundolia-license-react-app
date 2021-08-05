@@ -80,7 +80,7 @@ const useStyles = makeStyles(theme => ({
 		fontSize: ({ nivel }) => nivel == 2 ? "55px" : "45px",
 		color: 'red',
 		textAlign: "center",
-		paddingTop: "25px",
+		paddingTop: ({ nivel }) => nivel == 2 ? "17px" : "27px",
 	},
 	LabelDesc: {
 		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[1],
@@ -89,9 +89,13 @@ const useStyles = makeStyles(theme => ({
 		textShadow: '4px 4px 4px #595959',
 	},
 	LabelScore: {
-		fontFamily:  ({ nivel, theme }) => nivel == 2 ? theme.fonts[2] : theme.fonts[0],
-		fontSize: ({ nivel }) => nivel == 2 ? "95px" : "80px",
+		fontSize: "80px",
 		color: 'red',
+	},
+	LabelScoreWhite: {
+		fontFamily:  ({ theme }) => theme.fonts[2],
+		fontSize: "130px",
+		color: '#fff',
 	},
 	starIcon: {
 		color: 'purple',
@@ -709,7 +713,7 @@ function MiTarea(props) {
 																			{fileName == '' ? homework.file_path ? homework.file_path.slice(homework.file_path.indexOf('_')+1) : fileName : fileName}
 																		</Typography>
 																	}
-																	<DialogActions className="w-full mt-20">
+																	<DialogActions className={`w-full ${ nivel != 2 && 'mt-20'}`}>
 																		<Button
 																			className="w-full"
 																			style={ nivel == 2 ? {
@@ -858,14 +862,14 @@ function MiTarea(props) {
 															    (!nivel == 0 ? 
 																	<div
 																		style={{
-																			marginTop: 40,
-																			backgroundColor: '#FFFFFF',
+																			marginTop: nivel == 2 ? 0 : 40,
+																			backgroundColor: nivel == 2 ? 'transparent' : '#FFFFFF',
 																			paddingLeft: 25,
 																			paddingRight: 25,
 																			borderRadius: 10,
 																		}}
 																	>
-																		<Typography className={clsx(classes.LabelScore)}>
+																		<Typography className={clsx(nivel == 2 ? classes.LabelScoreWhite : classes.LabelScore)}>
 																			{homework.score.slice(homework.score.indexOf('.')) == '.00' ? homework.score.slice(0, homework.score.indexOf('.')) : homework.score}
 																		</Typography>
 																	</div>
