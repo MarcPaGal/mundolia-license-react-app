@@ -150,8 +150,10 @@ function NavbarWrapperLayout1(props) {
 							style={{ backgroundColor: navbarTheme.palette.background.default }}
 						>
 							<NavbarLayout1 className={classes.navbarContent} />
+
+							{ (!folded || foldedAndOpened) && <FooterLayout1/> }
 						</div>
-					<FooterLayout1 />
+						
 					</Hidden>
 
 					<Hidden lgUp>
