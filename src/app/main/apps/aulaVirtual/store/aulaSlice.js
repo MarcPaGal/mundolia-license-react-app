@@ -29,7 +29,7 @@ export const getFileClassroom = ( idMeeting ) => async dispatch => {
 		})
 		.then(response => {
 			//debugger;
-			dispatch(aulaSuccess('response data files',response.data));
+			dispatch(aulaSuccess(response.data));
 			console.log(response.data)
 		})
 		.catch(error => {

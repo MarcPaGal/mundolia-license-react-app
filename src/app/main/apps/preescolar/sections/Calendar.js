@@ -356,7 +356,8 @@ function CalendarActivities(props) {
         <div
             className="flex-1"
             style={{
-                backgroundImage: `url(${ theme.background[nivel] })`,
+                // backgroundImage: `url(${ theme.background[nivel] })`,
+                backgroundImage: `url(assets/images/backgrounds/_0012_Vector-Smart-Object.png)`,
                 backgroundPosition: 'center',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat'
@@ -469,6 +470,42 @@ function CalendarActivities(props) {
                                         Club Lia Eventos
                                     </Button>
                                 </div>*/}
+                                <div className="flex w-full flex-col text-center" style={{paddingBottom: 'inherit'}}>
+
+                                    <Button
+                                        style={{
+                                            backgroundImage:  `url(assets/images/calendar/buttonClasses.png)`,
+                                            backgroundSize: '106% 100%',
+                                            backgroundRepeat: 'no-repeat',
+                                        }}
+                                        to={`/apps/aula/all`}
+                                        component={Link}
+                                        type="button"
+                                    >
+                                        <Typography className={clsx(classes.Text)}>
+                                            Entrar A Clase
+                                        </Typography>
+                                    </Button>
+                                </div>
+                                <div className="flex w-full flex-col text-center" style={{paddingBottom: 'inherit'}}>
+
+                                    <Button
+                                        style={{
+                                            //backgroundColor: 'transparent',
+                                            backgroundImage:  `url(assets/images/calendar/buttonCalendar.png)`,
+                                            backgroundSize: '106% 100%',
+                                            backgroundRepeat: 'no-repeat',
+                                            
+                                        }}
+                                        to={`/loginp`}
+                                        component={Link}
+                                        type="button"
+                                    >
+                                        <Typography className={clsx(classes.Text)}>
+                                            Club Lia Eventos
+                                        </Typography>
+                                    </Button>
+                                </div>
                                 <div className="flex w-full flex-col text-center">
                                     <Button
                                         className={clsx(classes.button)}

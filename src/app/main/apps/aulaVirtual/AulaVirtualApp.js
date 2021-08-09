@@ -133,7 +133,8 @@ const useStyles = makeStyles({
         backgroundImage: "url(assets/images/backgrounds/_0007_Objeto-inteligente-vectorial.png)",backgroundSize:"cover",position:"relative",height:"80%",backgroundSize:"cover",
         //width: '80% !important',
         // width: '464% !important',
-        width: '396px !important',
+        // width: '396px !important',
+        width: '29vw !important',
         height: '100%',
         marginTop: '48px',
         marginLeft: '86px'
@@ -172,6 +173,7 @@ function AulaVirtualApp(props) {
 	const user = useSelector(({ auth }) => auth.user.data);
 	const role = user.role;
 	const aula = useSelector(({ AulaVirtualApp }) => AulaVirtualApp.aulaVirtual.filesAula);
+    console.log('aul',aula);
 	const meetingIdVal = useSelector(({ AulaVirtualApp }) => AulaVirtualApp.aulaVirtual.meetingAula);
 	const groupsTeacher = useSelector(({ AulaVirtualApp }) => AulaVirtualApp.aulaVirtual.groups);
 
@@ -316,6 +318,8 @@ function AulaVirtualApp(props) {
                                     </div>
                             </div> */}
                                        <Grid container>
+                                       {(role === 'maestro_preescolar' || role === 'maestro_secundaria' || role === 'profesor_summit_2021' || role === 'maestro' || role ==='maestroe1' || role === 'maestroe2' || role === 'maestroe3' || role === 'Maestro-I' || role === 'Maestro-M' || role === 'Maestro-A') ?
+                                          <Grid item xs={2}></Grid>:
                                            <Grid item xs={2}>
                                            <div>
                                                 <Button
@@ -336,8 +340,8 @@ function AulaVirtualApp(props) {
                                                         Mis Clases 
                                                     </Typography>
                                                     </div>
-                                           </Grid>
-
+                                           </Grid> 
+                                         }
                                            <Grid item xs={9} className={classes.containerStyle, classes.videoScreen}>
                                 {openGroups ? 
                                     <>
@@ -376,14 +380,14 @@ function AulaVirtualApp(props) {
                                         <Item>4</Item>
                                         <Item>5</Item>
                                         <Item>6</Item> */}
-                                        {items.map(item => <div key={item.id}>{item.title}</div>)}
-                                        {/* <div className={classes.elementDown}>   
-                                        <button className={classes.anotherelementDown}>Legend 1</button>
+                                        {/* {items.map(item => <div key={item.id}>{item.title}</div>)} */}
+                                        <div className={classes.elementDown}>   
+                                        <button className={classes.anotherelementDown}>Not file found</button>
 
                                         </div>
                                         <div className={classes.elementDown}>
-                                            <p className={classes.anotherelementDown}>Legend 2</p>
-                                        </div> */}
+                                            <p className={classes.anotherelementDown}>Not file found</p>
+                                        </div>
                                         {/* <div>
                                             <p className="legend">Legend 3</p>
                                         </div> */}
@@ -413,13 +417,71 @@ function AulaVirtualApp(props) {
                                 // </Droppable>
                                 }
                             </Grid>
-                            <Grid className={classes.resourcesRight}>
+                            {/* <Grid className={classes.resourcesRight}>
                             {(gamesShow) && (
                                 <div className={classes.imgBackgroundStyle3}>
                                 <p className="legend"></p>
                                 </div>)}
+                            </Grid> */}
+                            
+                            {(role === 'maestro_preescolar' || role === 'maestro_secundaria' || role === 'profesor_summit_2021' || role === 'maestro' || role ==='maestroe1' || role === 'maestroe2' || role === 'maestroe3' || role === 'Maestro-I' || role === 'Maestro-M' || role === 'Maestro-A') ?
+                                <Grid item xs={4} className={classes.rightContainerStyle}>
+                                <div className={clsx('flex flex-col justify-center')}>    
+                                {openMeeting !== false && aula.response &&
+                                <>
+                                {aula.response?.map(file => {
+                                    return(
+                                        <>
+                                            <p style={{paddingTop: 3, paddingBottom: 3, paddingLeft: 5, paddingRight: 5, marginTop: 5, backgroundColor: '#c7c7c7', color: '#FFFFFF', borderRadius: 12, fontWeight: "bold", textAlign:"center"}}>    
+                                                <Button className='flex flex-col justify-center'
+                                                    onClick={ev => {
+                                                        ev.stopPropagation();
+                                                        dispatch(downloadFile(file.replace('public','')));}}>
+                                                    <Typography
+                                                        className={clsx(classes.fileNameStyle,"text-center text-13 font-600 mt-4")}>
+                                                        {file.slice(file.indexOf('_')+1)}
+                                                    </Typography>
+
+                                                    <Icon className={clsx(classes.fileNameStyle,"text-center text-13 font-600 mt-4 ml-4")}>save_alt</Icon>
+                                                </Button>
+                                            </p>
+                                        </>
+                                    )})
+                                } 
+                                {(role === 'maestro_preescolar' || role === 'maestro_secundaria' || role === 'profesor_summit_2021' || role === 'maestro' || role ==='maestroe1' || role === 'maestroe2' || role === 'maestroe3' || role === 'Maestro-I' || role === 'Maestro-M' || role === 'Maestro-A') ?
+                                    <input
+                                        style={{alignSelf:"center",marginTop:"10%"}}
+                                        className="mb-16"
+                                        type="file"
+                                        name="file"
+                                        id="file"
+                                        onChange={(e) => uploadFile(e.target.files[0])}
+                                        variant="outlined"
+                                    /> 
+                                :
+                                    <IconButton
+                                        onClick={() => dispatch(getFileClassroom(meetingIdVal.response.meeting_id))}
+                                        aria-label="open left sidebar"
+                                        color="primary"
+                                    >
+                                        <Typography className={clsx(classes.fileNameStyle,"text-center text-16 font-600 m-4")}>Recursos para la clase </Typography>
+                                        <Icon className={clsx(classes.fileNameStyle,"text-center text-16 font-600 mt-4")}>refresh</Icon>
+                                    </IconButton>
+                                }
+                                </>
+                                } 
+                                </div>
+                                </Grid> 
+                            :
+                                <Grid className={classes.resourcesRight}>
+                                
+                                <div className={classes.imgBackgroundStyle3}>
+                                <p className="legend"></p>
+                                </div>
+                                </Grid> 
+                            }
                             </Grid>
-                                       </Grid> 
+                                       
                                 
 
                             {/* ------------------------- Avatar and User Info --------------------- */}
@@ -472,7 +534,7 @@ function AulaVirtualApp(props) {
                                 <div className={clsx('flex flex-col justify-center')}>    
                                 {openMeeting !== false && aula.response &&
                                 <>
-                                {aula.response.map(file => {
+                                {aula.response?.map(file => {
                                     return(
                                         <>
                                             <p style={{paddingTop: 3, paddingBottom: 3, paddingLeft: 5, paddingRight: 5, marginTop: 5, backgroundColor: '#c7c7c7', color: '#FFFFFF', borderRadius: 12, fontWeight: "bold", textAlign:"center"}}>    
