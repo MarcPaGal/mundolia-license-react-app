@@ -372,7 +372,9 @@ function MisTareas(props) {
 							}}
 						>
 							<Typography className={clsx(classes.Text)}>
-								{ !nivel == 0 ? 'Tareas Pendientes' : 'Actividades Pendientes' }
+								{ nivel == 0 ?  'Actividades Pendientes' 
+									: nivel == 1 ? 'Tareas Pendientes' 
+									: 'Mis Tareas Pendientes'  }
 							</Typography>
 						</div>
 						{/* ----------------------------Info inside card-------------------------- */}
@@ -514,7 +516,9 @@ function MisTareas(props) {
 							}}
 						>
 							<Typography className={clsx(classes.Text)}>
-								{ !nivel == 0 ? 'Tareas Entregadas' : 'Actividades Entregadas' }
+								{ nivel == 0 ?  'Actividades Entregadas' 
+									: nivel == 1 ? 'Tareas Entregadas' 
+									: 'Mis Tareas Entregadas'  }
 							</Typography>
 						</div>
 						{/* ----------------------------Info inside card-------------------------- */}
@@ -629,7 +633,9 @@ function MisTareas(props) {
 							}}
 						>
 							<Typography className={clsx(classes.Text)}>
-								{ !nivel == 0 ? 'Tareas Calificadas' : 'Actividades Calificadas' }
+								{ nivel == 0 ?  'Actividades Calificadas' 
+									: nivel == 1 ? 'Tareas Calificadas' 
+									: 'Mis Tareas Calificadas'  }
 							</Typography>
 						</div>
 						{/* ----------------------------Info inside card-------------------------- */}
@@ -707,7 +713,7 @@ function MisTareas(props) {
 									backgroundRepeat: 'no-repeat',
 								}}
 							>
-								<Typography className={clsx(classes.TextCalendar)}>
+								<Typography className={clsx(classes.Text)}>
 									{!nivel == 0 ? 'Calendario Semanal de tareas' : 'Calendario Semanal de Actividades'}
 									{/* Nuevas Tareas */}
 								</Typography>
