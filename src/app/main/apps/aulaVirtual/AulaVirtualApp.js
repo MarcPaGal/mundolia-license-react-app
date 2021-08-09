@@ -373,7 +373,36 @@ function AulaVirtualApp(props) {
                                     <div id="jitsi-container" className={classes.jitsiContainerOpen}>
                                                 <img className={clsx(classes.img)} src="assets/images/logos/clublia.png" />
                                                 </div>
-                                        <Carousel itemsToShow={1} className={classes.imgBackgroundStyle2}>
+                                                <div className={clsx('flex flex-col justify-center')}>    
+                                {openMeeting !== false && aula.response &&
+                                <>
+                                <Carousel itemsToShow={1} className={classes.imgBackgroundStyle2}>
+                                {aula.response?.map(file => {
+                                    return(
+                                        <>
+                                        
+                                            <p style={{paddingTop: 3, paddingBottom: 3, paddingLeft: 5, paddingRight: 5, marginTop: 5, backgroundColor: '#c7c7c7', color: '#FFFFFF', borderRadius: 12, fontWeight: "bold", textAlign:"center"}}>    
+                                                <Button className='flex flex-col justify-center'
+                                                    onClick={ev => {
+                                                        ev.stopPropagation();
+                                                        dispatch(downloadFile(file.replace('public','')));}}>
+                                                    <Typography
+                                                        className={clsx(classes.fileNameStyle,"text-center text-13 font-600 mt-4")}>
+                                                        {file.slice(file.indexOf('_')+1)}
+                                                    </Typography>
+
+                                                    <Icon className={clsx(classes.fileNameStyle,"text-center text-13 font-600 mt-4 ml-4")}>save_alt</Icon>
+                                                </Button>
+                                            </p>
+                                            
+                                        </>
+                                    )})
+                                } 
+                               </Carousel>
+                                </>
+                                } 
+                                </div>
+                                        {/* <Carousel itemsToShow={1} className={classes.imgBackgroundStyle2}> */}
                                         {/* <Item>1</Item>
                                         <Item>2</Item>
                                         <Item>3</Item>
@@ -381,17 +410,19 @@ function AulaVirtualApp(props) {
                                         <Item>5</Item>
                                         <Item>6</Item> */}
                                         {/* {items.map(item => <div key={item.id}>{item.title}</div>)} */}
-                                        <div className={classes.elementDown}>   
+                                        {/* <div className={classes.elementDown}>   
                                         <button className={classes.anotherelementDown}>Not file found</button>
 
                                         </div>
                                         <div className={classes.elementDown}>
                                             <p className={classes.anotherelementDown}>Not file found</p>
-                                        </div>
+                                        </div> */}
+                                    
+                                        
                                         {/* <div>
                                             <p className="legend">Legend 3</p>
                                         </div> */}
-                                        </Carousel>                                    
+                                        {/* </Carousel>                                     */}
               
                                 </>
                          
