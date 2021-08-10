@@ -239,7 +239,8 @@ function CalendarActivities(props) {
 		background: [
 			'assets/images/preescolar/BackgroundPreescolar.png',
 			'assets/images/preescolar/pantalla12.png',
-			'assets/images/preescolar/BackgroundPrimariaAlta.png'
+            'assets/images/backgrounds/_0012_Vector-Smart-Object.png'
+			// 'assets/images/preescolar/BackgroundPrimariaAlta.png'
 		],
 		island1: [
 			'assets/images/preescolar/islaTareas.png',
@@ -356,8 +357,7 @@ function CalendarActivities(props) {
         <div
             className="flex-1"
             style={{
-                // backgroundImage: `url(${ theme.background[nivel] })`,
-                backgroundImage: `url(assets/images/backgrounds/_0012_Vector-Smart-Object.png)`,
+                backgroundImage: `url(${ theme.background[nivel] })`,
                 backgroundPosition: 'center',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat'
@@ -470,6 +470,7 @@ function CalendarActivities(props) {
                                         Club Lia Eventos
                                     </Button>
                                 </div>*/}
+                                {/*   JUST IN CASE 
                                 <div className="flex w-full flex-col text-center" style={{paddingBottom: 'inherit'}}>
 
                                     <Button
@@ -491,7 +492,6 @@ function CalendarActivities(props) {
 
                                     <Button
                                         style={{
-                                            //backgroundColor: 'transparent',
                                             backgroundImage:  `url(assets/images/calendar/buttonCalendar.png)`,
                                             backgroundSize: '106% 100%',
                                             backgroundRepeat: 'no-repeat',
@@ -505,7 +505,7 @@ function CalendarActivities(props) {
                                             Club Lia Eventos
                                         </Typography>
                                     </Button>
-                                </div>
+                                </div> */}
                                 <div className="flex w-full flex-col text-center">
                                     <Button
                                         className={clsx(classes.button)}
